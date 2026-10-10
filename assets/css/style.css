@@ -1975,14 +1975,32 @@ thead.table-light th,
   right: auto;
   left: 20px;
 }
-@media (max-width: 575.98px) {
+
+/* Mobile-Only: Position Dark Mode & RTL buttons neatly above the login card with proper gap & spacing */
+@media (max-width: 767.98px) {
   .vh-auth-controls {
-    top: 12px;
-    right: 12px;
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 544px;
+    margin: 0 auto;
+    padding: 16px 16px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    z-index: 10;
+    box-sizing: border-box;
   }
   [dir="rtl"] .vh-auth-controls {
     right: auto;
-    left: 12px;
+    left: auto;
+  }
+  .vh-auth-main {
+    padding: 12px 1rem 2.5rem;
   }
 }
 
