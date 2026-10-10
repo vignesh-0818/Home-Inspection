@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Purchase Property Assessment Details | VeriHome</title>
+  <meta name="description" content="In-depth breakdown of our 400-point pre-purchase home inspection service. Benefits, checklist items, thermal imaging, sample findings, and pricing.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg vh-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand vh-brand" href="index.html">
+        <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+        <span>Veri<span class="text-warning">Home</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sample-report.html">Sample Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
+          <!-- Dark/Light Mode Separate Button -->
+          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <i class="bi bi-moon-stars-fill text-primary"></i>
+          </button>
+          <!-- RTL Separate Button -->
+          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+            <span class="rtl-text">RTL</span>
+          </button>
+
+          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
+          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Customer Dashboard Navbar Button (REQUIRED) -->
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Full-Width Photographic Hero Banner (Reference Style) -->
+  <section class="vh-inner-banner vh-banner-service-details" id="serviceHeroBanner" style="background-image: url('assets/images/hero-service-details-shared.jpg'); background-size: cover; background-position: center center;">
+    <div class="container vh-inner-banner-container">
+      <h1 class="vh-inner-banner-title" id="serviceHeroTitle">Service Details</h1>
+      <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
+        <ol class="vh-inner-breadcrumb">
+          <li class="breadcrumb-item-custom"><a href="index.html" class="breadcrumb-link">Home</a></li>
+          <li class="breadcrumb-separator" aria-hidden="true">/</li>
+          <li class="breadcrumb-item-custom"><a href="services.html" class="breadcrumb-link">Services</a></li>
+          <li class="breadcrumb-separator" aria-hidden="true">/</li>
+          <li class="breadcrumb-item-custom breadcrumb-current" id="serviceBreadcrumb" aria-current="page">Service Details</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Detailed Service Content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Main Column -->
+        <div class="col-lg-8">
+          <div class="badge-pill-soft badge-soft-primary mb-3" id="serviceBadge">Inspection Service</div>
+          <h2 class="display-6 fw-bold mb-3" id="serviceTitle">Thermal Infrared & Drone Roof Audit</h2>
+          <img id="serviceMainImg" src="assets/images/hero-property.jpg" alt="Comprehensive Home Inspection Property" class="img-fluid rounded-4 shadow mb-4 w-100 object-fit-cover" style="height: 380px;">
+
+          <h2 class="fw-bold mb-3" id="serviceOverviewTitle">Complete Forensic Property Evaluation From Roof to Foundation</h2>
+          <div id="serviceOverviewContent">
+            <p class="text-muted">Whether you are purchasing your first home or maintaining an existing property, an independent 400-point inspection provides an unbiased forensic health assessment of every major system. Cosmetic remodeling frequently masks aged mechanicals, ungrounded wiring, and attic ventilation deficiencies.</p>
+            <p class="text-muted">Our licensed Master Inspectors spend 3 to 4 hours physically traversing crawlspaces, climbing attics, testing GFCI circuits, evaluating water heater TPR valves, and operating the heating and cooling equipment under full load to give you complete peace of mind.</p>
+          </div>
+
+          <h3 class="fw-bold mt-5 mb-3" id="serviceBenefitsHeading">Key Benefits of a Comprehensive Inspection</h3>
+          <div class="row g-3 mb-4" id="serviceBenefits">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-white dark-bg-dark h-100" style="background-color: var(--vh-bg-surface) !important;">
+                <h6 class="fw-bold text-primary"><i class="bi bi-search me-2"></i>400-Point Audit</h6>
+                <p class="text-muted small mb-0">Exhaustive physical check of structure, mechanicals, exterior drainage, and interior living zones.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-white dark-bg-dark h-100" style="background-color: var(--vh-bg-surface) !important;">
+                <h6 class="fw-bold text-success"><i class="bi bi-file-earmark-check me-2"></i>24-Hour Express Report</h6>
+                <p class="text-muted small mb-0">Interactive digital report delivered within 24 hours with annotated HD photos and severity filters.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-white dark-bg-dark h-100" style="background-color: var(--vh-bg-surface) !important;">
+                <h6 class="fw-bold text-warning"><i class="bi bi-camera-fill me-2"></i>Thermal Moisture Scan</h6>
+                <p class="text-muted small mb-0">FLIR infrared thermal scan included to spot latent moisture behind showers and ceilings.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-white dark-bg-dark h-100" style="background-color: var(--vh-bg-surface) !important;">
+                <h6 class="fw-bold text-danger"><i class="bi bi-shield-check me-2"></i>InterNACHI Guarantee</h6>
+                <p class="text-muted small mb-0">Backed by InterNACHI $10,000 Honor Guarantee and 90-day comprehensive structural warranty.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- What is Inspected vs What is Excluded -->
+          <h3 class="fw-bold mt-5 mb-3">Checklist Breakdown: What We Inspect</h3>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="p-4 rounded-4 border bg-success-subtle border-success-subtle h-100">
+                <h5 class="fw-bold text-success mb-3"><i class="bi bi-check-circle-fill me-2"></i>What Is Inspected</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 mb-0" id="serviceInspectedList">
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Roof covering, flashing, valleys, gutters, and downspouts</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Foundation walls, crawlspace framing, joists, and subflooring</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>200-Amp electrical service panel, breakers, GFCI/AFCI outlets</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Furnace, central AC, heat pump, thermostat, and air ducts</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Plumbing supply, DWV drain waste vent pipes, water heater & fixtures</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Attic insulation depth, ventilation baffles, and roof rafters</li>
+                  <li><i class="bi bi-check2 text-success me-2 fw-bold"></i>Interior doors, windows, fireplace damper, and smoke detectors</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 rounded-4 border bg-danger-subtle border-danger-subtle h-100">
+                <h5 class="fw-bold text-danger mb-3"><i class="bi bi-x-circle-fill me-2"></i>Exclusions / Special Add-Ons</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 mb-0" id="serviceExclusionsList">
+                  <li><i class="bi bi-dash-circle text-danger me-2"></i>Concealed underground sewer laterals (Available as Sewer Scope Add-on)</li>
+                  <li><i class="bi bi-dash-circle text-danger me-2"></i>Continuous 48-hour radon gas monitoring (Available as Radon Add-on)</li>
+                  <li><i class="bi bi-dash-circle text-danger me-2"></i>Detached outbuildings or swimming pool mechanicals (Add-on available)</li>
+                  <li><i class="bi bi-dash-circle text-danger me-2"></i>Destructive wall or concealed structural testing</li>
+                  <li><i class="bi bi-dash-circle text-danger me-2"></i>Phase I environmental hazardous material testing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQs Accordion -->
+          <h3 class="fw-bold mt-5 mb-3">Frequently Asked Questions</h3>
+          <div class="accordion mb-5" id="serviceFaqAccordion">
+            <div class="accordion-item" style="background-color: var(--vh-bg-surface);">
+              <h2 class="accordion-header" id="faqOne">
+                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Should I attend the inspection in person?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted small">
+                  Yes, absolutely! While you don't need to be there for the entire 3.5 hours, we strongly recommend attending the final 45 to 60 minutes for the on-site walkthrough. The inspector will physically show you shutoff valves, explain any defects found, and answer all questions.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item" style="background-color: var(--vh-bg-surface);">
+              <h2 class="accordion-header" id="faqTwo">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  When will I receive my digital inspection report?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted small">
+                  We guarantee delivery of your full interactive report within 24 hours of inspection completion. You will receive an instant SMS and email with a secure link to view the report on your computer, tablet, or phone, along with a 1-click PDF download option.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item" style="background-color: var(--vh-bg-surface);">
+              <h2 class="accordion-header" id="faqThree">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Can my real estate agent use this report to negotiate repairs?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted small">
+                  Yes! Our digital reports include a built-in "Create Repair Request" tool. Your agent can check off specific items from the report and automatically generate a formal PDF repair addendum with descriptions and photos to send to the seller.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Column -->
+        <div class="col-lg-4">
+          <!-- Pricing Summary Card -->
+          <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
+            <div class="badge-pill-soft badge-soft-primary mb-2">Transparent Pricing</div>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="display-6 fw-bold text-primary" id="servicePrice">$349</span>
+              <span class="text-muted small" id="servicePriceNote">/ up to 2,500 sq ft</span>
+            </div>
+            <ul class="list-unstyled small text-muted d-flex flex-column gap-2 mb-4" id="servicePricingFeatures">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Comprehensive 400-Point Audit</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>FLIR® Thermal Infrared Scan Included</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Appliance Recall & Safety Check</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>24-Hour Express Digital Delivery</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>$10,000 InterNACHI Guarantee</li>
+            </ul>
+            <a href="customer-dashboard.html#book" class="btn btn-vh-primary w-100 mb-2">Book This Service</a>
+            <a href="sample-report.html" class="btn btn-vh-outline w-100">View Sample Report</a>
+          </div>
+
+          <!-- Urgent Assistance Widget -->
+          <div class="p-4 rounded-4 border text-white shadow-sm mb-4" style="background: linear-gradient(135deg, var(--vh-primary-dark) 0%, #163e65 100%);">
+            <h5 class="fw-bold mb-2 text-white"><i class="bi bi-telephone-inbound text-warning me-2"></i>Need an Urgent Slot?</h5>
+            <p class="small text-white-50 mb-3">Contingency clock ticking? Call our priority dispatch coordinator directly for same-day or next-day appointments.</p>
+            <div class="h5 fw-bold text-warning mb-0">(800) 555-HOME</div>
+            <small class="text-white-50">Toll-free, 7am - 8pm daily</small>
+          </div>
+
+          <!-- Certified Badges -->
+          <div class="p-4 rounded-4 border bg-white shadow-sm text-center" style="background-color: var(--vh-bg-surface) !important;">
+            <h6 class="fw-bold mb-3">Accredited & Certified</h6>
+            <div class="d-flex justify-content-center align-items-center gap-3">
+              <div class="p-2 border rounded bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="fw-bold text-primary small d-block">InterNACHI</span>
+                <small class="text-muted" style="font-size: 0.7rem;">Certified Master</small>
+              </div>
+              <div class="p-2 border rounded bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="fw-bold text-warning small d-block">FLIR® ITC</span>
+                <small class="text-muted" style="font-size: 0.7rem;">Level II Thermal</small>
+              </div>
+              <div class="p-2 border rounded bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="fw-bold text-success small d-block">FAA Part 107</span>
+                <small class="text-muted" style="font-size: 0.7rem;">Licensed Drone</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="vh-footer">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <a class="vh-brand text-white mb-3 d-inline-flex" href="index.html">
+            <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+            <span>Veri<span class="text-warning">Home</span></span>
+          </a>
+          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and digital reports.</p>
+          <div class="d-flex gap-3">
+            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="sample-report.html">Sample Report</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h5>Resources</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="sample-report.html"><i class="bi bi-file-earmark-pdf me-1"></i>Sample Report</a></li>
+            <li><a href="service-details.html?id=1"><i class="bi bi-search me-1"></i>Comprehensive Inspection</a></li>
+            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a></li>
+            <li><a href="service-details.html?id=3"><i class="bi bi-camera me-1"></i>Drone & Thermal Audit</a></li>
+            <li><a href="blog.html"><i class="bi bi-journal-text me-1"></i>Inspection Resources</a></li>
+            <li><a href="pricing.html"><i class="bi bi-tags me-1"></i>Inspection Packages</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h5>Headquarters</h5>
+          <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
+            <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i>+1 (800) 555-HOME (4663)</li>
+            <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
+            <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="d-flex gap-4">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>window.DEFAULT_SERVICE_ID = 3;</script>
+  <script src="assets/js/service-details.js"></script>
+</body>
+</html>

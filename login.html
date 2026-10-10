@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client & Inspector Portal Login | VeriHome</title>
+  <meta name="description" content="Secure portal login for VeriHome clients, homebuyers, real estate agents, and certified inspectors. Access your digital inspection reports and appointments.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body class="vh-auth-body">
+
+  <!-- Floating Theme & RTL Controls -->
+  <div class="vh-auth-controls">
+    <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+      <i class="bi bi-moon-stars-fill text-primary"></i>
+    </button>
+    <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+      <span class="rtl-text">RTL</span>
+    </button>
+  </div>
+
+  <!-- Login Card Section (Centered in Viewport, No Footer) -->
+  <main class="vh-auth-main">
+    <div class="container">
+      <div class="vh-auth-card text-center">
+        
+        <!-- VeriHome Brand Logo (Consistent gold-gradient shield icon and wordmark) -->
+        <a class="vh-brand mx-auto mb-3" href="index.html">
+          <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>Veri<span class="text-warning">Home</span></span>
+        </a>
+
+        <h2 class="vh-auth-title">Sign In to Your Portal</h2>
+        <p class="vh-auth-subtitle">Access your inspection reports, photos, and scheduled appointments.</p>
+
+        <!-- Role Toggle Tabs (Silent tab switch: no toasts, no auto-fill) -->
+        <div class="vh-auth-tabs">
+          <button type="button" class="vh-auth-tab-btn active" id="btnRoleClient" onclick="switchLoginRole('client')">
+            <i class="bi bi-person-fill"></i>Client Login
+          </button>
+          <button type="button" class="vh-auth-tab-btn" id="btnRoleAdmin" onclick="switchLoginRole('admin')">
+            <i class="bi bi-shield-lock-fill"></i>Inspector Login
+          </button>
+        </div>
+
+        <!-- Inline Form Message (Validation & Demo Success) -->
+        <div id="loginFeedback" class="vh-auth-alert" style="display: none;" role="alert"></div>
+
+        <form id="loginForm" novalidate autocomplete="off" onsubmit="handleLoginSubmit(event)">
+          <div class="vh-auth-group">
+            <label class="vh-auth-label" for="loginEmail">Email Address</label>
+            <div class="vh-auth-input-wrap">
+              <span class="vh-auth-input-icon"><i class="bi bi-envelope"></i></span>
+              <input type="email" id="loginEmail" class="vh-auth-input" placeholder="Enter your email address" value="" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="vh-auth-group">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <label class="vh-auth-label mb-0" for="loginPassword">Password</label>
+            </div>
+            <div class="vh-auth-input-wrap has-toggle">
+              <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+              <input type="password" id="loginPassword" class="vh-auth-input" placeholder="Enter your password" value="" autocomplete="off">
+              <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('loginPassword', this)" aria-label="Toggle password visibility">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="form-check mb-0">
+              <input class="form-check-input" type="checkbox" id="rememberMe">
+              <label class="form-check-label small text-muted" for="rememberMe">
+                Remember this device
+              </label>
+            </div>
+            <a href="forgot-password.html" class="small vh-auth-link">Forgot Password?</a>
+          </div>
+
+          <button type="submit" id="loginSubmitBtn" class="btn vh-auth-btn w-100 py-3 mb-4">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+          </button>
+
+          <!-- Social Login Separator -->
+          <div class="vh-auth-divider mb-4">
+            <span>or continue with</span>
+          </div>
+
+          <!-- Social Login Options: Google & Apple -->
+          <div class="row g-2 mb-4">
+            <div class="col-6">
+              <button type="button" class="btn vh-auth-social-btn w-100" id="btnGoogleAuth" onclick="handleSocialAuth('Google')">
+                <i class="bi bi-google text-danger me-2"></i>Google
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn vh-auth-social-btn w-100" id="btnAppleAuth" onclick="handleSocialAuth('Apple')">
+                <i class="bi bi-apple me-2"></i>Apple
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center small">
+            <span class="text-muted">Don't have an account yet?</span> 
+            <a href="register.html" class="vh-auth-link fw-semibold ms-1">Register here</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    let currentRole = 'client';
+    let authRefreshTimer = null;
+    let socialAuthTimer = null;
+
+    function cleanupAllTimers() {
+      if (authRefreshTimer) {
+        clearTimeout(authRefreshTimer);
+        authRefreshTimer = null;
+      }
+      if (socialAuthTimer) {
+        clearTimeout(socialAuthTimer);
+        socialAuthTimer = null;
+      }
+    }
+
+    // Clean up timers on pagehide / beforeunload (component unmount)
+    window.addEventListener('beforeunload', cleanupAllTimers);
+    window.addEventListener('pagehide', cleanupAllTimers);
+
+    // Reset form fields completely on load and pageshow
+    function resetFormFields() {
+      const form = document.getElementById('loginForm');
+      if (form) form.reset();
+      const emailInput = document.getElementById('loginEmail');
+      const passInput = document.getElementById('loginPassword');
+      if (emailInput) emailInput.value = '';
+      if (passInput) passInput.value = '';
+      const feedbackEl = document.getElementById('loginFeedback');
+      if (feedbackEl) feedbackEl.style.display = 'none';
+      cleanupAllTimers();
+    }
+
+    window.addEventListener('DOMContentLoaded', resetFormFields);
+    window.addEventListener('pageshow', resetFormFields);
+
+    function switchLoginRole(role) {
+      currentRole = role;
+      const btnClient = document.getElementById('btnRoleClient');
+      const btnAdmin = document.getElementById('btnRoleAdmin');
+
+      if (role === 'client') {
+        btnClient.classList.add('active');
+        btnAdmin.classList.remove('active');
+      } else {
+        btnAdmin.classList.add('active');
+        btnClient.classList.remove('active');
+      }
+      // No notification, no auto-fill of credentials
+    }
+
+    function togglePasswordVisibility(fieldId, btn) {
+      const field = document.getElementById(fieldId);
+      const icon = btn.querySelector('i');
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        field.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      cleanupAllTimers();
+
+      const emailInput = document.getElementById('loginEmail');
+      const passInput = document.getElementById('loginPassword');
+      const feedbackEl = document.getElementById('loginFeedback');
+      
+      const email = emailInput.value.trim();
+      const pass = passInput.value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !pass) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Please fill in both your email address and password.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-circle-fill flex-shrink-0"></i><span>Please enter a valid email address.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      // Display success message inside the Login card without redirecting
+      feedbackEl.className = 'vh-auth-alert vh-auth-alert-success';
+      feedbackEl.innerHTML = '<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Sign-in successful!</span>';
+      feedbackEl.style.display = 'flex';
+
+      // Keep confirmation message visible for 5 seconds, then refresh current Login page
+      authRefreshTimer = setTimeout(() => {
+        resetFormFields();
+        window.location.reload();
+      }, 5000);
+    }
+
+    function handleSocialAuth(provider) {
+      // Clear any existing social auth timer to reset the 5-second window on repeated clicks
+      if (socialAuthTimer) {
+        clearTimeout(socialAuthTimer);
+        socialAuthTimer = null;
+      }
+      if (authRefreshTimer) {
+        clearTimeout(authRefreshTimer);
+        authRefreshTimer = null;
+      }
+
+      const feedbackEl = document.getElementById('loginFeedback');
+      if (!feedbackEl) return;
+
+      // Display existing informational message without falsely claiming authentication
+      feedbackEl.className = 'vh-auth-alert vh-auth-alert-info';
+      feedbackEl.innerHTML = `<i class="bi bi-info-circle-fill flex-shrink-0"></i><span>${provider} sign-in is not configured yet.</span>`;
+      feedbackEl.style.display = 'flex';
+
+      // Automatically hide the informational notification after exactly 5 seconds
+      socialAuthTimer = setTimeout(() => {
+        feedbackEl.style.display = 'none';
+        socialAuthTimer = null;
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

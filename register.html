@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Client Account | VeriHome Inspection Portal</title>
+  <meta name="description" content="Register for a VeriHome client account to schedule home inspections, download digital reports, and manage property assessments.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body class="vh-auth-body">
+
+  <!-- Floating Theme & RTL Controls -->
+  <div class="vh-auth-controls">
+    <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+      <i class="bi bi-moon-stars-fill text-primary"></i>
+    </button>
+    <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+      <span class="rtl-text">RTL</span>
+    </button>
+  </div>
+
+  <!-- Register Card Section (Centered in Viewport, No Footer) -->
+  <main class="vh-auth-main">
+    <div class="container">
+      <div class="vh-auth-card vh-auth-card-wide text-center">
+        
+        <!-- VeriHome Brand Logo (Consistent gold-gradient shield icon and wordmark) -->
+        <a class="vh-brand mx-auto mb-3" href="index.html">
+          <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>Veri<span class="text-warning">Home</span></span>
+        </a>
+
+        <h2 class="vh-auth-title">Create Your Client Account</h2>
+        <p class="vh-auth-subtitle">Create your account to schedule home inspections and view digital reports.</p>
+
+        <!-- Role Toggle Tabs -->
+        <div class="vh-auth-tabs">
+          <button type="button" class="vh-auth-tab-btn active" id="btnRoleBuyer" onclick="switchRegRole('buyer')">
+            <i class="bi bi-house-heart-fill"></i>Homebuyer Account
+          </button>
+          <button type="button" class="vh-auth-tab-btn" id="btnRoleAgent" onclick="switchRegRole('agent')">
+            <i class="bi bi-briefcase-fill"></i>Realtor / Agent
+          </button>
+        </div>
+
+        <!-- Inline Form Message (Validation & Demo Success) -->
+        <div id="regFeedback" class="vh-auth-alert" style="display: none;" role="alert"></div>
+
+        <form id="registerForm" novalidate autocomplete="off" onsubmit="handleRegisterSubmit(event)">
+          <!-- First & Last Name side-by-side -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6 col-12">
+              <div class="vh-auth-group mb-0">
+                <label class="vh-auth-label" for="regFirstName">First Name</label>
+                <div class="vh-auth-input-wrap">
+                  <span class="vh-auth-input-icon"><i class="bi bi-person"></i></span>
+                  <input type="text" id="regFirstName" class="vh-auth-input" placeholder="Enter your first name" value="" autocomplete="off">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="vh-auth-group mb-0">
+                <label class="vh-auth-label" for="regLastName">Last Name</label>
+                <div class="vh-auth-input-wrap">
+                  <span class="vh-auth-input-icon"><i class="bi bi-person"></i></span>
+                  <input type="text" id="regLastName" class="vh-auth-input" placeholder="Enter your last name" value="" autocomplete="off">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Address -->
+          <div class="vh-auth-group">
+            <label class="vh-auth-label" for="regEmail">Email Address</label>
+            <div class="vh-auth-input-wrap">
+              <span class="vh-auth-input-icon"><i class="bi bi-envelope"></i></span>
+              <input type="email" id="regEmail" class="vh-auth-input" placeholder="Enter your email address" value="" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Mobile Phone -->
+          <div class="vh-auth-group">
+            <label class="vh-auth-label" for="regPhone">Mobile Phone</label>
+            <div class="vh-auth-input-wrap">
+              <span class="vh-auth-input-icon"><i class="bi bi-telephone"></i></span>
+              <input type="tel" id="regPhone" class="vh-auth-input" placeholder="Enter your phone number" value="" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Password & Confirm Password side-by-side -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6 col-12">
+              <div class="vh-auth-group mb-0">
+                <label class="vh-auth-label" for="regPassword">Password</label>
+                <div class="vh-auth-input-wrap has-toggle">
+                  <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+                  <input type="password" id="regPassword" class="vh-auth-input" placeholder="Create a password" value="" autocomplete="off">
+                  <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('regPassword', this)" aria-label="Toggle password visibility">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="vh-auth-group mb-0">
+                <label class="vh-auth-label" for="regConfirm">Confirm Password</label>
+                <div class="vh-auth-input-wrap has-toggle">
+                  <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+                  <input type="password" id="regConfirm" class="vh-auth-input" placeholder="Confirm your password" value="" autocomplete="off">
+                  <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('regConfirm', this)" aria-label="Toggle password visibility">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms / Privacy Checkbox -->
+          <div class="form-check text-start mb-4">
+            <input class="form-check-input" type="checkbox" id="termsCheck">
+            <label class="form-check-label small text-muted" for="termsCheck">
+              I agree to the <a href="terms-of-service.html" class="vh-auth-link">Terms of Service</a> and <a href="privacy-policy.html" class="vh-auth-link">Privacy Policy</a>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="regSubmitBtn" class="btn vh-auth-btn vh-auth-btn-accent w-100 py-3 mb-4">
+            <i class="bi bi-check2-circle me-1"></i>Create Client Account
+          </button>
+
+          <div class="text-center small">
+            <span class="text-muted">Already have an account?</span> 
+            <a href="login.html" class="vh-auth-link fw-semibold ms-1">Sign in here</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    let currentRole = 'buyer';
+    let authRefreshTimer = null;
+
+    function cleanupAuthTimer() {
+      if (authRefreshTimer) {
+        clearTimeout(authRefreshTimer);
+        authRefreshTimer = null;
+      }
+    }
+
+    // Clean up timer on pagehide / beforeunload
+    window.addEventListener('beforeunload', cleanupAuthTimer);
+    window.addEventListener('pagehide', cleanupAuthTimer);
+
+    // Reset form fields completely on load and pageshow
+    function resetFormFields() {
+      const form = document.getElementById('registerForm');
+      if (form) form.reset();
+      const inputIds = ['regFirstName', 'regLastName', 'regEmail', 'regPhone', 'regPassword', 'regConfirm'];
+      inputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      const check = document.getElementById('termsCheck');
+      if (check) check.checked = false;
+    }
+
+    window.addEventListener('DOMContentLoaded', resetFormFields);
+    window.addEventListener('pageshow', resetFormFields);
+
+    function switchRegRole(role) {
+      currentRole = role;
+      const btnBuyer = document.getElementById('btnRoleBuyer');
+      const btnAgent = document.getElementById('btnRoleAgent');
+
+      if (role === 'buyer') {
+        btnBuyer.classList.add('active');
+        btnAgent.classList.remove('active');
+      } else {
+        btnAgent.classList.add('active');
+        btnBuyer.classList.remove('active');
+      }
+      // No notification, no auto-fill
+    }
+
+    function togglePasswordVisibility(fieldId, btn) {
+      const field = document.getElementById(fieldId);
+      const icon = btn.querySelector('i');
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        field.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      cleanupAuthTimer();
+
+      const firstName = document.getElementById('regFirstName').value.trim();
+      const lastName = document.getElementById('regLastName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const phone = document.getElementById('regPhone').value.trim();
+      const pass = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      const termsCheck = document.getElementById('termsCheck').checked;
+      const feedbackEl = document.getElementById('regFeedback');
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!firstName || !lastName || !email || !phone || !pass || !confirm) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Please fill out all required fields.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-circle-fill flex-shrink-0"></i><span>Please enter a valid email address.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (pass !== confirm) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Passwords do not match. Please re-enter them.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (!termsCheck) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-shield-exclamation flex-shrink-0"></i><span>Please agree to the Terms of Service and Privacy Policy.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      // Display registration confirmation without the word "demo"
+      feedbackEl.className = 'vh-auth-alert vh-auth-alert-success';
+      feedbackEl.innerHTML = '<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Registration successful! Your account has been created successfully.</span>';
+      feedbackEl.style.display = 'flex';
+
+      // Keep confirmation message visible for 5 seconds, then refresh current Register page
+      authRefreshTimer = setTimeout(() => {
+        resetFormFields();
+        window.location.reload();
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Inspection Articles & Buyer Guides | VeriHome</title>
+  <meta name="description" content="Expert property inspection guides, contingency negotiation strategies, foundation red flags, and homeowner maintenance advice from certified master inspectors.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg vh-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand vh-brand" href="index.html">
+        <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+        <span>Veri<span class="text-warning">Home</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sample-report.html">Sample Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
+          <!-- Dark/Light Mode Separate Button -->
+          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <i class="bi bi-moon-stars-fill text-primary"></i>
+          </button>
+          <!-- RTL Separate Button -->
+          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+            <span class="rtl-text">RTL</span>
+          </button>
+
+          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
+          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Customer Dashboard Navbar Button (REQUIRED) -->
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Full-Width Photographic Hero Banner (Reference Style) -->
+  <section class="vh-inner-banner vh-banner-blog">
+    <div class="container vh-inner-banner-container">
+      <h1 class="vh-inner-banner-title">Our Blog</h1>
+      <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
+        <ol class="vh-inner-breadcrumb">
+          <li class="breadcrumb-item-custom"><a href="index.html" class="breadcrumb-link">Home</a></li>
+          <li class="breadcrumb-separator" aria-hidden="true">/</li>
+          <li class="breadcrumb-item-custom breadcrumb-current" aria-current="page">Blog</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Blog Listing -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Main Articles Column -->
+        <div class="col-lg-8">
+          <!-- Live Search Bar -->
+          <div class="input-group mb-5 shadow-sm rounded-3">
+            <span class="input-group-text bg-white border-end-0" style="background-color: var(--vh-bg-surface) !important;"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" id="blogSearchInput" class="form-control border-start-0 py-3" placeholder="Search guides by defect, keyword (e.g. electrical, roof, foundation, contingency)...">
+          </div>
+
+          <!-- Articles Grid -->
+          <div class="row g-4" id="blogCardsContainer">
+            <!-- Article 1 -->
+            <div class="col-md-6 blog-post-item" data-category="roof" data-title="10 Critical Red Flags Every Homebuyer Must Check Before Closing" data-desc="From compromised chimney flashing to concealed roof deck rot, uncover the 10 major defects that can cost upwards of $20,000 if missed during contingency.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=1" class="vh-blog-card-img-wrapper d-block" title="Read Article: 10 Critical Red Flags Every Homebuyer Must Check Before Closing">
+                  <img src="assets/images/blog-card-roof-defects.jpg" alt="Roof Defect Inspection" class="vh-blog-card-img">
+                  <span class="badge bg-danger position-absolute top-0 start-0 m-3 shadow-sm">Buyer Warning</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle small fw-semibold">Roof & Exterior</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Oct 28, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=1" class="text-dark dark-text-light text-decoration-none">10 Critical Red Flags Every Homebuyer Must Check Before Closing</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    From compromised chimney flashing to concealed roof deck rot, uncover the 10 major defects that can cost upwards of $20,000 if missed during contingency.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 7 Min Read</span>
+                    <a href="blog-details.html?id=1" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="col-md-6 blog-post-item" data-category="electrical" data-title="Federal Pacific & Zinsco Breaker Panels: Why Insurers Reject Them" data-desc="Understand why outdated 1970s circuit breaker panels fail to trip under direct overload, causing severe electrical fire risks and immediate insurance denial.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=2" class="vh-blog-card-img-wrapper d-block" title="Read Article: Federal Pacific & Zinsco Breaker Panels">
+                  <img src="assets/images/blog-card-electrical-safety.jpg" alt="Electrical Panel Inspection" class="vh-blog-card-img">
+                  <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 shadow-sm">Safety Hazard</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle small fw-semibold">Electrical Safety</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Oct 24, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=2" class="text-dark dark-text-light text-decoration-none">Federal Pacific & Zinsco Breaker Panels: Why Insurers Reject Them</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    Understand why outdated 1970s circuit breaker panels fail to trip under direct overload, causing severe electrical fire risks and immediate insurance denial.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 6 Min Read</span>
+                    <a href="blog-details.html?id=2" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="col-md-6 blog-post-item" data-category="thermal" data-title="How Infrared Thermal Imaging Uncovers Invisible Leaks Behind Tile" data-desc="Thermal heat differential cameras spot concealed bathroom plumbing seepage and roof envelope moisture weeks before interior drywall stains appear.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=3" class="vh-blog-card-img-wrapper d-block" title="Read Article: Infrared Thermal Imaging">
+                  <img src="assets/images/blog-card-thermal-moisture.jpg" alt="Infrared Thermal Imaging Inspection" class="vh-blog-card-img">
+                  <span class="badge bg-info text-white position-absolute top-0 start-0 m-3 shadow-sm">Diagnostic Tech</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle small fw-semibold">Thermal Scans</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Oct 18, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=3" class="text-dark dark-text-light text-decoration-none">How Infrared Thermal Imaging Uncovers Invisible Leaks Behind Tile</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    Thermal heat differential cameras spot concealed bathroom plumbing seepage and roof envelope moisture weeks before interior drywall stains appear.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 5 Min Read</span>
+                    <a href="blog-details.html?id=3" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="col-md-6 blog-post-item" data-category="prepurchase" data-title="How to Turn an Inspection Report into a $15,000 Closing Credit" data-desc="Step-by-step framework for buyers and realtors to itemize contractor-verified repair estimates and secure closing escrow holdbacks before contingency expires.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=4" class="vh-blog-card-img-wrapper d-block" title="Read Article: $15,000 Closing Credit Negotiation">
+                  <img src="assets/images/blog-card-inspection-negotiation.jpg" alt="Inspection Report Closing Credit Negotiation" class="vh-blog-card-img">
+                  <span class="badge bg-success position-absolute top-0 start-0 m-3 shadow-sm">Negotiation Tips</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle small fw-semibold">Pre-Purchase</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Oct 12, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=4" class="text-dark dark-text-light text-decoration-none">How to Turn an Inspection Report into a $15,000 Closing Credit</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    Step-by-step framework for buyers and realtors to itemize contractor-verified repair estimates and secure closing escrow holdbacks before contingency expires.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 8 Min Read</span>
+                    <a href="blog-details.html?id=4" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="col-md-6 blog-post-item" data-category="foundation" data-title="Foundation Settlement vs. Curing Shrinkage Cracks: The True Difference" data-desc="Learn how licensed structural inspectors determine whether foundation wall fissures are harmless concrete curing shrinkage or catastrophic structural movement.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=5" class="vh-blog-card-img-wrapper d-block" title="Read Article: Foundation Settlement vs Shrinkage">
+                  <img src="assets/images/blog-card-foundation-cracks.jpg" alt="Foundation Structural Inspection" class="vh-blog-card-img">
+                  <span class="badge bg-primary position-absolute top-0 start-0 m-3 shadow-sm">Structural</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle small fw-semibold">Foundation</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Oct 05, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=5" class="text-dark dark-text-light text-decoration-none">Foundation Settlement vs. Curing Shrinkage Cracks: The True Difference</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    Learn how licensed structural inspectors determine whether foundation wall fissures are harmless concrete curing shrinkage or catastrophic structural movement.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 6 Min Read</span>
+                    <a href="blog-details.html?id=5" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="col-md-6 blog-post-item" data-category="roof" data-title="Sewer Scope Video Diagnostics: Avoiding $15,000 Mainline Pipe Collapses" data-desc="Tree root intrusion, bellied pipes, and offset clay tile joints are completely hidden beneath soil. See why a high-definition fiber optic push-camera inspection is vital.">
+              <div class="vh-blog-card">
+                <a href="blog-details.html?id=6" class="vh-blog-card-img-wrapper d-block" title="Read Article: Sewer Scope Video Diagnostics">
+                  <img src="assets/images/blog-card-sewer-scope.jpg" alt="Sewer Scope Video Camera Inspection" class="vh-blog-card-img">
+                  <span class="badge bg-dark text-white position-absolute top-0 start-0 m-3 shadow-sm">Plumbing Video</span>
+                </a>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle small fw-semibold">Roof & Exterior</span>
+                    <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Sep 28, 2026</span>
+                  </div>
+                  <h5 class="vh-blog-card-title fw-bold">
+                    <a href="blog-details.html?id=6" class="text-dark dark-text-light text-decoration-none">Sewer Scope Video Diagnostics: Avoiding $15,000 Mainline Pipe Collapses</a>
+                  </h5>
+                  <p class="vh-blog-card-desc text-muted">
+                    Tree root intrusion, bellied pipes, and offset clay tile joints are completely hidden beneath soil. See why a high-definition fiber optic push-camera inspection is vital.
+                  </p>
+                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small">
+                    <span class="d-flex align-items-center gap-1"><i class="bi bi-clock text-primary"></i> 5 Min Read</span>
+                    <a href="blog-details.html?id=6" class="btn btn-sm btn-vh-outline">Read Article <i class="bi bi-arrow-right ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Results State -->
+            <div id="noBlogResults" class="col-12 py-4 d-none text-center">
+              <div class="p-5 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+                <div class="vh-icon-box vh-icon-primary mx-auto mb-3" style="width: 60px; height: 60px;">
+                  <i class="bi bi-search fs-3"></i>
+                </div>
+                <h4 class="fw-bold mb-2">No Articles Found</h4>
+                <p class="text-muted small mb-4">No inspection guides matched your search for "<strong id="searchQueryText" class="text-primary"></strong>". Try searching for "roof", "electrical", "thermal", "foundation", "credit", or "sewer".</p>
+                <button type="button" class="btn btn-sm btn-vh-primary" id="resetBlogSearchBtn">Reset Search Filters</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Sidebar -->
+        <div class="col-lg-4">
+          <!-- Categories Widget -->
+          <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
+            <h5 class="fw-bold mb-3">Categories</h5>
+            <div class="d-flex flex-column gap-2 mb-0" id="blogCategoriesList">
+              <a href="javascript:void(0)" class="vh-cat-item" data-filter="prepurchase">
+                <span class="vh-cat-name"><i class="bi bi-shield-check text-primary"></i>Pre-Purchase Due Diligence</span>
+                <span class="vh-cat-badge">1</span>
+              </a>
+              <a href="javascript:void(0)" class="vh-cat-item" data-filter="roof">
+                <span class="vh-cat-name"><i class="bi bi-house-gear text-danger"></i>Roof & Exterior Diagnostics</span>
+                <span class="vh-cat-badge">2</span>
+              </a>
+              <a href="javascript:void(0)" class="vh-cat-item" data-filter="electrical">
+                <span class="vh-cat-name"><i class="bi bi-lightning-charge text-warning"></i>Electrical & Fire Safety</span>
+                <span class="vh-cat-badge">1</span>
+              </a>
+              <a href="javascript:void(0)" class="vh-cat-item" data-filter="foundation">
+                <span class="vh-cat-name"><i class="bi bi-bricks text-info"></i>Foundation & Framing</span>
+                <span class="vh-cat-badge">1</span>
+              </a>
+              <a href="javascript:void(0)" class="vh-cat-item" data-filter="thermal">
+                <span class="vh-cat-name"><i class="bi bi-camera-fill text-success"></i>Thermal Imaging & Drones</span>
+                <span class="vh-cat-badge">1</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Free Buyer Checklist Banner -->
+          <div class="p-4 rounded-4 border text-white shadow-sm mb-4 text-center" style="background: linear-gradient(135deg, var(--vh-primary) 0%, var(--vh-primary-dark) 100%);">
+            <i class="bi bi-file-earmark-pdf-fill display-4 text-warning mb-2 d-block"></i>
+            <h5 class="fw-bold mb-2 text-white">Free Pre-Closing Checklist</h5>
+            <p class="small text-white-50 mb-3">Download our 45-point printable checklist before walking through your final escrow inspection.</p>
+            <button class="btn btn-vh-accent w-100 btn-sm" onclick="showToast('Checklist Downloaded', 'The Pre-Closing Buyer Checklist PDF has been downloaded.', 'success')">
+              Download PDF Guide
+            </button>
+          </div>
+
+          <!-- Sample Report Teaser Widget -->
+          <div class="p-4 rounded-4 border bg-white shadow-sm text-center" style="background-color: var(--vh-bg-surface) !important;">
+            <h6 class="fw-bold mb-2">Want to See How We Document Defects?</h6>
+            <p class="small text-muted mb-3">View our actual interactive digital inspection report with photo evidence and severity tags.</p>
+            <a href="sample-report.html" class="btn btn-vh-outline btn-sm w-100">Open Sample Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="vh-footer">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <a class="vh-brand text-white mb-3 d-inline-flex" href="index.html">
+            <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+            <span>Veri<span class="text-warning">Home</span></span>
+          </a>
+          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and digital reports.</p>
+          <div class="d-flex gap-3">
+            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="sample-report.html">Sample Report</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h5>Resources</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="sample-report.html"><i class="bi bi-file-earmark-pdf me-1"></i>Sample Report</a></li>
+            <li><a href="service-details.html?id=1"><i class="bi bi-search me-1"></i>Comprehensive Inspection</a></li>
+            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a></li>
+            <li><a href="service-details.html?id=3"><i class="bi bi-camera me-1"></i>Drone & Thermal Audit</a></li>
+            <li><a href="blog.html"><i class="bi bi-journal-text me-1"></i>Inspection Resources</a></li>
+            <li><a href="pricing.html"><i class="bi bi-tags me-1"></i>Inspection Packages</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h5>Headquarters</h5>
+          <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
+            <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i>+1 (800) 555-HOME (4663)</li>
+            <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
+            <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="d-flex gap-4">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

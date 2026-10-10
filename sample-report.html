@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Home Inspection Report | VeriHome</title>
+  <meta name="description" content="Explore an interactive sample home inspection report for 482 Maple Avenue. See how we document defect severity, photos, repair recommendations, and property scores.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg vh-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand vh-brand" href="index.html">
+        <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+        <span>Veri<span class="text-warning">Home</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="sample-report.html">Sample Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
+          <!-- Dark/Light Mode Separate Button -->
+          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <i class="bi bi-moon-stars-fill text-primary"></i>
+          </button>
+          <!-- RTL Separate Button -->
+          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+            <span class="rtl-text">RTL</span>
+          </button>
+
+          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
+          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Customer Dashboard Navbar Button (REQUIRED) -->
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Report Header Banner -->
+  <div class="py-4 bg-light border-bottom" style="background-color: var(--vh-bg-subtle) !important;">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+          <span class="badge bg-success mb-1"><i class="bi bi-check-circle me-1"></i>Official Verified Report #VH-2026-889</span>
+          <h1 class="h3 fw-bold mb-1">Pre-Purchase Property Assessment: 482 Maple Avenue</h1>
+          <p class="text-muted small mb-0">Oakridge, IL 60126 • Inspected on October 28, 2026 by John R. Davis, CMI®</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-vh-outline" onclick="window.print()">
+            <i class="bi bi-printer me-1"></i>Print Report
+          </button>
+          <button class="btn btn-sm btn-vh-primary" onclick="showToast('Report Download', 'Sample Report PDF has been downloaded.', 'success')">
+            <i class="bi bi-download me-1"></i>Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Digital Report Body -->
+  <section class="py-5">
+    <div class="container">
+      <div class="vh-report-paper">
+        <!-- Report Overview Header Card -->
+        <div class="report-header-banner">
+          <div class="row align-items-center g-4">
+            <div class="col-md-3 text-center border-end-md">
+              <div class="score-circle mx-auto mb-2">
+                <div class="score-circle-inner">
+                  <span>94%</span>
+                  <small style="font-size: 0.65rem; color: #64748b;">SCORE</small>
+                </div>
+              </div>
+              <strong class="text-success d-block">Good Overall Condition</strong>
+              <small class="text-muted">400 Points Evaluated</small>
+            </div>
+
+            <div class="col-md-6">
+              <h4 class="fw-bold mb-3">Property & Inspection Overview</h4>
+              <div class="row g-2 small text-muted">
+                <div class="col-sm-6"><strong>Property Type:</strong> Single Family (2-Story)</div>
+                <div class="col-sm-6"><strong>Year Built:</strong> 2014</div>
+                <div class="col-sm-6"><strong>Square Footage:</strong> 2,850 sq ft</div>
+                <div class="col-sm-6"><strong>Weather:</strong> 64°F, Clear & Dry</div>
+                <div class="col-sm-6"><strong>Client Name:</strong> David & Karen Miller</div>
+                <div class="col-sm-6"><strong>Lead Inspector:</strong> John R. Davis (#9876543)</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 text-center">
+              <img src="assets/images/hero-property.jpg" alt="482 Maple Avenue" class="img-fluid rounded-3 shadow-sm border mb-2 w-100 object-fit-cover" style="height: 120px;">
+              <small class="text-muted d-block">Front Elevation Photo</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Defect Summary Counters -->
+        <div class="row g-3 mb-5 text-center">
+          <div class="col-6 col-md-3">
+            <div class="p-3 rounded-3 border bg-danger-subtle border-danger-subtle">
+              <div class="display-6 fw-bold text-danger">1</div>
+              <div class="fw-bold text-danger small">Major Defect</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="p-3 rounded-3 border bg-danger-subtle border-danger-subtle">
+              <div class="display-6 fw-bold text-danger">2</div>
+              <div class="fw-bold text-danger small">Safety Hazards</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="p-3 rounded-3 border bg-warning-subtle border-warning-subtle">
+              <div class="display-6 fw-bold text-warning-emphasis">3</div>
+              <div class="fw-bold text-warning-emphasis small">Minor Defects</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="p-3 rounded-3 border bg-success-subtle border-success-subtle">
+              <div class="display-6 fw-bold text-success">386</div>
+              <div class="fw-bold text-success small">Passed / Satisfactory</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive System Filter Buttons -->
+        <div class="d-flex gap-2 flex-wrap mb-4 pb-3 border-bottom">
+          <button class="btn btn-sm btn-vh-primary report-filter-btn active" data-filter="all">All Systems (7)</button>
+          <button class="btn btn-sm btn-vh-outline report-filter-btn" data-filter="roof">Roof & Exterior (1)</button>
+          <button class="btn btn-sm btn-vh-outline report-filter-btn" data-filter="electrical">Electrical (2)</button>
+          <button class="btn btn-sm btn-vh-outline report-filter-btn" data-filter="plumbing">Plumbing (2)</button>
+          <button class="btn btn-sm btn-vh-outline report-filter-btn" data-filter="hvac">HVAC / Heating (1)</button>
+          <button class="btn btn-sm btn-vh-outline report-filter-btn" data-filter="structure">Structure & Foundation (1)</button>
+        </div>
+
+        <!-- Findings List -->
+        <div id="findingsContainer">
+          <!-- Finding 1: Roof (Major Defect) -->
+          <div class="finding-card major-border" data-system="roof">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-major-defect rounded-pill px-3 py-1 me-2">MAJOR DEFECT</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 2.1 - Roof Coverings</span>
+              </div>
+              <span class="text-danger fw-bold small"><i class="bi bi-clock-history me-1"></i>Requires Immediate Action</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">Cracked Shingles & Damaged Flashing Around Chimney</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> Asphalt architectural shingles adjacent to the chimney flashing on the south slope exhibit broken seal tabs and cracked flashing sealant. With an inspector ruler gauge, approximately 1.5 inches of shingle uplift was recorded. Active signs of moisture intrusion were noted on the roof deck underlayment.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-primary d-block mb-1"><i class="bi bi-wrench-adjustable-circle me-1"></i>Inspector Recommendation:</strong>
+                  Engage a licensed roofing contractor to replace affected shingles and reinstall galvanized step flashing before closing. Estimated repair cost: $800 - $1,400.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/defect-roof.jpg" alt="Roof Shingle Defect with Inspector Ruler" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 2.1A: 1.5" shingle gap measured</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 2: Electrical (Safety Hazard) -->
+          <div class="finding-card safety-border" data-system="electrical">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-safety-hazard rounded-pill px-3 py-1 me-2">SAFETY HAZARD</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 5.3 - Service Panel</span>
+              </div>
+              <span class="text-danger fw-bold small"><i class="bi bi-lightning-charge me-1"></i>Fire & Shock Hazard</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">Double-Tapped Circuit Breaker in Kitchen Branch Line</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> Inside the main 200A Siemens electrical breaker panel, breaker slot A16 (Kitchen Outlets) has two conductors attached under a single terminal lug that is only rated for one wire. Klein Tools digital multimeter recorded resistance variance and potential arcing risk under high load.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-primary d-block mb-1"><i class="bi bi-wrench-adjustable-circle me-1"></i>Inspector Recommendation:</strong>
+                  A licensed master electrician must properly pigtail the wires or install an approved tandem/piggyback breaker. Estimated repair cost: $150 - $250.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/defect-electrical.jpg" alt="Electrical Panel Breaker Inspection Tag" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 5.3B: Attention Required tag on slot A16</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 3: Plumbing (Safety Hazard - Water Heater TPR) -->
+          <div class="finding-card safety-border" data-system="plumbing">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-safety-hazard rounded-pill px-3 py-1 me-2">SAFETY HAZARD</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 6.4 - Water Heating Equipment</span>
+              </div>
+              <span class="text-warning-emphasis fw-bold small"><i class="bi bi-shield-exclamation me-1"></i>Scald / Pressure Hazard</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">Water Heater TPR Relief Valve Missing Discharge Tube</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> The 50-gallon gas water heater in the basement has an operational Temperature & Pressure Relief (TPR) valve, but the discharge port lacks an extension pipe directed downward to within 6 inches of the floor drain. If excess pressure builds, scalding hot steam could project outward horizontally.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-primary d-block mb-1"><i class="bi bi-wrench-adjustable-circle me-1"></i>Inspector Recommendation:</strong>
+                  Install a rigid 3/4-inch copper or CPVC discharge pipe extending downward to prevent scalding. Estimated repair cost: $60 - $120.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/defect-water-heater-tpr.jpg" alt="Water Heater TPR Relief Valve Missing Discharge Tube" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 6.4A: Unpiped TPR relief discharge valve</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 4: HVAC (Minor Defect - AC Condenser Fins) -->
+          <div class="finding-card minor-border" data-system="hvac">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-minor-defect rounded-pill px-3 py-1 me-2">MINOR DEFECT</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 7.2 - Cooling Equipment</span>
+              </div>
+              <span class="text-muted small"><i class="bi bi-info-circle me-1"></i>Maintenance Needed</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">AC Exterior Condenser Coil Fins Bent & Restricted Airflow</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> The outdoor condensing unit has roughly 15% crushed aluminum coil fins along the lower perimeter, likely caused by weed trimmers. System operated normally with a 18°F temperature differential, but reduced airflow lowers seasonal energy efficiency.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-primary d-block mb-1"><i class="bi bi-wrench-adjustable-circle me-1"></i>Inspector Recommendation:</strong>
+                  Comb coil fins straight using an HVAC fin comb tool during routine spring service. Estimated cost: $80 - $150.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/defect-ac-condenser-fins.jpg" alt="Outdoor AC Condenser Coil Bent Fins" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 7.2A: Bent aluminum condenser coil fins</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 5: Plumbing (Minor Defect - Under-Sink P-Trap Seepage) -->
+          <div class="finding-card minor-border" data-system="plumbing">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-minor-defect rounded-pill px-3 py-1 me-2">MINOR DEFECT</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 6.2 - Fixtures & Drain Waste Vent</span>
+              </div>
+              <span class="text-muted small"><i class="bi bi-droplet-half me-1"></i>Minor Seepage</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">Under-Sink PVC P-Trap Slip-Nut Seepage</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> Moisture testing beneath the primary bathroom vanity revealed active dripping along the slip-joint nut of the 1-1/2" PVC P-trap during continuous drainage testing. Rubber gasket has dry-rotted. Minor wood swelling noted on vanity cabinet base.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-primary d-block mb-1"><i class="bi bi-wrench-adjustable-circle me-1"></i>Inspector Recommendation:</strong>
+                  Replace rubber slip-joint beveled washer and hand-tighten PVC compression nut. Estimated repair cost: $40 - $75.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/defect-plumbing-ptrap.jpg" alt="Plumbing PVC P-Trap Slip Joint Seepage" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 6.2B: Active water droplet on PVC trap</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 6: Structure (Satisfactory - Foundation & Framing) -->
+          <div class="finding-card passed-border" data-system="structure">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-satisfactory rounded-pill px-3 py-1 me-2">SATISFACTORY</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 1.1 - Foundation & Framing</span>
+              </div>
+              <span class="text-success fw-bold small"><i class="bi bi-check-circle-fill me-1"></i>Structurally Sound</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">Poured Concrete Foundation & Main Steel Support I-Beam</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> Foundation walls, crawlspace stem walls, and steel support posts were inspected and verified with a Zip-Level digital altimeter. Minor hairline curing cracks (< 1/16") were observed, which are typical for concrete hydration. No settlement displacement or water efflorescence was found.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-success d-block mb-1"><i class="bi bi-shield-check me-1"></i>Inspector Status:</strong>
+                  Structure and load-bearing framing meet InterNACHI standards in good serviceable condition. No structural repairs needed.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/satisfactory-foundation.jpg" alt="Sound Poured Concrete Foundation and Steel Support Beam" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 1.1A: Plumb poured concrete foundation wall</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Finding 7: Electrical (Satisfactory - Main Service Panel) -->
+          <div class="finding-card passed-border" data-system="electrical">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <span class="badge badge-satisfactory rounded-pill px-3 py-1 me-2">SATISFACTORY</span>
+                <span class="badge bg-secondary-subtle text-dark">Section 5.1 - Main Service Equipment</span>
+              </div>
+              <span class="text-success fw-bold small"><i class="bi bi-check-circle-fill me-1"></i>Fully Compliant</span>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-8">
+                <h5 class="fw-bold mb-2">200-Amp Main Service Disconnect & Grounding Electrode System</h5>
+                <p class="text-muted small mb-3">
+                  <strong>Finding:</strong> Main service copper conductors, 200A main breaker disconnect, neutral/ground bonding bus, and dual driven ground rods were inspected. Dead front panel was removed; thermal imaging confirmed normal baseline operating temperatures under full simulated load.
+                </p>
+                <div class="p-3 bg-light rounded-3 border small" style="background-color: var(--vh-bg-subtle) !important;">
+                  <strong class="text-success d-block mb-1"><i class="bi bi-shield-check me-1"></i>Inspector Status:</strong>
+                  Clean, code-compliant residential electrical distribution panel with proper wire gauges and clear labeling.
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <img src="assets/images/satisfactory-electrical-panel.jpg" alt="Properly Functioning Clean Electrical Service Panel" class="img-fluid rounded-3 shadow-sm border w-100 object-fit-cover" style="height: 180px;">
+                <small class="text-muted d-block mt-1">Photo 5.1A: Clean 200A service panel interior</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Inspector Certification Sign-off -->
+        <div class="p-4 rounded-4 border bg-light mt-5" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <img src="assets/images/inspector-1.jpg" alt="John R. Davis" class="rounded-circle shadow border border-2 border-primary" style="width: 60px; height: 60px; object-fit: cover;">
+              <div>
+                <h6 class="fw-bold mb-0">John R. Davis, CMI®</h6>
+                <small class="text-muted">InterNACHI Certified Master Inspector #9876543</small>
+              </div>
+            </div>
+            <div class="text-md-end">
+              <div class="badge bg-success-subtle text-success fw-bold mb-1"><i class="bi bi-award-fill me-1"></i>InterNACHI SOP Verified</div>
+              <small class="text-muted d-block">Digitally Signed & Archived: Oct 28, 2026</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="vh-footer">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <a class="vh-brand text-white mb-3 d-inline-flex" href="index.html">
+            <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+            <span>Veri<span class="text-warning">Home</span></span>
+          </a>
+          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and digital reports.</p>
+          <div class="d-flex gap-3">
+            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="sample-report.html">Sample Report</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h5>Resources</h5>
+          <ul class="list-unstyled small d-flex flex-column gap-2">
+            <li><a href="sample-report.html"><i class="bi bi-file-earmark-pdf me-1"></i>Sample Report</a></li>
+            <li><a href="service-details.html?id=1"><i class="bi bi-search me-1"></i>Comprehensive Inspection</a></li>
+            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a></li>
+            <li><a href="service-details.html?id=3"><i class="bi bi-camera me-1"></i>Drone & Thermal Audit</a></li>
+            <li><a href="blog.html"><i class="bi bi-journal-text me-1"></i>Inspection Resources</a></li>
+            <li><a href="pricing.html"><i class="bi bi-tags me-1"></i>Inspection Packages</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h5>Headquarters</h5>
+          <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
+            <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i>+1 (800) 555-HOME (4663)</li>
+            <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
+            <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="d-flex gap-4">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

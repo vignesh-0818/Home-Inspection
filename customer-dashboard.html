@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard | VeriHome Inspection Portal</title>
+  <meta name="description" content="Customer inspection dashboard. Track upcoming appointments, view digital reports, download inspection photos, and communicate with your certified inspector.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+  <!-- Customer Dashboard Navbar -->
+  <nav class="navbar navbar-expand-lg border-bottom sticky-top" style="background-color: var(--vh-bg-surface); z-index: 1030;">
+    <div class="container-fluid px-lg-4">
+      <!-- Brand returns to Public Homepage -->
+      <a class="navbar-brand vh-brand" href="index.html" title="Return to Public Homepage">
+        <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+        <span>Veri<span class="text-warning">Home</span></span>
+        <span class="badge bg-primary-subtle text-primary ms-2 fs-6 fw-normal d-none d-sm-inline">Client Portal</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <!-- Dark/Light & RTL Controls Inside Navbar -->
+        <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <span class="rtl-text">RTL</span>
+        </button>
+
+        <a href="index.html" class="btn btn-sm btn-vh-outline d-none d-md-inline-flex">
+          <i class="bi bi-arrow-left me-1"></i>Public Website
+        </a>
+
+        <!-- Notifications Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-secondary position-relative rounded-circle p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="vhNotificationBell" style="width: 38px; height: 38px;" title="Notifications">
+            <i class="bi bi-bell-fill"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg vh-notification-menu" aria-labelledby="vhNotificationBell">
+            <li class="dropdown-header fw-bold d-flex justify-content-between align-items-center py-2 px-3">
+              <span class="text-dark dark-text-light">Recent Notifications</span>
+              <span class="badge bg-primary-subtle text-primary">2 New</span>
+            </li>
+            <li><hr class="dropdown-divider my-0"></li>
+            <li>
+              <a class="dropdown-item py-2 px-3" href="#tab-reports" onclick="switchCustomerTab('tab-reports')">
+                <div class="d-flex align-items-start gap-2 w-100">
+                  <div class="rounded-circle bg-success-subtle text-success p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px;">
+                    <i class="bi bi-file-earmark-check-fill"></i>
+                  </div>
+                  <div class="flex-grow-1 overflow-hidden">
+                    <div class="fw-bold small text-success">Report Ready</div>
+                    <div class="text-muted small text-wrap lh-sm">Your digital inspection for 482 Maple Ave is now ready to download.</div>
+                    <small class="text-muted opacity-75" style="font-size: 0.7rem;">2 hours ago</small>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item py-2 px-3" href="#tab-messages" onclick="switchCustomerTab('tab-messages')">
+                <div class="d-flex align-items-start gap-2 w-100">
+                  <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px;">
+                    <i class="bi bi-person-badge-fill"></i>
+                  </div>
+                  <div class="flex-grow-1 overflow-hidden">
+                    <div class="fw-bold small text-primary">New Inspector Note</div>
+                    <div class="text-muted small text-wrap lh-sm">Inspector John R. Davis added notes on the circuit breaker panel.</div>
+                    <small class="text-muted opacity-75" style="font-size: 0.7rem;">Yesterday at 1:15 PM</small>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- User Profile Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-sm d-flex align-items-center gap-2 border-0 bg-transparent p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="userProfileDropdownBtn">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold user-avatar-initials" style="width: 38px; height: 38px; font-size: 0.95rem;">
+              DM
+            </div>
+            <div class="text-start d-none d-sm-block">
+              <span class="fw-bold d-block text-dark dark-text-light user-profile-fullname" style="line-height: 1.1; font-size: 0.88rem;">David Miller</span>
+              <small class="text-muted" style="font-size: 0.75rem;">Homebuyer Client</small>
+            </div>
+            <i class="bi bi-chevron-down text-muted small ms-1"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 220px;">
+            <li class="px-3 py-2 border-bottom mb-1">
+              <div class="fw-bold user-profile-fullname text-dark dark-text-light" style="font-size: 0.9rem;">David Miller</div>
+              <small class="text-muted user-profile-email" style="font-size: 0.78rem;">david@example.com</small>
+            </li>
+            <li>
+              <a class="dropdown-item py-2" href="#tab-profile" onclick="switchCustomerTab('tab-profile')">
+                <i class="bi bi-person-gear me-2 text-primary"></i>Profile & Settings
+              </a>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+              <a class="dropdown-item text-danger py-2" href="login.html" onclick="handleLogout(event)">
+                <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Layout Container -->
+  <div class="dash-wrapper">
+    <!-- Sidebar -->
+    <aside class="dash-sidebar p-3">
+      <div class="d-flex flex-column gap-1">
+        <a href="#tab-overview" class="dash-nav-item active" onclick="switchCustomerTab('tab-overview', this)">
+          <i class="bi bi-speedometer2 fs-5"></i>
+          <span>Overview</span>
+        </a>
+        <a href="#tab-appointments" class="dash-nav-item" onclick="switchCustomerTab('tab-appointments', this)">
+          <i class="bi bi-calendar2-check fs-5"></i>
+          <span>My Inspections</span>
+        </a>
+        <a href="#tab-book" class="dash-nav-item" onclick="switchCustomerTab('tab-book', this)">
+          <i class="bi bi-plus-circle fs-5 text-warning"></i>
+          <span>Book Inspection</span>
+        </a>
+        <a href="#tab-reports" class="dash-nav-item" onclick="switchCustomerTab('tab-reports', this)">
+          <i class="bi bi-file-earmark-bar-graph fs-5"></i>
+          <span>Digital Reports</span>
+          <span class="badge bg-success ms-auto">1 Ready</span>
+        </a>
+        <a href="#tab-photos" class="dash-nav-item" onclick="switchCustomerTab('tab-photos', this)">
+          <i class="bi bi-images fs-5"></i>
+          <span>Inspection Photos</span>
+        </a>
+        <a href="#tab-messages" class="dash-nav-item" onclick="switchCustomerTab('tab-messages', this)">
+          <i class="bi bi-chat-square-text fs-5"></i>
+          <span>Messages & Notes</span>
+        </a>
+        <a href="#tab-profile" class="dash-nav-item" onclick="switchCustomerTab('tab-profile', this)">
+          <i class="bi bi-person-gear fs-5"></i>
+          <span>Profile & Settings</span>
+        </a>
+      </div>
+
+      <div class="mt-auto pt-4 border-top">
+        <div class="p-3 rounded-3 bg-light text-center small mb-3" style="background-color: var(--vh-bg-subtle) !important;">
+          <i class="bi bi-headset fs-3 text-primary mb-1 d-block"></i>
+          <strong class="d-block">Inspector Hotline</strong>
+          <span class="text-muted">(800) 555-4663</span>
+        </div>
+        <a href="login.html" class="dash-nav-item text-danger" onclick="handleLogout(event)">
+          <i class="bi bi-box-arrow-left fs-5"></i>
+          <span>Log Out</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dash-content">
+      <!-- TAB 1: OVERVIEW -->
+      <section id="tab-overview" class="customer-view-tab">
+        <!-- Welcome Banner -->
+        <div class="p-4 p-md-5 rounded-4 text-white shadow-sm mb-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, var(--vh-primary) 0%, #081a2e 100%);">
+          <div class="position-relative z-2">
+            <span class="badge bg-warning text-dark fw-bold mb-2">Active Inspection Update</span>
+            <h2 class="fw-bold mb-2" id="overviewGreeting">Welcome Back, David!</h2>
+            <p class="text-white-50 mb-4 max-w-600">Your inspection for <strong>482 Maple Avenue</strong> is complete. The digital diagnostic report and photo evidence are now fully accessible.</p>
+            <div class="d-flex gap-3 flex-wrap">
+              <button class="btn btn-vh-accent" onclick="window.openDigitalReport('VH-2026-889')">
+                <i class="bi bi-file-earmark-medical me-2"></i>Open Full Digital Report
+              </button>
+              <button class="btn btn-outline-light" onclick="window.downloadInspectionReport('VH-2026-889')">
+                <i class="bi bi-download me-2"></i>Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Inspection Status Timeline -->
+        <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+            <div>
+              <h5 class="fw-bold mb-0">Active Inspection Status: 482 Maple Avenue</h5>
+              <small class="text-muted">Inspection Order #VH-2026-889 • Inspector: John R. Davis, CMI®</small>
+            </div>
+            <span class="badge bg-success-subtle text-success fs-6 px-3 py-1">Current Status: Report Ready</span>
+          </div>
+
+          <!-- 5-Step Status Tracker -->
+          <div class="timeline-tracker">
+            <div class="timeline-step completed">
+              <div class="timeline-node"><i class="bi bi-check-lg"></i></div>
+              <strong class="d-block small text-dark dark-text-light">Booking Requested</strong>
+              <small class="text-muted">Oct 25, 2026</small>
+            </div>
+            <div class="timeline-step completed">
+              <div class="timeline-node"><i class="bi bi-check-lg"></i></div>
+              <strong class="d-block small text-dark dark-text-light">Inspection Scheduled</strong>
+              <small class="text-muted">Oct 26, 2026</small>
+            </div>
+            <div class="timeline-step completed">
+              <div class="timeline-node"><i class="bi bi-check-lg"></i></div>
+              <strong class="d-block small text-dark dark-text-light">Inspection Completed</strong>
+              <small class="text-muted">Oct 28, 9:00 AM</small>
+            </div>
+            <div class="timeline-step completed">
+              <div class="timeline-node"><i class="bi bi-check-lg"></i></div>
+              <strong class="d-block small text-dark dark-text-light">Report Processing</strong>
+              <small class="text-muted">Oct 28, 2:30 PM</small>
+            </div>
+            <div class="timeline-step active completed">
+              <div class="timeline-node"><i class="bi bi-patch-check-fill text-success"></i></div>
+              <strong class="d-block small text-success fw-bold">Report Ready</strong>
+              <small class="text-success fw-semibold">Delivered in 24h</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Metrics & Active Inspection Cards -->
+        <div class="row g-4 mb-4">
+          <!-- Property Summary Card -->
+          <div class="col-lg-8">
+            <div class="vh-card p-4">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <span class="badge bg-primary mb-1">Pre-Purchase Assessment</span>
+                  <h4 class="fw-bold mb-0">482 Maple Avenue, Oakridge, IL 60126</h4>
+                  <small class="text-muted">Single-Family Home • 2,850 sq ft • Built 2014</small>
+                </div>
+                <div class="text-end">
+                  <div class="h3 fw-bold text-success mb-0">94%</div>
+                  <small class="text-muted">Property Score</small>
+                </div>
+              </div>
+
+              <div class="row g-3 my-2">
+                <div class="col-sm-3 col-6">
+                  <div class="p-2 border rounded bg-light text-center" style="background-color: var(--vh-bg-subtle) !important;">
+                    <div class="fw-bold text-danger">1 Major</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">Roof Flashing</small>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6">
+                  <div class="p-2 border rounded bg-light text-center" style="background-color: var(--vh-bg-subtle) !important;">
+                    <div class="fw-bold text-danger">2 Safety</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">Breaker & TPR</small>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6">
+                  <div class="p-2 border rounded bg-light text-center" style="background-color: var(--vh-bg-subtle) !important;">
+                    <div class="fw-bold text-warning-emphasis">3 Minor</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">AC Fins / Trim</small>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6">
+                  <div class="p-2 border rounded bg-light text-center" style="background-color: var(--vh-bg-subtle) !important;">
+                    <div class="fw-bold text-success">386 Passed</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">Sound Systems</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-3 border-top d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto">
+                <div class="d-flex align-items-center gap-2">
+                  <img src="assets/images/inspector-1.jpg" alt="John R. Davis" class="rounded-circle shadow-sm" style="width: 36px; height: 36px; object-fit: cover;">
+                  <small class="text-muted">Lead Inspector: <strong>John R. Davis, CMI®</strong></small>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-vh-primary" onclick="window.openDigitalReport('VH-2026-889')">View Report</button>
+                  <button class="btn btn-sm btn-vh-outline" onclick="showToast('Realtor Link Generated', 'Shareable report link copied to clipboard.', 'info')">
+                    <i class="bi bi-share me-1"></i>Share With Agent
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Next Inspection Card -->
+          <div class="col-lg-4" id="overviewUpcomingCard">
+            <div class="vh-card p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Upcoming Booking</h5>
+                <span class="badge bg-warning text-dark">Scheduled</span>
+              </div>
+              <h6 class="fw-bold text-primary mb-1">104 Willow Ridge Road</h6>
+              <p class="text-muted small mb-3">Naperville, IL • 3,200 sq ft</p>
+              
+              <div class="p-3 rounded-3 bg-light mb-3 small" style="background-color: var(--vh-bg-subtle) !important;">
+                <div><i class="bi bi-calendar-event me-2 text-primary"></i><strong>Thursday, Nov 3, 2026</strong></div>
+                <div><i class="bi bi-clock me-2 text-primary"></i>10:00 AM - 1:30 PM</div>
+                <div><i class="bi bi-person-badge me-2 text-primary"></i>Inspector: Sarah Jenkins, P.E.</div>
+              </div>
+
+              <button class="btn btn-sm btn-vh-outline w-100" onclick="window.openInspectionDetails('VH-2026-942')">
+                <i class="bi bi-info-circle me-1"></i>View Appointment Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: MY INSPECTIONS & APPOINTMENTS -->
+      <section id="tab-appointments" class="customer-view-tab" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <div>
+            <h3 class="fw-bold mb-1">My Property Inspections</h3>
+            <p class="text-muted small mb-0">Track active, scheduled, and past property assessments.</p>
+          </div>
+          <button class="btn btn-sm btn-vh-accent" onclick="switchCustomerTab('tab-book')">
+            <i class="bi bi-plus-lg me-1"></i>Book New Inspection
+          </button>
+        </div>
+
+        <div class="table-responsive rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="ps-4">Property Address</th>
+                <th>Service Scope</th>
+                <th>Date & Time</th>
+                <th>Inspector</th>
+                <th>Status</th>
+                <th class="text-end pe-4">Action</th>
+              </tr>
+            </thead>
+            <tbody id="myInspectionsTableBody">
+              <!-- Dynamically populated from verihome_inspections -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: BOOK INSPECTION / APPOINTMENT -->
+      <section id="tab-book" class="customer-view-tab" style="display: none;">
+        <div class="max-w-700 mx-auto">
+          <div class="text-center mb-4">
+            <h3 class="fw-bold mb-1">Book a Property Inspection</h3>
+            <p class="text-muted small">Choose your service package, enter property details, and pick an inspection date.</p>
+          </div>
+
+          <div class="p-4 p-md-5 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+            <form id="inspectionBookingForm">
+              <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-geo-alt me-2"></i>1. Property Location & Details</h5>
+              <div class="mb-3">
+                <label class="form-label small fw-semibold">Street Address Under Contract *</label>
+                <input type="text" class="form-control" id="bookAddress" required placeholder="e.g. 560 Westview Terrace">
+              </div>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">City & State *</label>
+                  <input type="text" class="form-control" id="bookCityState" required placeholder="Oakridge, IL">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Zip Code *</label>
+                  <input type="text" class="form-control" id="bookZip" required placeholder="60126">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Approx. Sq Ft *</label>
+                  <input type="number" class="form-control" id="bookSqft" required placeholder="2400" min="500">
+                </div>
+              </div>
+
+              <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-box-seam me-2"></i>2. Choose Inspection Scope</h5>
+              <div class="mb-3">
+                <select class="form-select" id="bookInspectionScope" required>
+                  <option value="prepurchase" selected>Comprehensive Pre-Purchase Assessment ($489)</option>
+                  <option value="standard">Standard Full Home Inspection ($349)</option>
+                  <option value="condo">Condo / Townhome Inspection ($299)</option>
+                  <option value="elite">Elite Shield Bundle (Inspection + Radon + Sewer) ($749)</option>
+                </select>
+              </div>
+
+              <!-- Add-ons selection -->
+              <label class="form-label small fw-semibold mb-2">Optional Diagnostic Add-Ons:</label>
+              <div class="row g-2 mb-4">
+                <div class="col-md-6">
+                  <div class="form-check p-3 border rounded bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+                    <input class="form-check-input" type="checkbox" id="bookAddonSewer">
+                    <label class="form-check-label small fw-semibold" for="bookAddonSewer">
+                      Sewer Lateral Scope (+$195)
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check p-3 border rounded bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+                    <input class="form-check-input" type="checkbox" id="bookAddonRadon">
+                    <label class="form-check-label small fw-semibold" for="bookAddonRadon">
+                      48-Hr Radon Test (+$175)
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-calendar3 me-2"></i>3. Preferred Date & Time</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Preferred Inspection Date *</label>
+                  <input type="date" class="form-control" id="bookDate" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Preferred Time Slot *</label>
+                  <select class="form-select" id="bookTimeSlot" required>
+                    <option value="morning">Morning (9:00 AM - 1:00 PM)</option>
+                    <option value="afternoon">Afternoon (1:30 PM - 5:30 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Live Price Summary -->
+              <div class="d-flex justify-content-between align-items-center p-3 rounded-3 border bg-light mb-4" style="background-color: var(--vh-bg-subtle) !important;">
+                <div>
+                  <span class="small fw-semibold text-muted d-block">Estimated Package Total:</span>
+                  <small class="text-muted">Includes on-site inspection, digital report & cloud vault access</small>
+                </div>
+                <span id="bookCalculatedPrice" class="h3 fw-bold text-primary mb-0">$489</span>
+              </div>
+
+              <button type="submit" class="btn btn-vh-accent btn-lg w-100 fw-bold">
+                <i class="bi bi-check-circle-fill me-2"></i>Submit Inspection Appointment
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: DIGITAL INSPECTION REPORTS -->
+      <section id="tab-reports" class="customer-view-tab" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Digital Inspection Reports</h3>
+            <p class="text-muted small mb-0">Access interactive cloud reports, download high-res PDFs, or export repair addendums.</p>
+          </div>
+        </div>
+
+        <div class="row g-4" id="digitalReportsCardsContainer">
+          <div class="col-md-6">
+            <div class="p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge bg-success">Report Published</span>
+                <span class="text-muted small">Oct 28, 2026</span>
+              </div>
+              <h5 class="fw-bold mb-1">482 Maple Avenue, Oakridge</h5>
+              <p class="text-muted small mb-3">Comprehensive Pre-Purchase Assessment (400 Points)</p>
+              
+              <div class="p-3 bg-light rounded-3 mb-3 small d-flex justify-content-between align-items-center" style="background-color: var(--vh-bg-subtle) !important;">
+                <span>Overall Condition Score:</span>
+                <strong class="text-success h5 mb-0">94 / 100</strong>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-vh-primary flex-grow-1" onclick="window.openDigitalReport('VH-2026-889')">
+                  <i class="bi bi-eye me-1"></i>View Digital Report
+                </button>
+                <button class="btn btn-vh-outline" onclick="window.downloadInspectionReport('VH-2026-889')" title="Download official PDF report">
+                  <i class="bi bi-download"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge bg-secondary-subtle text-dark dark-text-light">Archived Report</span>
+                <span class="text-muted small">Aug 14, 2025</span>
+              </div>
+              <h5 class="fw-bold mb-1">712 North Clark St, #4B</h5>
+              <p class="text-muted small mb-3">Condo / Townhome Inspection (215 Points)</p>
+              
+              <div class="p-3 bg-light rounded-3 mb-3 small d-flex justify-content-between align-items-center" style="background-color: var(--vh-bg-subtle) !important;">
+                <span>Overall Condition Score:</span>
+                <strong class="text-success h5 mb-0">91 / 100</strong>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-vh-primary flex-grow-1" onclick="window.openDigitalReport('VH-2025-412')">
+                  <i class="bi bi-eye me-1"></i>View Digital Report
+                </button>
+                <button class="btn btn-vh-outline" onclick="window.downloadInspectionReport('VH-2025-412')" title="Download official PDF report">
+                  <i class="bi bi-download"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: IN-PAGE DIGITAL INSPECTION REPORT VIEW (Full Interactive Experience) -->
+      <section id="tab-report-view" class="customer-view-tab" style="display: none;">
+        <!-- Top Toolbar with Back Button and Actions -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <button type="button" class="btn btn-sm btn-vh-outline d-inline-flex align-items-center" onclick="window.switchCustomerTab('tab-appointments')">
+            <i class="bi bi-arrow-left me-1"></i>Back to My Inspections
+          </button>
+          <div class="d-flex gap-2 align-items-center">
+            <button type="button" class="btn btn-sm btn-vh-outline" onclick="window.print()">
+              <i class="bi bi-printer me-1"></i>Print Report
+            </button>
+            <button type="button" class="btn btn-sm btn-vh-primary" id="reportViewDownloadBtn" onclick="window.downloadCurrentReport()">
+              <i class="bi bi-download me-1"></i>Download PDF
+            </button>
+          </div>
+        </div>
+
+        <div id="digitalReportDynamicContainer">
+          <!-- Dynamically populated report content -->
+        </div>
+      </section>
+
+      <!-- TAB 5: INSPECTION PHOTOS -->
+      <section id="tab-photos" class="customer-view-tab" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <div>
+            <h3 class="fw-bold mb-1">High-Resolution Inspection Photos</h3>
+            <p class="text-muted small mb-0">Defect documentation and diagnostic photos captured during official inspections.</p>
+          </div>
+          <button class="btn btn-sm btn-vh-outline" onclick="showToast('Photo Archive', 'All inspection photos package downloaded.', 'success')">
+            <i class="bi bi-cloud-arrow-down me-1"></i>Download All Photos (.ZIP)
+          </button>
+        </div>
+
+        <!-- Dynamic Photos Grid matching Blog Inspection Images -->
+        <div class="row g-4" id="inspectionPhotosGrid">
+          <!-- Dynamically populated by customer-dashboard.js -->
+        </div>
+      </section>
+
+      <!-- TAB 6: MESSAGES & NOTES -->
+      <section id="tab-messages" class="customer-view-tab" style="display: none;">
+        <div class="mb-4">
+          <h3 class="fw-bold mb-1">Inspector Notes & Messages</h3>
+          <p class="text-muted small mb-0">Direct communication thread with your Lead Inspector.</p>
+        </div>
+
+        <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
+          <div id="inspectorMessageThread">
+            <div class="d-flex align-items-start gap-3 mb-4 pb-3 border-bottom">
+              <img src="assets/images/inspector-1.jpg" alt="John R. Davis" class="rounded-circle shadow-sm" style="width: 48px; height: 48px; object-fit: cover;">
+              <div>
+                <div class="d-flex align-items-center gap-2">
+                  <strong class="text-dark dark-text-light">John R. Davis, CMI®</strong>
+                  <small class="text-muted">Oct 28, 2026 at 1:15 PM</small>
+                </div>
+                <p class="text-muted small mt-1 mb-0">
+                  "Hello David! It was great meeting you and Karen at the property. The roof flashing and double-tapped circuit in breaker slot A16 are the two top items I advise addressing with your realtor before the contingency window closes. Let me know if you need any clarification on the digital report!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Reply Box -->
+          <form id="customerMessageForm">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Send a Message to Inspector</label>
+              <textarea class="form-control" rows="3" required placeholder="Type your question regarding the report findings..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-vh-primary btn-sm">
+              <i class="bi bi-send me-1"></i>Send Message
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 7: PROFILE & SETTINGS -->
+      <section id="tab-profile" class="customer-view-tab" style="display: none;">
+        <div class="max-w-700">
+          <h3 class="fw-bold mb-4">Customer Profile & Settings</h3>
+          <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
+            <form id="customerProfileForm">
+              <h5 class="fw-bold mb-3 text-primary">Personal Details</h5>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">First Name *</label>
+                  <input type="text" class="form-control" id="profileFirstName" required value="David">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Last Name *</label>
+                  <input type="text" class="form-control" id="profileLastName" required value="Miller">
+                </div>
+              </div>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Email Address *</label>
+                  <input type="email" class="form-control" id="profileEmail" required value="david@example.com">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Mobile Phone</label>
+                  <input type="tel" class="form-control" id="profilePhone" value="(555) 345-6789">
+                </div>
+              </div>
+
+              <h5 class="fw-bold mt-4 mb-3 text-primary">My Real Estate Agent</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Agent Name</label>
+                  <input type="text" class="form-control" id="profileAgentName" value="Samantha Lawrence (Compass)">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Agent Email</label>
+                  <input type="email" class="form-control" id="profileAgentEmail" value="samantha@compass.com">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-vh-primary">Save Profile Changes</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Inspection Details Modal -->
+  <div class="modal fade" id="inspectionDetailsModal" tabindex="-1" aria-labelledby="detailsModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow-lg border-0">
+        <div class="modal-header vh-modal-header-accent py-3">
+          <h5 class="modal-title fw-bold" id="detailsModalTitle">Inspection Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4" id="detailsModalBody">
+          <!-- Dynamically populated -->
+        </div>
+        <div class="modal-footer border-top bg-light" style="background-color: var(--vh-bg-subtle) !important;">
+          <button type="button" class="btn btn-vh-outline btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Preview / Lightbox Modal -->
+  <div class="modal fade" id="photoPreviewModal" tabindex="-1" aria-labelledby="photoPreviewTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow-lg border-0 overflow-hidden">
+        <div class="modal-header py-3 px-3 border-bottom d-flex align-items-center justify-content-between">
+          <h5 class="modal-title fw-bold small text-truncate mb-0" id="photoPreviewTitle">Photo Evidence</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0 text-center bg-black bg-opacity-10">
+          <img src="" id="photoPreviewImage" alt="Inspection Finding" class="img-fluid w-100" style="max-height: 480px; object-fit: contain;">
+        </div>
+        <div class="modal-footer d-flex justify-content-between align-items-center p-3">
+          <div id="photoPreviewCaption" class="small text-start flex-grow-1 pe-3"></div>
+          <div class="d-flex gap-2 flex-shrink-0">
+            <a href="#" id="photoPreviewDownload" download class="btn btn-sm btn-vh-primary">
+              <i class="bi bi-download me-1"></i>Save Photo
+            </a>
+            <button type="button" class="btn btn-sm btn-vh-outline d-inline-flex align-items-center gap-1" data-bs-dismiss="modal">
+              <i class="bi bi-arrow-left"></i>Back to Inspection Photos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/customer-dashboard.js"></script>
+  <script>
+    function handleLogout(e) {
+      e.preventDefault();
+      if (window.showToast) {
+        showToast('Logged Out', 'You have securely signed out of the Customer Portal.', 'info');
+      }
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 700);
+    }
+  </script>
+</body>
+</html>
