@@ -271,5 +271,33 @@
   display: inline-block !important;
 }
 
+/* RTL Contact Page Elements & FAQ Accordion */
+[dir="rtl"] .vh-faq-accordion .accordion-button::after {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
 
+[dir="rtl"] .vh-faq-accordion .accordion-button {
+  text-align: right !important;
+}
 
+[dir="rtl"] .vh-faq-accordion .accordion-body {
+  text-align: right !important;
+}
+
+/* RTL Pricing Table & Calculator */
+[dir="rtl"] .vh-pricing-table th,
+[dir="rtl"] .vh-pricing-table td {
+  border-right: none;
+  border-left: 1px solid var(--vh-border);
+  text-align: right;
+}
+
+[dir="rtl"] .vh-pricing-table th:last-child,
+[dir="rtl"] .vh-pricing-table td:last-child {
+  border-left: none;
+}
+
+[dir="rtl"] .vh-pricing-table .col-tier {
+  text-align: center;
+}

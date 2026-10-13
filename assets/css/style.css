@@ -2707,3 +2707,482 @@ thead.table-light th,
 .vh-photo-card:hover .vh-photo-img-wrapper img {
   transform: scale(1.05);
 }
+
+/* ===================================================================
+   Contact Page - Interactive Map & Quick Info Cards (Matching Screenshot)
+   =================================================================== */
+.vh-contact-map-frame {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  border-radius: var(--vh-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--vh-border);
+  box-shadow: var(--vh-card-shadow);
+  background-color: var(--vh-bg-surface);
+}
+
+@media (max-width: 991.98px) {
+  .vh-contact-map-frame {
+    height: 380px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .vh-contact-map-frame {
+    height: 300px;
+    border-radius: var(--vh-radius-md);
+  }
+}
+
+.vh-contact-map-frame iframe,
+#vhServiceMap {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border: 0;
+  display: block;
+  z-index: 1;
+}
+
+@media (max-width: 991.98px) {
+  #vhServiceMap {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #vhServiceMap {
+    min-height: 300px;
+  }
+}
+
+.leaflet-container {
+  font-family: var(--font-body);
+}
+
+[data-bs-theme="dark"] .leaflet-control-attribution {
+  background: rgba(17, 29, 45, 0.85) !important;
+  color: #94a3b8 !important;
+}
+
+[data-bs-theme="dark"] .leaflet-control-attribution a {
+  color: #60a5fa !important;
+}
+
+[data-bs-theme="dark"] .leaflet-bar a {
+  background-color: #111d2d !important;
+  color: #f1f5f9 !important;
+  border-color: #223753 !important;
+}
+
+[data-bs-theme="dark"] .leaflet-bar a:hover {
+  background-color: #1e3a5f !important;
+  color: #ffffff !important;
+}
+
+/* Custom Interactive Map Pin Marker */
+.vh-map-marker-pin {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.vh-marker-pulse {
+  width: 36px;
+  height: 36px;
+  background: #0e3b68;
+  color: #ffffff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(14, 59, 104, 0.45);
+  border: 2px solid #ffffff;
+}
+
+.vh-marker-pulse i {
+  transform: rotate(45deg);
+  font-size: 1.05rem;
+}
+
+[data-bs-theme="dark"] .vh-marker-pulse {
+  background: #2563eb;
+  border-color: #0f172a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+
+
+.vh-contact-quick-card {
+  background-color: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-lg);
+  padding: 2rem 1.75rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: var(--vh-card-shadow);
+}
+
+.vh-contact-quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--vh-card-shadow-hover);
+  border-color: var(--vh-primary-light);
+}
+
+.vh-contact-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--vh-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 14px rgba(14, 59, 104, 0.25);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+[data-bs-theme="dark"] .vh-contact-quick-card {
+  background-color: #111d2d;
+  border-color: #223753;
+}
+
+[data-bs-theme="dark"] .vh-contact-card-icon {
+  background-color: #162438;
+  border: 1px solid #28446b;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.vh-contact-quick-card:hover .vh-contact-card-icon {
+  transform: scale(1.08);
+  background-color: var(--vh-accent);
+  color: #ffffff;
+}
+
+/* ===================================================================
+   Contact Page - FAQ Section & Accordion
+   =================================================================== */
+.vh-faq-section {
+  background-color: var(--vh-bg-page) !important;
+}
+
+.vh-faq-accordion .accordion-item {
+  background-color: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-md) !important;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--vh-card-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vh-faq-accordion .accordion-item:hover {
+  border-color: rgba(var(--vh-primary-rgb), 0.35);
+  box-shadow: var(--vh-card-shadow-hover);
+}
+
+.vh-faq-accordion .accordion-button {
+  background-color: var(--vh-bg-surface);
+  color: var(--vh-text-main);
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vh-faq-accordion .accordion-button:not(.collapsed) {
+  background-color: rgba(var(--vh-primary-rgb), 0.06);
+  color: var(--vh-primary);
+  border-bottom: 1px solid var(--vh-border);
+}
+
+[data-bs-theme="dark"] .vh-faq-accordion .accordion-button:not(.collapsed) {
+  background-color: rgba(30, 85, 144, 0.2);
+  color: #60a5fa;
+}
+
+.vh-faq-accordion .accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.vh-faq-accordion .accordion-body {
+  padding: 1.25rem 1.5rem;
+  color: var(--vh-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+[data-bs-theme="dark"] .vh-faq-accordion .accordion-button::after {
+  filter: invert(1) brightness(0.85);
+}
+
+[data-bs-theme="dark"] .vh-faq-accordion .accordion-button:not(.collapsed)::after {
+  filter: invert(0.6) sepia(1) saturate(5) hue-rotate(190deg);
+}
+
+/* ===================================================================
+   Pricing Page Enhanced Modules (Calculator, Comparison Matrix, Trust & Cost Factors)
+   =================================================================== */
+
+/* Live Cost Estimator Calculator Box */
+.vh-pricing-calc-box {
+  background: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-xl);
+  padding: 40px;
+  box-shadow: var(--vh-card-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.vh-pricing-calc-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--vh-primary), var(--vh-accent));
+}
+
+.vh-calc-range {
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--vh-border);
+  accent-color: var(--vh-primary);
+  cursor: pointer;
+}
+
+[data-bs-theme="dark"] .vh-calc-range {
+  background-color: #24354a;
+}
+
+.vh-calc-summary-card {
+  background: linear-gradient(135deg, rgba(var(--vh-primary-rgb), 0.05), rgba(var(--vh-accent-rgb), 0.08));
+  border: 1px solid rgba(var(--vh-primary-rgb), 0.15);
+  border-radius: var(--vh-radius-lg);
+  padding: 30px 24px;
+  text-align: center;
+}
+
+[data-bs-theme="dark"] .vh-calc-summary-card {
+  background: linear-gradient(135deg, rgba(30, 85, 144, 0.2), rgba(245, 158, 11, 0.1));
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* Feature Comparison Table */
+.vh-pricing-table-wrapper {
+  background: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-lg);
+  box-shadow: var(--vh-card-shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vh-pricing-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 780px;
+}
+
+.vh-pricing-table th,
+.vh-pricing-table td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--vh-border);
+  border-right: 1px solid var(--vh-border);
+  font-size: 0.95rem;
+}
+
+.vh-pricing-table th:last-child,
+.vh-pricing-table td:last-child {
+  border-right: none;
+}
+
+.vh-pricing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.vh-pricing-table thead th {
+  background-color: var(--vh-bg-subtle);
+  color: var(--vh-text-main);
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.vh-pricing-table .col-feature {
+  width: 34%;
+  font-weight: 600;
+}
+
+.vh-pricing-table .col-tier {
+  width: 22%;
+  text-align: center;
+}
+
+.vh-pricing-table .col-highlight {
+  background-color: rgba(var(--vh-primary-rgb), 0.04);
+}
+
+[data-bs-theme="dark"] .vh-pricing-table .col-highlight {
+  background-color: rgba(30, 85, 144, 0.15);
+}
+
+.vh-pricing-table tr.category-row td {
+  background-color: var(--vh-bg-subtle);
+  color: var(--vh-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 20px;
+}
+
+[data-bs-theme="dark"] .vh-pricing-table tr.category-row td {
+  color: var(--vh-accent);
+}
+
+.vh-pricing-table tbody tr:hover td {
+  background-color: rgba(var(--vh-primary-rgb), 0.02);
+}
+
+[data-bs-theme="dark"] .vh-pricing-table tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Cost Factor Cards */
+.vh-factor-card {
+  background: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-lg);
+  padding: 28px 24px;
+  height: 100%;
+  transition: all 0.25s ease;
+  box-shadow: var(--vh-card-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.vh-factor-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--vh-primary-rgb), 0.35);
+  box-shadow: var(--vh-card-shadow-hover);
+}
+
+.vh-factor-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--vh-radius-md);
+  background: rgba(var(--vh-primary-rgb), 0.08);
+  color: var(--vh-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+[data-bs-theme="dark"] .vh-factor-icon {
+  background: rgba(37, 99, 235, 0.18);
+  color: #60a5fa;
+}
+
+/* Guarantee / Trust Cards */
+.vh-guarantee-card {
+  background: var(--vh-bg-surface);
+  border: 1px solid var(--vh-border);
+  border-radius: var(--vh-radius-lg);
+  padding: 28px 24px;
+  height: 100%;
+  transition: all 0.25s ease;
+  box-shadow: var(--vh-card-shadow);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.vh-guarantee-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--vh-card-shadow-hover);
+  border-color: rgba(var(--vh-accent-rgb), 0.45);
+}
+
+.vh-guarantee-badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(var(--vh-accent-rgb), 0.15);
+  color: var(--vh-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+
+[data-bs-theme="dark"] .vh-guarantee-badge-icon {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--vh-accent-light);
+}
+
+/* Payment Flexibility Box */
+.vh-payment-banner {
+  background: linear-gradient(135deg, var(--vh-primary-dark) 0%, var(--vh-primary) 100%);
+  color: #ffffff;
+  border-radius: var(--vh-radius-xl);
+  padding: 44px 36px;
+  box-shadow: 0 15px 35px rgba(14, 59, 104, 0.25);
+}
+
+.vh-payment-col {
+  padding: 16px 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.vh-payment-col:first-child {
+  border-left: none;
+}
+
+[dir="rtl"] .vh-payment-col {
+  border-left: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[dir="rtl"] .vh-payment-col:first-child {
+  border-right: none;
+}
+
+@media (max-width: 991.98px) {
+  .vh-payment-col {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 24px;
+    margin-top: 12px;
+  }
+  .vh-payment-col:first-child {
+    border-top: none !important;
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+

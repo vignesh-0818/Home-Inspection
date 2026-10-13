@@ -443,6 +443,7 @@ function initVeriHome() {
 
 }
 
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initVeriHome);
 } else {
