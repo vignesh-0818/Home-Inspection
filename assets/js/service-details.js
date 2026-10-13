@@ -118,7 +118,7 @@
       badge: "High Tech Diagnostic",
       badgeClass: "badge-soft-info",
       tagline: "Advanced diagnostic scanning utilizing FLIR® thermography to identify missing insulation and leaks, paired with 4K drone roof imaging.",
-      image: "assets/images/thermal-drone.jpg",
+      image: "assets/images/thermal-drone-inspection.jpg",
       imageAlt: "Thermal Infrared & Drone Roof Audit",
       price: "$249",
       priceNote: "Standalone or $150 Add-on",

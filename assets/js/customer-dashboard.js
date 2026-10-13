@@ -152,7 +152,7 @@
       title: 'Plumbing: Sewer Lateral Root Intrusion',
       category: 'Plumbing Assessment',
       badgeClass: 'bg-primary text-white',
-      image: 'assets/images/blog-card-sewer-scope.jpg',
+      image: 'assets/images/blog-card-sewer-scope-inspection.jpg',
       caption: 'High-resolution bore-scope video captured fine root intrusion 34 feet down line near city sewer main junction.',
       property: '104 Willow Ridge Road, Naperville, IL'
     },

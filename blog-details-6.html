@@ -94,7 +94,7 @@
   </nav>
 
     <!-- Full-Width Photographic Hero Banner (Reference Style) -->
-  <section class="vh-inner-banner vh-banner-blog-details" id="articleHeroBanner" style="background-image: url('assets/images/hero-blog-details-shared.jpg'); background-size: cover; background-position: center center;">
+  <section class="vh-inner-banner vh-banner-blog-details" id="articleHeroBanner" style="background-image: url('assets/images/hero-blog-details-inspection.jpg'); background-size: cover; background-position: center center;">
     <div class="container vh-inner-banner-container">
       <h1 class="vh-inner-banner-title" id="blogHeroTitle">Blog Details</h1>
       <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
@@ -124,7 +124,7 @@
             <span>•</span>
             <span><i class="bi bi-clock me-1 text-primary"></i>5 Min Read</span>
           </div>
-          <img id="articleMainImg" src="assets/images/blog-card-sewer-scope.jpg" alt="Sewer Scope Inspection - Lateral Video Push Camera Diagnostics" class="img-fluid rounded-4 shadow mb-4 w-100 object-fit-cover" style="height: 380px;">
+          <img id="articleMainImg" src="assets/images/blog-card-sewer-scope-inspection.jpg" alt="Sewer Scope Inspection - Lateral Video Push Camera Diagnostics" class="img-fluid rounded-4 shadow mb-4 w-100 object-fit-cover" style="height: 380px;">
 
           <div id="articleBodyContent">
             <p class="lead text-dark dark-text-light">
@@ -215,19 +215,34 @@
           <div class="p-4 rounded-4 border bg-white shadow-sm mb-4" style="background-color: var(--vh-bg-surface) !important;">
             <h5 class="fw-bold mb-3">Related Guides</h5>
             <div class="d-flex flex-column gap-3" id="relatedGuidesList">
-              <a href="blog-details.html?id=2" class="text-decoration-none">
+              <a href="blog-details.html?id=1" class="text-decoration-none vh-related-guide-item" data-id="1">
+                <h6 class="fw-bold text-dark dark-text-light mb-1 small">10 Critical Red Flags Every Homebuyer Must Check Before Closing</h6>
+                <small class="text-muted">Oct 28, 2026 • 7 min read</small>
+              </a>
+              <hr class="my-1 border-secondary-subtle">
+              <a href="blog-details.html?id=2" class="text-decoration-none vh-related-guide-item" data-id="2">
                 <h6 class="fw-bold text-dark dark-text-light mb-1 small">Federal Pacific Breaker Panels: Why Insurers Reject Them</h6>
                 <small class="text-muted">Oct 24, 2026 • 6 min read</small>
               </a>
               <hr class="my-1 border-secondary-subtle">
-              <a href="blog-details.html?id=3" class="text-decoration-none">
+              <a href="blog-details.html?id=3" class="text-decoration-none vh-related-guide-item" data-id="3">
                 <h6 class="fw-bold text-dark dark-text-light mb-1 small">How Infrared Thermal Cameras Detect Concealed Leaks</h6>
                 <small class="text-muted">Oct 18, 2026 • 5 min read</small>
               </a>
               <hr class="my-1 border-secondary-subtle">
-              <a href="blog-details.html?id=4" class="text-decoration-none">
+              <a href="blog-details.html?id=4" class="text-decoration-none vh-related-guide-item" data-id="4">
                 <h6 class="fw-bold text-dark dark-text-light mb-1 small">How to Turn an Inspection Report into a $15,000 Closing Credit</h6>
                 <small class="text-muted">Oct 12, 2026 • 8 min read</small>
+              </a>
+              <hr class="my-1 border-secondary-subtle">
+              <a href="blog-details.html?id=5" class="text-decoration-none vh-related-guide-item" data-id="5">
+                <h6 class="fw-bold text-dark dark-text-light mb-1 small">Foundation Settlement vs. Curing Shrinkage Cracks: The True Difference</h6>
+                <small class="text-muted">Oct 05, 2026 • 6 min read</small>
+              </a>
+              <hr class="my-1 border-secondary-subtle">
+              <a href="blog-details.html?id=6" class="text-decoration-none vh-related-guide-item" data-id="6">
+                <h6 class="fw-bold text-dark dark-text-light mb-1 small">Sewer Scope Video Diagnostics: Avoiding $15,000 Mainline Pipe Collapses</h6>
+                <small class="text-muted">Sep 28, 2026 • 5 min read</small>
               </a>
             </div>
           </div>
@@ -289,7 +304,7 @@
           <h5>Headquarters</h5>
           <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
             <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
-            <li><i class="bi bi-telephone-fill text-warning me-2"></i>+1 (800) 555-HOME (4663)</li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i><span dir="ltr" class="vh-phone-bidi">+1 (800) 555-HOME (4663)</span></li>
             <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
             <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
           </ul>
@@ -297,7 +312,7 @@
       </div>
 
       <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div>&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="vh-footer-bottom-copy" dir="ltr">&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
         <div class="d-flex gap-4">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>

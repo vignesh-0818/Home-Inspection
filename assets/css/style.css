@@ -1460,6 +1460,67 @@ thead.table-light th,
 .vh-footer a.text-muted:hover {
   color: #ffffff !important;
 }
+
+/* Footer VeriHome Brand - Exact match to Navbar & Protected from Hover Color Changes */
+.vh-footer .vh-brand,
+.vh-footer a.vh-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: var(--font-heading) !important;
+  font-weight: 800 !important;
+  font-size: 1.42rem !important;
+  letter-spacing: -0.03em !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: none !important;
+  cursor: pointer !important;
+}
+
+.vh-footer .vh-brand:hover,
+.vh-footer .vh-brand:focus,
+.vh-footer .vh-brand:active,
+.vh-footer a.vh-brand:hover,
+.vh-footer a.vh-brand:focus,
+.vh-footer a.vh-brand:active {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.vh-footer .vh-brand span,
+.vh-footer a.vh-brand span {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.vh-footer .vh-brand:hover span,
+.vh-footer a.vh-brand:hover span {
+  color: #ffffff !important;
+}
+
+.vh-footer .vh-brand .text-warning,
+.vh-footer .vh-brand:hover .text-warning,
+.vh-footer a.vh-brand .text-warning,
+.vh-footer a.vh-brand:hover .text-warning {
+  color: var(--vh-accent, #f59e0b) !important;
+}
+
+.vh-footer .vh-brand-icon,
+.vh-footer .vh-brand .vh-brand-icon,
+.vh-footer a.vh-brand .vh-brand-icon {
+  width: 38px !important;
+  height: 38px !important;
+  background: linear-gradient(135deg, var(--vh-accent, #f59e0b), var(--vh-accent-dark, #d97706)) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9px !important;
+  font-size: 1.2rem !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  flex-shrink: 0 !important;
+}
+
 .vh-footer-bottom {
   border-top: 1px solid #1e293b;
   padding-top: 25px;
@@ -1473,6 +1534,40 @@ thead.table-light th,
 .vh-footer-bottom a:hover {
   color: #ffffff !important;
 }
+
+/* Home 2 Hero Image Enlarge */
+.vh-hero-2-img {
+  width: 100% !important;
+  height: 480px !important;
+  object-fit: cover !important;
+  object-position: center 30% !important;
+  border-radius: 20px !important;
+  border: 3px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45) !important;
+  display: block !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.vh-hero-2-img:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55) !important;
+}
+@media (max-width: 1199.98px) {
+  .vh-hero-2-img {
+    height: 430px !important;
+  }
+}
+@media (max-width: 991.98px) {
+  .vh-hero-2-img {
+    height: 380px !important;
+    margin-top: 1.5rem !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .vh-hero-2-img {
+    height: 290px !important;
+  }
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 991.98px) {
@@ -1707,7 +1802,7 @@ thead.table-light th,
 /* 1. About Us Hero */
 .vh-banner-about,
 .vh-about-banner {
-  background-image: url('../images/hero-about-inspector.jpg');
+  background-image: url('../images/hero-about-inspectors-team.jpg');
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -1767,7 +1862,7 @@ thead.table-light th,
 .vh-banner-blog-4,
 .vh-banner-blog-5,
 .vh-banner-blog-6 {
-  background-image: url('../images/hero-blog-details-shared.jpg') !important;
+  background-image: url('../images/hero-blog-details-inspection.jpg') !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -1943,6 +2038,53 @@ thead.table-light th,
 }
 [data-bs-theme="dark"] .pricing-addon-card .addon-desc {
   color: #94a3b8;
+}
+
+/* ===================================================================
+   BLOG DETAILS - RELATED GUIDES SIDEBAR STYLING
+   =================================================================== */
+.vh-related-guide-item {
+  display: block;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  padding: 6px 8px;
+  margin: -2px -4px;
+  border-left: 3px solid transparent;
+}
+.vh-related-guide-item:hover {
+  background-color: var(--vh-bg-subtle, rgba(14, 59, 104, 0.05));
+  transform: translateX(2px);
+}
+.vh-related-guide-item:hover h6 {
+  color: var(--vh-primary) !important;
+}
+.vh-related-guide-item.active-article {
+  background-color: rgba(37, 99, 235, 0.08);
+  border-left: 3px solid var(--vh-primary);
+}
+[data-bs-theme="dark"] .vh-related-guide-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+[data-bs-theme="dark"] .vh-related-guide-item:hover h6 {
+  color: var(--vh-accent, #f59e0b) !important;
+}
+[data-bs-theme="dark"] .vh-related-guide-item.active-article {
+  background-color: rgba(56, 189, 248, 0.12);
+  border-left-color: var(--vh-accent, #f59e0b);
+}
+[dir="rtl"] .vh-related-guide-item {
+  border-left: none;
+  border-right: 3px solid transparent;
+}
+[dir="rtl"] .vh-related-guide-item:hover {
+  transform: translateX(-2px);
+}
+[dir="rtl"] .vh-related-guide-item.active-article {
+  border-right: 3px solid var(--vh-primary);
+  border-left: none;
+}
+[dir="rtl"][data-bs-theme="dark"] .vh-related-guide-item.active-article {
+  border-right-color: var(--vh-accent, #f59e0b);
 }
 
 /* ===================================================================

@@ -64,6 +64,15 @@ function initVeriHome() {
         textSpan.textContent = dir === 'rtl' ? 'LTR' : 'RTL';
       }
     }
+    // Propagate direction and alignment to form inputs (tel, date, text, textarea, select)
+    document.querySelectorAll('input, textarea, select, .form-control, .vh-auth-input').forEach(function(el) {
+      el.setAttribute('dir', dir);
+      if (dir === 'rtl') {
+        el.style.textAlign = 'right';
+      } else {
+        el.style.textAlign = '';
+      }
+    });
   }
 
   // 3. Inspection Cost Estimator Calculator

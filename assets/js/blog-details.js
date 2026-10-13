@@ -209,7 +209,7 @@
       authorRole: "Founder & InterNACHI Certified Master Inspector",
       authorBio: "John is the Founder of VeriHome and an InterNACHI Certified Master Inspector with 18+ years of forensic property assessment experience across the Midwest.",
       authorImg: "assets/images/inspector-1.jpg",
-      mainImg: "assets/images/blog-card-sewer-scope.jpg",
+      mainImg: "assets/images/blog-card-sewer-scope-inspection.jpg",
       mainImgAlt: "Sewer Scope Inspection - Lateral Video Push Camera Diagnostics",
       lead: "Standard home inspection standards of practice (SOP) only require testing accessible interior plumbing fixtures. They completely exclude the 100 feet of buried lateral pipe connecting the house to the municipal street main—a buried pipeline that costs upwards of $15,000 to replace when it fails.",
       intro: "Municipal sewer laterals running beneath front lawns, driveways, and sidewalks are 100% the private homeowner's financial responsibility. Discover why a high-definition fiber optic video scope is the most cost-effective $200 inspection add-on you can invest in.",
@@ -244,7 +244,7 @@
     const heroBannerEl = document.getElementById('articleHeroBanner');
     if (heroBannerEl) {
       heroBannerEl.className = 'vh-inner-banner vh-banner-blog-details';
-      heroBannerEl.style.backgroundImage = "url('assets/images/hero-blog-details-shared.jpg')";
+      heroBannerEl.style.backgroundImage = "url('assets/images/hero-blog-details-inspection.jpg')";
       heroBannerEl.style.backgroundSize = "cover";
       heroBannerEl.style.backgroundPosition = "center center";
     }
@@ -336,6 +336,44 @@
 
     const authorBioEl = document.getElementById('articleAuthorBio');
     if (authorBioEl) authorBioEl.textContent = article.authorBio;
+
+    // 8. Render all 6 Related Guides with Current Active Indicator
+    renderRelatedGuides(id);
+  }
+
+  function renderRelatedGuides(currentId) {
+    const relatedListEl = document.getElementById('relatedGuidesList');
+    if (!relatedListEl) return;
+
+    const allArticles = [
+      { id: 1, title: "10 Critical Red Flags Every Homebuyer Must Check Before Closing", meta: "Oct 28, 2026 • 7 min read" },
+      { id: 2, title: "Federal Pacific Breaker Panels: Why Insurers Reject Them", meta: "Oct 24, 2026 • 6 min read" },
+      { id: 3, title: "How Infrared Thermal Cameras Detect Concealed Leaks", meta: "Oct 18, 2026 • 5 min read" },
+      { id: 4, title: "How to Turn an Inspection Report into a $15,000 Closing Credit", meta: "Oct 12, 2026 • 8 min read" },
+      { id: 5, title: "Foundation Settlement vs. Curing Shrinkage Cracks: The True Difference", meta: "Oct 05, 2026 • 6 min read" },
+      { id: 6, title: "Sewer Scope Video Diagnostics: Avoiding $15,000 Mainline Pipe Collapses", meta: "Sep 28, 2026 • 5 min read" }
+    ];
+
+    let html = '';
+    allArticles.forEach((art, index) => {
+      const isCurrent = art.id === currentId;
+      const currentBadge = isCurrent ? ` <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1" style="font-size: 0.7rem; font-weight: 600;">Current</span>` : '';
+      const textClass = isCurrent ? 'text-primary' : 'text-dark dark-text-light';
+      const activeClass = isCurrent ? ' active-article' : '';
+
+      html += `
+        <a href="blog-details.html?id=${art.id}" class="text-decoration-none vh-related-guide-item${activeClass}" data-id="${art.id}">
+          <h6 class="fw-bold ${textClass} mb-1 small">${art.title}${currentBadge}</h6>
+          <small class="text-muted">${art.meta}</small>
+        </a>
+      `;
+
+      if (index < allArticles.length - 1) {
+        html += `<hr class="my-1 border-secondary-subtle">`;
+      }
+    });
+
+    relatedListEl.innerHTML = html;
   }
 
   // Read URL query parameter
