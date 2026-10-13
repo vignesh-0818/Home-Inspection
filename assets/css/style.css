@@ -1573,11 +1573,50 @@ thead.table-light th,
 @media (max-width: 991.98px) {
   .dash-wrapper {
     flex-direction: column;
+    min-height: auto;
   }
   .dash-sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--vh-border);
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    background: var(--vh-bg-surface) !important;
+    z-index: 1060 !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25) !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-right: 1px solid var(--vh-border) !important;
+    border-bottom: none !important;
+  }
+  .dash-sidebar.show {
+    transform: translateX(0) !important;
+  }
+  .dash-content {
+    padding: 20px 15px !important;
+    width: 100% !important;
+  }
+  .dash-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 1055;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .dash-backdrop.show {
+    opacity: 1;
+    visibility: visible;
   }
   .pricing-card.featured {
     transform: none;
@@ -3182,6 +3221,116 @@ thead.table-light th,
     border-top: none !important;
     padding-top: 0;
     margin-top: 0;
+  }
+}
+
+/* ===================================================================
+   Unified Dashboard Navbar & Responsive Action Controls
+   =================================================================== */
+.vh-dash-navbar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: var(--vh-bg-surface) !important;
+}
+
+.vh-dash-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+}
+
+.vh-dash-actions .btn-nav-control {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.vh-dash-actions .user-avatar-initials {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.vh-profile-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Mobile responsive sizing for dashboard buttons (< 768px) */
+@media (max-width: 767.98px) {
+  .vh-dash-actions {
+    gap: 6px !important;
+  }
+  .vh-dash-actions .btn-nav-control {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+  .vh-dash-actions .user-avatar-initials {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 0.85rem;
+  }
+  .vh-dash-navbar .vh-brand {
+    font-size: 1.15rem;
+  }
+
+  /* Full-width, crystal-clear notification menu on mobile (both LTR & RTL) */
+  .vh-dash-navbar .vh-notification-dropdown {
+    position: static !important;
+  }
+  .vh-dash-navbar .vh-notification-menu {
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 24px) !important;
+    margin: 0 !important;
+    transform: none !important;
+    border-radius: var(--vh-radius-md, 12px) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
+    z-index: 1050 !important;
+  }
+  .vh-notification-menu .dropdown-header {
+    padding: 10px 14px !important;
+  }
+  .vh-notification-menu .dropdown-item {
+    padding: 10px 14px !important;
+  }
+
+  /* Keep profile dropdown cleanly bounded within screen in LTR */
+  [dir="ltr"] .vh-dash-navbar .vh-profile-dropdown .dropdown-menu {
+    right: 8px !important;
+    left: auto !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+  [dir="rtl"] .vh-dash-navbar .vh-profile-dropdown .dropdown-menu {
+    left: 8px !important;
+    right: auto !important;
+    max-width: calc(100vw - 16px) !important;
   }
 }
 

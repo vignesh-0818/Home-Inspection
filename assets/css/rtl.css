@@ -301,3 +301,83 @@
 [dir="rtl"] .vh-pricing-table .col-tier {
   text-align: center;
 }
+
+/* RTL Contact Quick Cards */
+[dir="rtl"] .vh-contact-quick-card {
+  text-align: center;
+}
+
+[dir="rtl"] .vh-contact-quick-card .badge {
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* RTL Contact Quick Cards - Mobile Reverse Vertical Stack (Email -> Phone -> Lab) */
+@media (max-width: 767.98px) {
+  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-email {
+    order: 1;
+  }
+  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-phone {
+    order: 2;
+  }
+  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-lab {
+    order: 3;
+  }
+}
+
+/* ===================================================================
+   RTL Dashboard Mobile Sidebar & Dropdown Alignment
+   =================================================================== */
+
+/* RTL Mobile Sidebar: Slide in from the Right instead of Left */
+@media (max-width: 991.98px) {
+  [dir="rtl"] .dash-sidebar {
+    left: auto !important;
+    right: 0 !important;
+    border-right: none !important;
+    border-left: 1px solid var(--vh-border) !important;
+    transform: translateX(100%) !important;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.25) !important;
+  }
+  [dir="rtl"] .dash-sidebar.show {
+    transform: translateX(0) !important;
+  }
+}
+
+/* RTL Dashboard Dropdown Menus: Open from Left Edge inwards to avoid screen cutoff */
+[dir="rtl"] .vh-dash-navbar .dropdown-menu,
+[dir="rtl"] .vh-dash-navbar .dropdown-menu-end {
+  right: auto !important;
+  left: 0 !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] .vh-dash-navbar .dropdown-item {
+  text-align: right !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+[dir="rtl"] .vh-dash-navbar .dropdown-item i {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Max-width constraint on mobile dropdowns */
+@media (max-width: 767.98px) {
+  /* Notification menu spans full mobile width with 12px gutters on both sides */
+  [dir="rtl"] .vh-dash-navbar .vh-notification-menu {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  /* Profile dropdown opens inwards from left: 8px */
+  [dir="rtl"] .vh-dash-navbar .vh-profile-dropdown .dropdown-menu {
+    left: 8px !important;
+    right: auto !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+}
+

@@ -27,8 +27,8 @@
 <body>
 
   <!-- Customer Dashboard Navbar -->
-  <nav class="navbar navbar-expand-lg border-bottom sticky-top" style="background-color: var(--vh-bg-surface); z-index: 1030;">
-    <div class="container-fluid px-lg-4">
+  <nav class="navbar navbar-expand-lg border-bottom sticky-top vh-dash-navbar" style="background-color: var(--vh-bg-surface); z-index: 1030;">
+    <div class="container-fluid px-2 px-sm-3 px-lg-4">
       <!-- Brand returns to Public Homepage -->
       <a class="navbar-brand vh-brand" href="index.html" title="Return to Public Homepage">
         <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
@@ -36,7 +36,7 @@
         <span class="badge bg-primary-subtle text-primary ms-2 fs-6 fw-normal d-none d-sm-inline">Client Portal</span>
       </a>
 
-      <div class="d-flex align-items-center gap-3 ms-auto">
+      <div class="d-flex align-items-center gap-2 ms-auto vh-dash-actions">
         <!-- Dark/Light & RTL Controls Inside Navbar -->
         <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
           <i class="bi bi-moon-stars-fill text-primary"></i>
@@ -45,13 +45,13 @@
           <span class="rtl-text">RTL</span>
         </button>
 
-        <a href="index.html" class="btn btn-sm btn-vh-outline d-none d-md-inline-flex">
+        <a href="index.html" class="btn btn-sm btn-vh-outline d-none d-md-inline-flex" title="Return to Public Website">
           <i class="bi bi-arrow-left me-1"></i>Public Website
         </a>
 
         <!-- Notifications Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-sm btn-outline-secondary position-relative rounded-circle p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="vhNotificationBell" style="width: 38px; height: 38px;" title="Notifications">
+        <div class="dropdown vh-notification-dropdown">
+          <button class="btn btn-nav-control position-relative" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" id="vhNotificationBell" title="Notifications">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
               <span class="visually-hidden">New alerts</span>
@@ -95,16 +95,16 @@
         </div>
 
         <!-- User Profile Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-sm d-flex align-items-center gap-2 border-0 bg-transparent p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="userProfileDropdownBtn">
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold user-avatar-initials" style="width: 38px; height: 38px; font-size: 0.95rem;">
+        <div class="dropdown vh-profile-dropdown">
+          <button class="btn vh-profile-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" id="userProfileDropdownBtn" title="Account Menu">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold user-avatar-initials">
               DM
             </div>
-            <div class="text-start d-none d-sm-block">
+            <div class="text-start d-none d-sm-block ms-2">
               <span class="fw-bold d-block text-dark dark-text-light user-profile-fullname" style="line-height: 1.1; font-size: 0.88rem;">David Miller</span>
               <small class="text-muted" style="font-size: 0.75rem;">Homebuyer Client</small>
             </div>
-            <i class="bi bi-chevron-down text-muted small ms-1"></i>
+            <i class="bi bi-chevron-down text-muted small ms-1 d-none d-sm-inline"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 220px;">
             <li class="px-3 py-2 border-bottom mb-1">
@@ -124,6 +124,11 @@
             </li>
           </ul>
         </div>
+
+        <!-- Hamburger Toggle for Mobile View Only -->
+        <button class="btn btn-nav-control d-inline-flex d-lg-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
+          <i class="bi bi-list fs-5"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -131,7 +136,19 @@
   <!-- Dashboard Layout Container -->
   <div class="dash-wrapper">
     <!-- Sidebar -->
-    <aside class="dash-sidebar p-3">
+    <aside class="dash-sidebar p-3" id="dashSidebar">
+      <!-- Mobile Sidebar Header with Close Button -->
+      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-lg-none">
+        <div class="d-flex align-items-center gap-2">
+          <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span class="fw-bold fs-6">Veri<span class="text-warning">Home</span></span>
+          <span class="badge bg-primary-subtle text-primary small">Portal</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-nav-control" id="vhCloseSidebarBtn" aria-label="Close Sidebar" title="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
       <div class="d-flex flex-column gap-1">
         <a href="#tab-overview" class="dash-nav-item active" onclick="switchCustomerTab('tab-overview', this)">
           <i class="bi bi-speedometer2 fs-5"></i>
@@ -673,6 +690,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Dashboard Sidebar Backdrop -->
+  <div class="dash-backdrop" id="dashBackdrop"></div>
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>

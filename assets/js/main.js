@@ -441,6 +441,79 @@ function initVeriHome() {
 
   setupFooterSocialLinks();
 
+  // 12. Dashboard Mobile Sidebar Drawer & Backdrop Interaction
+  function initDashboardSidebar() {
+    const toggleBtn = document.getElementById('vhDashSidebarToggle');
+    const closeBtn = document.getElementById('vhCloseSidebarBtn');
+    const sidebar = document.getElementById('dashSidebar');
+    const backdrop = document.getElementById('dashBackdrop');
+
+    if (!sidebar) return;
+
+    function openSidebar() {
+      sidebar.classList.add('show');
+      if (backdrop) backdrop.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('show');
+      if (backdrop) backdrop.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (sidebar.classList.contains('show')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeSidebar();
+      });
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeSidebar();
+      });
+    }
+
+    // Auto-close on mobile when user selects any nav tab item
+    sidebar.querySelectorAll('.dash-nav-item').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth < 992) {
+          closeSidebar();
+        }
+      });
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('show')) {
+        closeSidebar();
+      }
+    });
+
+    // Close on window resize to desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 992 && sidebar.classList.contains('show')) {
+        closeSidebar();
+      }
+    });
+  }
+
+  initDashboardSidebar();
+
 }
 
 

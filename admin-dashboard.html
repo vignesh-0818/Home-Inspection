@@ -27,15 +27,15 @@
 <body>
 
   <!-- Admin Navbar -->
-  <nav class="navbar navbar-expand-lg border-bottom sticky-top" style="background-color: var(--vh-bg-surface); z-index: 1030;">
-    <div class="container-fluid px-lg-4">
+  <nav class="navbar navbar-expand-lg border-bottom sticky-top vh-dash-navbar" style="background-color: var(--vh-bg-surface); z-index: 1030;">
+    <div class="container-fluid px-2 px-sm-3 px-lg-4">
       <a class="navbar-brand vh-brand" href="index.html" title="Return to Public Homepage">
         <span class="vh-brand-icon" style="background: linear-gradient(135deg, #091726, #0e3b68);"><i class="bi bi-shield-lock"></i></span>
         <span>Veri<span class="text-warning">Home</span></span>
         <span class="badge bg-dark ms-2 fs-6 fw-normal d-none d-sm-inline">Admin Console</span>
       </a>
 
-      <div class="d-flex align-items-center gap-3 ms-auto">
+      <div class="d-flex align-items-center gap-2 ms-auto vh-dash-actions">
         <!-- Dark/Light & RTL Controls Inside Navbar -->
         <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
           <i class="bi bi-moon-stars-fill text-primary"></i>
@@ -44,17 +44,17 @@
           <span class="rtl-text">RTL</span>
         </button>
 
-        <a href="index.html" class="btn btn-sm btn-vh-outline d-none d-md-inline-flex">
+        <a href="index.html" class="btn btn-sm btn-vh-outline d-none d-md-inline-flex" title="Return to Public Website">
           <i class="bi bi-house me-1"></i>Public Website
         </a>
 
         <!-- Notifications -->
-        <div class="dropdown">
-          <button class="btn btn-sm btn-outline-secondary position-relative rounded-circle p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 38px; height: 38px;">
+        <div class="dropdown vh-notification-dropdown">
+          <button class="btn btn-nav-control position-relative" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" title="Notifications">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="width: 320px;">
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg vh-notification-menu">
             <li class="dropdown-header fw-bold">Dispatch & Report Notifications</li>
             <li><hr class="dropdown-divider"></li>
             <li>
@@ -73,16 +73,16 @@
         </div>
 
         <!-- Admin Profile -->
-        <div class="dropdown">
-          <button class="btn btn-sm d-flex align-items-center gap-2 border-0 bg-transparent p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">
+        <div class="dropdown vh-profile-dropdown">
+          <button class="btn vh-profile-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" title="Account Menu">
+            <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-bold user-avatar-initials">
               MV
             </div>
-            <div class="text-start d-none d-sm-block">
+            <div class="text-start d-none d-sm-block ms-2">
               <span class="fw-bold d-block text-dark dark-text-light" style="line-height: 1.1; font-size: 0.88rem;">Marcus Vance</span>
               <small class="text-muted" style="font-size: 0.75rem;">Operations Director</small>
             </div>
-            <i class="bi bi-chevron-down text-muted small"></i>
+            <i class="bi bi-chevron-down text-muted small ms-1 d-none d-sm-inline"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow-lg">
             <li><a class="dropdown-item" href="customer-dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Switch to Customer View</a></li>
@@ -91,6 +91,11 @@
             <li><a class="dropdown-item text-danger" href="login.html" onclick="handleAdminLogout(event)"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
           </ul>
         </div>
+
+        <!-- Hamburger Toggle for Mobile View Only -->
+        <button class="btn btn-nav-control d-inline-flex d-lg-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
+          <i class="bi bi-list fs-5"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -98,7 +103,19 @@
   <!-- Admin Layout Wrapper -->
   <div class="dash-wrapper">
     <!-- Admin Sidebar -->
-    <aside class="dash-sidebar p-3" style="background: var(--vh-bg-surface);">
+    <aside class="dash-sidebar p-3" id="dashSidebar" style="background: var(--vh-bg-surface);">
+      <!-- Mobile Sidebar Header with Close Button -->
+      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-lg-none">
+        <div class="d-flex align-items-center gap-2">
+          <span class="vh-brand-icon" style="background: linear-gradient(135deg, #091726, #0e3b68);"><i class="bi bi-shield-lock"></i></span>
+          <span class="fw-bold fs-6">Veri<span class="text-warning">Home</span></span>
+          <span class="badge bg-dark small">Admin</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-nav-control" id="vhCloseSidebarBtn" aria-label="Close Sidebar" title="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
       <div class="d-flex flex-column gap-1">
         <a href="#admin-overview" class="dash-nav-item active" onclick="switchAdminTab('admin-overview', this)">
           <i class="bi bi-graph-up-arrow fs-5 text-primary"></i>
@@ -534,6 +551,9 @@
   </div>
 
 
+
+  <!-- Mobile Dashboard Sidebar Backdrop -->
+  <div class="dash-backdrop" id="dashBackdrop"></div>
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
