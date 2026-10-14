@@ -1190,6 +1190,47 @@ thead.table-light th,
   color: var(--vh-accent-light) !important;
 }
 
+/* Service Card Decision Value Callout */
+.vh-service-decision-box {
+  background-color: var(--vh-bg-subtle);
+  border-left: 3px solid var(--vh-accent);
+  border-radius: var(--vh-radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--vh-text-main);
+}
+[data-bs-theme="dark"] .vh-service-decision-box {
+  background-color: #162438;
+  border-left-color: var(--vh-accent);
+  color: #cbd5e1;
+}
+[dir="rtl"] .vh-service-decision-box {
+  border-left: none;
+  border-right: 3px solid var(--vh-accent);
+  text-align: right;
+}
+.vh-service-decision-box .decision-label {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 3px;
+  color: var(--vh-primary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+[data-bs-theme="dark"] .vh-service-decision-box .decision-label {
+  color: var(--vh-accent-light);
+}
+
+/* Common Container Width Utilities */
+.max-w-600 { max-width: 600px; }
+.max-w-700 { max-width: 700px; }
+.max-w-800 { max-width: 800px; }
+
 .vh-icon-box {
   width: 58px;
   height: 58px;

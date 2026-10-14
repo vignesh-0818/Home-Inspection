@@ -469,3 +469,14 @@
   }
 }
 
+/* Service Card Decision Box in RTL */
+[dir="rtl"] .vh-service-decision-box {
+  border-left: none !important;
+  border-right: 3px solid var(--vh-accent) !important;
+  text-align: right !important;
+}
+[dir="rtl"] .vh-service-decision-box .decision-label {
+  justify-content: flex-start;
+}
+
+
