@@ -312,17 +312,105 @@
   display: inline-block;
 }
 
-/* RTL Contact Quick Cards - Mobile Reverse Vertical Stack (Email -> Phone -> Lab) */
+/* Ensure the contact card icon is ALWAYS a strictly-sized circle and never distorted */
+[dir="rtl"] .vh-contact-card-icon {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  max-width: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* RTL Contact Quick Cards - Mobile View Direction & Content Alignment */
 @media (max-width: 767.98px) {
+  /* Keep existing mobile card order and layout structure unchanged (Lab -> Phone -> Email) */
+  [dir="rtl"] #vhContactQuickCardsRow > div,
+  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-lab,
+  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-phone,
   [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-email {
-    order: 1;
+    order: unset !important;
   }
-  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-phone {
-    order: 2;
+
+  /* Change only the content direction and alignment inside the contact cards for mobile RTL */
+  [dir="rtl"] .vh-contact-quick-card {
+    direction: rtl !important;
+    text-align: right !important;
+    align-items: flex-start !important;
   }
-  [dir="rtl"] #vhContactQuickCardsRow .vh-contact-col-lab {
-    order: 3;
+
+  /* The circle icon: strictly 56x56, perfectly round, aligned to RTL start (right) */
+  [dir="rtl"] .vh-contact-quick-card .vh-contact-card-icon {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: flex-start !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 1.25rem !important;
   }
+
+  [dir="rtl"] .vh-contact-quick-card h5 {
+    text-align: right !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  [dir="rtl"] .vh-contact-quick-card .mb-2 {
+    text-align: right !important;
+    width: 100% !important;
+  }
+
+  /* Address and description text: right-aligned, preserved LTR bidi so numbers and dashes don't scramble */
+  [dir="rtl"] .vh-contact-quick-card p {
+    text-align: right !important;
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* Badges aligned to right with bidi protection */
+  [dir="rtl"] .vh-contact-quick-card .badge {
+    align-self: flex-start !important;
+    margin-right: 0 !important;
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    display: inline-block !important;
+  }
+
+  /* Phone and email links */
+  [dir="rtl"] .vh-contact-quick-card a[href^="tel"],
+  [dir="rtl"] .vh-contact-quick-card a[href^="mailto"] {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    text-align: right !important;
+    display: inline-block !important;
+  }
+}
+
+/* RTL Testimonial Reviews & Profile Alignment */
+[dir="rtl"] .vh-testimonial-profile {
+  direction: rtl;
+  text-align: right;
+}
+[dir="rtl"] .vh-testimonial-meta {
+  text-align: right !important;
 }
 
 /* ===================================================================
