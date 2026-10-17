@@ -35,11 +35,36 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
+      <!-- Quick mobile actions header (Theme & Dashboard immediately accessible without scrolling - Issue 14) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none ms-auto me-2">
+        <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash px-2 py-1" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2"></i>
+        </a>
+      </div>
+
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,19 +95,22 @@
           </li>
         </ul>
 
-        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <!-- Action Controls: Theme Toggles, Sign In / Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
-          <!-- Dark/Light Mode Separate Button -->
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <!-- Dark/Light Mode Separate Button (Desktop) -->
+          <button class="btn btn-nav-control vh-theme-toggle-btn d-none d-lg-inline-flex" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
 
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Combined Sign In / Register (Issue 3) -->
+          <a href="login.html" class="btn btn-sm btn-vh-outline">
+            <i class="bi bi-person me-1"></i>Sign In / Register
+          </a>
+
           <!-- Customer Dashboard Navbar Button (REQUIRED) -->
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
@@ -96,14 +124,8 @@
   <!-- Full-Width Photographic Hero Banner (Reference Style) -->
   <section class="vh-inner-banner vh-banner-blog">
     <div class="container vh-inner-banner-container">
-      <h1 class="vh-inner-banner-title">Our Blog</h1>
-      <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
-        <ol class="vh-inner-breadcrumb">
-          <li class="breadcrumb-item-custom"><a href="index.html" class="breadcrumb-link">Home</a></li>
-          <li class="breadcrumb-separator" aria-hidden="true">/</li>
-          <li class="breadcrumb-item-custom breadcrumb-current" aria-current="page">Blog</li>
-        </ol>
-      </nav>
+      <h1 class="vh-inner-banner-title">Our Blog & Inspection Resources</h1>
+      <p class="vh-inner-banner-desc">Practical inspection guides, defect case studies, and negotiation tips from certified master inspectors to help you protect your property investment.</p>
     </div>
   </section>
 

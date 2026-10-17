@@ -125,20 +125,47 @@
           </ul>
         </div>
 
-        <!-- Hamburger Toggle for Mobile View Only -->
-        <button class="btn btn-nav-control d-inline-flex d-lg-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
+        <!-- Hamburger Toggle for Mobile & Tablet View (Issue 13) -->
+        <button class="btn btn-nav-control d-inline-flex d-xl-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
           <i class="bi bi-list fs-5"></i>
         </button>
       </div>
     </div>
   </nav>
 
+  <!-- Persistent Dashboard Section Navigation Bar for 1024px, 720px & Mobile (Issue 13) -->
+  <div class="dash-tablet-nav d-xl-none bg-white border-bottom shadow-sm px-3 py-2 sticky-top" style="top: 0; z-index: 1020; background-color: var(--vh-bg-surface) !important;">
+    <div class="dash-tablet-nav-scroller d-flex align-items-center gap-2 overflow-x-auto py-1">
+      <button type="button" class="dash-tab-btn active" data-tab="tab-overview" onclick="switchCustomerTab('tab-overview', this)">
+        <i class="bi bi-speedometer2 me-1"></i>Overview
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-appointments" onclick="switchCustomerTab('tab-appointments', this)">
+        <i class="bi bi-calendar2-check me-1"></i>My Inspections
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-book" onclick="switchCustomerTab('tab-book', this)">
+        <i class="bi bi-plus-circle me-1 text-warning"></i>Book Inspection
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-reports" onclick="switchCustomerTab('tab-reports', this)">
+        <i class="bi bi-file-earmark-bar-graph me-1"></i>Digital Reports <span class="badge bg-success ms-1">1 Ready</span>
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-photos" onclick="switchCustomerTab('tab-photos', this)">
+        <i class="bi bi-images me-1"></i>Inspection Photos
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-messages" onclick="switchCustomerTab('tab-messages', this)">
+        <i class="bi bi-chat-square-text me-1"></i>Messages
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="tab-profile" onclick="switchCustomerTab('tab-profile', this)">
+        <i class="bi bi-person-gear me-1"></i>Settings
+      </button>
+    </div>
+  </div>
+
   <!-- Dashboard Layout Container -->
   <div class="dash-wrapper">
     <!-- Sidebar -->
     <aside class="dash-sidebar p-3" id="dashSidebar">
       <!-- Mobile Sidebar Header with Close Button -->
-      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-lg-none">
+      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-xl-none">
         <div class="d-flex align-items-center gap-2">
           <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
           <span class="fw-bold fs-6">Veri<span class="text-warning">Home</span></span>
@@ -338,19 +365,35 @@
         </div>
       </section>
 
-      <!-- TAB 2: MY INSPECTIONS & APPOINTMENTS -->
+      <!-- TAB 2: MY INSPECTIONS & APPOINTMENTS (Issue 2) -->
       <section id="tab-appointments" class="customer-view-tab" style="display: none;">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
           <div>
             <h3 class="fw-bold mb-1">My Property Inspections</h3>
-            <p class="text-muted small mb-0">Track active, scheduled, and past property assessments.</p>
+            <p class="text-muted small mb-0">Track active, scheduled, and past property assessments with real-time status.</p>
           </div>
-          <button class="btn btn-sm btn-vh-accent" onclick="switchCustomerTab('tab-book')">
-            <i class="bi bi-plus-lg me-1"></i>Book New Inspection
-          </button>
+          <div class="d-flex gap-2 align-items-center">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Inspection View Mode">
+              <button type="button" class="btn btn-outline-secondary active" id="btnViewModeCards" onclick="window.switchInspectionViewMode('cards')">
+                <i class="bi bi-grid-fill me-1"></i>Cards
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="btnViewModeTable" onclick="window.switchInspectionViewMode('table')">
+                <i class="bi bi-table me-1"></i>Table
+              </button>
+            </div>
+            <button class="btn btn-sm btn-vh-accent" onclick="switchCustomerTab('tab-book')">
+              <i class="bi bi-plus-lg me-1"></i>Book New Inspection
+            </button>
+          </div>
         </div>
 
-        <div class="table-responsive rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+        <!-- Cards View (Default Matching Screenshot) -->
+        <div class="row g-4 mb-4" id="myInspectionsCardsContainer">
+          <!-- Dynamically populated from verihome_inspections by renderInspectionCards() -->
+        </div>
+
+        <!-- Table View -->
+        <div class="table-responsive rounded-4 border bg-white shadow-sm" id="myInspectionsTableContainer" style="display: none; background-color: var(--vh-bg-surface) !important;">
           <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
               <tr>
@@ -464,62 +507,40 @@
 
       <!-- TAB 4: DIGITAL INSPECTION REPORTS -->
       <section id="tab-reports" class="customer-view-tab" style="display: none;">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
           <div>
             <h3 class="fw-bold mb-1">Digital Inspection Reports</h3>
-            <p class="text-muted small mb-0">Access interactive cloud reports, download high-res PDFs, or export repair addendums.</p>
+            <p class="text-muted small mb-0">Access interactive cloud reports, download official certified PDFs, and review inspection photo evidence.</p>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small fw-semibold">
+              <i class="bi bi-patch-check-fill me-1"></i>2 Reports Ready
+            </span>
+            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-3 py-2 rounded-pill small fw-semibold">
+              <i class="bi bi-hourglass-split me-1"></i>1 In Progress
+            </span>
           </div>
         </div>
 
+        <!-- Report Status Banner -->
+        <div class="p-3 rounded-4 border mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3" style="background-color: var(--vh-bg-surface) !important; border-color: var(--vh-border) !important;">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-circle bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
+              <i class="bi bi-file-earmark-bar-graph fs-4"></i>
+            </div>
+            <div>
+              <strong class="d-block text-dark dark-text-light" style="font-size: 0.95rem;">Cloud Diagnostic Vault & Certified Deliverables</strong>
+              <small class="text-muted">Published reports include empirical findings, InterNACHI® SOP certifications, and high-resolution defect photography.</small>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-vh-outline" onclick="window.switchCustomerTab('tab-photos')">
+            <i class="bi bi-images me-1"></i>Open Photo Evidence Vault
+          </button>
+        </div>
+
+        <!-- Digital Report Cards (Dynamically populated from verihome_inspections by renderDigitalReportsCards()) -->
         <div class="row g-4" id="digitalReportsCardsContainer">
-          <div class="col-md-6">
-            <div class="p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <span class="badge bg-success">Report Published</span>
-                <span class="text-muted small">Oct 28, 2026</span>
-              </div>
-              <h5 class="fw-bold mb-1">482 Maple Avenue, Oakridge</h5>
-              <p class="text-muted small mb-3">Comprehensive Pre-Purchase Assessment (400 Points)</p>
-              
-              <div class="p-3 bg-light rounded-3 mb-3 small d-flex justify-content-between align-items-center" style="background-color: var(--vh-bg-subtle) !important;">
-                <span>Overall Condition Score:</span>
-                <strong class="text-success h5 mb-0">94 / 100</strong>
-              </div>
-
-              <div class="d-flex gap-2">
-                <button type="button" class="btn btn-vh-primary flex-grow-1" onclick="window.openDigitalReport('VH-2026-889')">
-                  <i class="bi bi-eye me-1"></i>View Digital Report
-                </button>
-                <button class="btn btn-vh-outline" onclick="window.downloadInspectionReport('VH-2026-889')" title="Download official PDF report">
-                  <i class="bi bi-download"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <span class="badge bg-secondary-subtle text-dark dark-text-light">Archived Report</span>
-                <span class="text-muted small">Aug 14, 2025</span>
-              </div>
-              <h5 class="fw-bold mb-1">712 North Clark St, #4B</h5>
-              <p class="text-muted small mb-3">Condo / Townhome Inspection (215 Points)</p>
-              
-              <div class="p-3 bg-light rounded-3 mb-3 small d-flex justify-content-between align-items-center" style="background-color: var(--vh-bg-subtle) !important;">
-                <span>Overall Condition Score:</span>
-                <strong class="text-success h5 mb-0">91 / 100</strong>
-              </div>
-
-              <div class="d-flex gap-2">
-                <button type="button" class="btn btn-vh-primary flex-grow-1" onclick="window.openDigitalReport('VH-2025-412')">
-                  <i class="bi bi-eye me-1"></i>View Digital Report
-                </button>
-                <button class="btn btn-vh-outline" onclick="window.downloadInspectionReport('VH-2025-412')" title="Download official PDF report">
-                  <i class="bi bi-download"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+          <!-- Populated by customer-dashboard.js -->
         </div>
       </section>
 
@@ -527,9 +548,14 @@
       <section id="tab-report-view" class="customer-view-tab" style="display: none;">
         <!-- Top Toolbar with Back Button and Actions -->
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-          <button type="button" class="btn btn-sm btn-vh-outline d-inline-flex align-items-center" onclick="window.switchCustomerTab('tab-appointments')">
-            <i class="bi bi-arrow-left me-1"></i>Back to My Inspections
-          </button>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-sm btn-vh-outline d-inline-flex align-items-center" onclick="window.switchCustomerTab('tab-reports')">
+              <i class="bi bi-arrow-left me-1"></i>Back to Digital Reports
+            </button>
+            <button type="button" class="btn btn-sm btn-vh-outline d-inline-flex align-items-center" onclick="window.switchCustomerTab('tab-appointments')">
+              <i class="bi bi-calendar-check me-1"></i>My Inspections
+            </button>
+          </div>
           <div class="d-flex gap-2 align-items-center">
             <button type="button" class="btn btn-sm btn-vh-outline" onclick="window.print()">
               <i class="bi bi-printer me-1"></i>Print Report
@@ -555,6 +581,15 @@
           <button class="btn btn-sm btn-vh-outline" onclick="showToast('Photo Archive', 'All inspection photos package downloaded.', 'success')">
             <i class="bi bi-cloud-arrow-down me-1"></i>Download All Photos (.ZIP)
           </button>
+        </div>
+
+        <!-- Property Filter Controls (Issue 2) -->
+        <div class="d-flex gap-2 flex-wrap mb-4 pb-3 border-bottom align-items-center" id="photoPropertyFilters">
+          <span class="small text-muted fw-semibold me-1"><i class="bi bi-funnel me-1"></i>Filter by Property:</span>
+          <button type="button" class="btn btn-sm btn-vh-primary photo-prop-filter active" onclick="window.filterPhotosByProperty('all', this)">All Properties</button>
+          <button type="button" class="btn btn-sm btn-vh-outline photo-prop-filter" onclick="window.filterPhotosByProperty('482 Maple', this)">482 Maple Avenue</button>
+          <button type="button" class="btn btn-sm btn-vh-outline photo-prop-filter" onclick="window.filterPhotosByProperty('104 Willow', this)">104 Willow Ridge</button>
+          <button type="button" class="btn btn-sm btn-vh-outline photo-prop-filter" onclick="window.filterPhotosByProperty('712 North Clark', this)">712 North Clark St</button>
         </div>
 
         <!-- Dynamic Photos Grid matching Blog Inspection Images -->
@@ -660,6 +695,37 @@
         </div>
         <div class="modal-footer border-top bg-light" style="background-color: var(--vh-bg-subtle) !important;">
           <button type="button" class="btn btn-vh-outline btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Processing / Pending Status Modal (Issue 2) -->
+  <div class="modal fade" id="reportPendingModal" tabindex="-1" aria-labelledby="reportPendingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="modal-header vh-modal-header-accent py-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-warning text-dark px-3 py-1 rounded-pill fw-bold"><i class="bi bi-clock-history me-1"></i>Report In Progress</span>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 text-center">
+          <div class="vh-icon-box vh-icon-accent mx-auto mb-3" style="width: 56px; height: 56px;">
+            <i class="bi bi-file-earmark-hourglass fs-3"></i>
+          </div>
+          <h5 class="fw-bold mb-1" id="pendingModalAddress">104 Willow Ridge Road</h5>
+          <p class="text-muted small mb-3" id="pendingModalDetails">Comprehensive + Sewer Scope Inspection</p>
+          <div class="p-3 bg-light rounded-3 text-start small mb-3" style="background-color: var(--vh-bg-subtle) !important;">
+            <div class="mb-2"><i class="bi bi-calendar-event me-2 text-primary"></i><strong>Inspection Date:</strong> <span id="pendingModalDate">Thursday, Nov 3, 2026</span></div>
+            <div class="mb-2"><i class="bi bi-clock me-2 text-primary"></i><strong>Time Window:</strong> 10:00 AM - 1:30 PM</div>
+            <div class="mb-2"><i class="bi bi-person-badge me-2 text-primary"></i><strong>Assigned Inspector:</strong> Sarah Jenkins, P.E.</div>
+            <div><i class="bi bi-shield-check me-2 text-success"></i><strong>Delivery Commitment:</strong> Guaranteed within 24 hours of completion</div>
+          </div>
+          <p class="small text-muted mb-0">Your certified 400-point diagnostic report, FLIR thermal imaging radiometry, and photo evidence are compiling and will appear here automatically upon release.</p>
+        </div>
+        <div class="modal-footer border-top bg-light p-3" style="background-color: var(--vh-bg-subtle) !important;">
+          <button type="button" class="btn btn-vh-primary btn-sm w-100" data-bs-dismiss="modal">Acknowledge</button>
         </div>
       </div>
     </div>

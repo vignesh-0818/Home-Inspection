@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pre-Purchase Property Assessment | VeriHome Buyer Due Diligence</title>
-  <meta name="description" content="Specialized pre-purchase home assessments and forensic building inspections for buyers. Negotiate with confidence before your contingency deadline.">
+  <meta name="description"
+    content="Specialized pre-purchase home assessments and forensic building inspections for buyers. Negotiate with confidence before your contingency deadline.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -13,19 +15,22 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- Bootstrap 5 CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- RTL Stylesheet -->
   <link rel="stylesheet" href="assets/css/rtl.css">
 </head>
+
 <body>
 
 
@@ -37,19 +42,48 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Mobile Quick Actions (Theme & Dashboard easy access) -->
+      <div class="vh-mobile-top-actions d-flex d-lg-none align-items-center gap-2 me-2">
+        <button class="btn btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-nav-control" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2 text-primary"></i>
+        </a>
+      </div>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle active" href="index.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
-              <li><a class="dropdown-item active" href="index-2.html"><i class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home
+                  1</a></li>
+              <li><a class="dropdown-item active" href="index-2.html"><i
+                    class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -72,19 +106,23 @@
           </li>
         </ul>
 
-        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <!-- Action Controls: Theme Toggles, Single Login/Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
           <!-- Dark/Light Mode Separate Button -->
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <button class="btn btn-nav-control vh-theme-toggle-btn" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode"
+            aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR"
+            aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
 
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Single Combined Login & Registration (Issue 3) -->
+          <a href="login.html" class="btn btn-sm btn-vh-outline">
+            <i class="bi bi-person me-1"></i>Sign In / Register
+          </a>
           <!-- Customer Dashboard Navbar Button (REQUIRED) -->
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
@@ -107,16 +145,21 @@
             Uncover Hidden Flaws <span class="text-warning">Before You Close</span> the Deal
           </h1>
           <p class="hero-subtitle mb-4">
-            Under contract? Don't risk costly surprises after closing. Our forensic pre-purchase assessment provides prospective buyers with actionable diagnostic reports, structural cost estimates, and real negotiation power.
+            Under contract? Don't risk costly surprises after closing. Our forensic pre-purchase assessment provides
+            prospective buyers with actionable diagnostic reports, structural cost estimates, and real negotiation
+            power.
           </p>
 
           <!-- Address Availability Search Box -->
-          <div class="p-3 bg-white rounded-4 shadow-lg text-dark mb-4" style="background-color: var(--vh-bg-surface) !important;">
+          <div class="p-3 bg-white rounded-4 shadow-lg text-dark mb-4"
+            style="background-color: var(--vh-bg-surface) !important;">
             <form action="customer-dashboard.html" method="get" class="row g-2 align-items-center">
               <div class="col-md-7">
                 <div class="input-group">
-                  <span class="input-group-text bg-transparent border-0 text-primary fs-5"><i class="bi bi-geo-alt-fill"></i></span>
-                  <input type="text" class="form-control border-0 ps-1" placeholder="Enter Property Address under contract..." required>
+                  <span class="input-group-text bg-transparent border-0 text-primary fs-5"><i
+                      class="bi bi-geo-alt-fill"></i></span>
+                  <input type="text" class="form-control border-0 ps-1"
+                    placeholder="Enter Property Address under contract..." required>
                 </div>
               </div>
               <div class="col-md-5">
@@ -135,8 +178,11 @@
 
         <div class="col-lg-6">
           <div class="position-relative">
-            <img src="assets/images/pre-purchase-protection-new.jpg" alt="Inspectors and Buyers Reviewing Property Assessment" class="vh-hero-2-img">
-            <div class="position-absolute bottom-0 end-0 bg-dark text-white p-3 rounded-3 m-3 shadow border border-warning" style="opacity: 0.95;">
+            <img src="assets/images/pre-purchase-protection-new.jpg"
+              alt="Inspectors and Buyers Reviewing Property Assessment" class="vh-hero-2-img">
+            <div
+              class="position-absolute bottom-0 end-0 bg-dark text-white p-3 rounded-3 m-3 shadow border border-warning"
+              style="opacity: 0.95;">
               <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-shield-fill-check text-warning fs-3"></i>
                 <div>
@@ -144,6 +190,33 @@
                   <div class="h5 mb-0 text-warning fw-bold">$14,250</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Section Footer Strip (Aligned cleanly across the entire hero width - Issue 11) -->
+      <div class="vh-hero-footer-bar p-3 p-md-4 mt-4 shadow-sm border bg-white" style="background-color: var(--vh-bg-surface) !important;">
+        <div class="row g-3 align-items-center text-center text-sm-start">
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3">
+            <i class="bi bi-star-fill text-warning fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">4.9 / 5.0 Rating</strong>
+              <small class="text-muted">Over 2,400+ Verified Homeowner Reviews</small>
+            </div>
+          </div>
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3 border-start-md ps-md-4">
+            <i class="bi bi-shield-check text-success fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">$10,000 Guarantee</strong>
+              <small class="text-muted">Official InterNACHI Buy-Back Protection</small>
+            </div>
+          </div>
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3 border-start-md ps-md-4">
+            <i class="bi bi-lightning-charge-fill text-primary fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">24-Hr Report Delivery</strong>
+              <small class="text-muted">Same-Day Interactive Digital Portal Access</small>
             </div>
           </div>
         </div>
@@ -157,7 +230,8 @@
       <div class="text-center max-w-700 mx-auto mb-5">
         <div class="badge-pill-soft badge-soft-primary mb-2">Detailed Comparison</div>
         <h2 class="display-6 fw-bold">Standard Inspection vs. VeriHome Pre-Purchase Audit</h2>
-        <p class="text-muted">Most inspectors do a quick surface check. VeriHome uses calibrated engineering diagnostic tools to inspect deeper where defects hide.</p>
+        <p class="text-muted">Most inspectors do a quick surface check. VeriHome uses calibrated engineering diagnostic
+          tools to inspect deeper where defects hide.</p>
       </div>
 
       <div class="table-responsive shadow-sm rounded-4 border overflow-hidden">
@@ -180,27 +254,33 @@
             <tr>
               <td class="ps-4 fw-semibold">Infrared Thermal Moisture & Heat Scan</td>
               <td class="text-center text-muted"><i class="bi bi-x-circle text-danger fs-5"></i> Extra $150 Charge</td>
-              <td class="text-center fw-bold text-success bg-primary-subtle"><i class="bi bi-check-circle-fill text-success fs-5"></i> Included Standard</td>
+              <td class="text-center fw-bold text-success bg-primary-subtle"><i
+                  class="bi bi-check-circle-fill text-success fs-5"></i> Included Standard</td>
             </tr>
             <tr>
               <td class="ps-4 fw-semibold">Aerial 4K Drone Roof & Chimney Inspection</td>
-              <td class="text-center text-muted"><i class="bi bi-x-circle text-danger fs-5"></i> Ground Binoculars Only</td>
-              <td class="text-center fw-bold text-success bg-primary-subtle"><i class="bi bi-check-circle-fill text-success fs-5"></i> Included Standard</td>
+              <td class="text-center text-muted"><i class="bi bi-x-circle text-danger fs-5"></i> Ground Binoculars Only
+              </td>
+              <td class="text-center fw-bold text-success bg-primary-subtle"><i
+                  class="bi bi-check-circle-fill text-success fs-5"></i> Included Standard</td>
             </tr>
             <tr>
               <td class="ps-4 fw-semibold">Electrical Panel Voltage & Arc Testing</td>
               <td class="text-center text-muted">Visual Cover Only</td>
-              <td class="text-center fw-bold text-success bg-primary-subtle"><i class="bi bi-check-circle-fill text-success fs-5"></i> Multi-Meter Tested</td>
+              <td class="text-center fw-bold text-success bg-primary-subtle"><i
+                  class="bi bi-check-circle-fill text-success fs-5"></i> Multi-Meter Tested</td>
             </tr>
             <tr>
               <td class="ps-4 fw-semibold">Estimated Repair Cost Negotiation Guide</td>
               <td class="text-center text-muted"><i class="bi bi-x-circle text-danger fs-5"></i> Not Provided</td>
-              <td class="text-center fw-bold text-success bg-primary-subtle"><i class="bi bi-check-circle-fill text-success fs-5"></i> Built-in to Report</td>
+              <td class="text-center fw-bold text-success bg-primary-subtle"><i
+                  class="bi bi-check-circle-fill text-success fs-5"></i> Built-in to Report</td>
             </tr>
             <tr>
               <td class="ps-4 fw-semibold">Report Delivery Guarantee</td>
               <td class="text-center text-muted">48 to 72 Hours</td>
-              <td class="text-center fw-bold text-success bg-primary-subtle"><i class="bi bi-lightning-charge-fill text-warning fs-5"></i> Within 24 Hours</td>
+              <td class="text-center fw-bold text-success bg-primary-subtle"><i
+                  class="bi bi-lightning-charge-fill text-warning fs-5"></i> Within 24 Hours</td>
             </tr>
             <tr>
               <td class="ps-4 fw-semibold">Inspector Credentials</td>
@@ -220,43 +300,122 @@
         <div class="col-lg-6">
           <div class="badge-pill-soft badge-soft-accent mb-2">High-Tech Equipment</div>
           <h2 class="display-6 fw-bold mb-3">Diagnostic Tools That See What the Human Eye Misses</h2>
-          <p class="text-muted mb-4">We invest in commercial-grade diagnostic hardware to provide empirical proof, not guesswork. This empirical data gives you unbeatable leverage during price negotiations.</p>
+          <p class="text-muted mb-4">We invest in commercial-grade diagnostic hardware to provide empirical proof, not
+            guesswork. This empirical data gives you unbeatable leverage during price negotiations.</p>
 
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <div class="p-3 bg-white rounded-3 shadow-sm border" style="background-color: var(--vh-bg-surface) !important;">
-                <i class="bi bi-eye-fill text-primary fs-3 mb-2 d-block"></i>
-                <h6 class="fw-bold">FLIR® Infrared Cam</h6>
-                <p class="text-muted small mb-0">Detects hidden plumbing leaks, missing insulation, and overheating electrical breakers.</p>
+          <!-- High-Tech Equipment Cards Grid (Fixed Alignment for Issue 4) -->
+          <div class="row g-3 align-items-stretch">
+            <div class="col-sm-6 d-flex">
+              <div class="vh-equip-card h-100 w-100 p-3 bg-white rounded-3 shadow-sm border d-flex flex-column"
+                style="background-color: var(--vh-bg-surface) !important;">
+                <div class="vh-equip-icon-wrap mb-2">
+                  <i class="bi bi-eye-fill text-primary fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-2">FLIR® Infrared Cam</h6>
+                <p class="text-muted small mb-0 flex-grow-1">Detects hidden plumbing leaks, missing insulation, and overheating
+                  electrical breakers.</p>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="p-3 bg-white rounded-3 shadow-sm border" style="background-color: var(--vh-bg-surface) !important;">
-                <i class="bi bi-broadcast text-warning fs-3 mb-2 d-block"></i>
-                <h6 class="fw-bold">4K Aerial Drone</h6>
-                <p class="text-muted small mb-0">Reveals broken clay tiles, loose flashing, and chimney cracks that cannot be seen safely from ladders.</p>
+            <div class="col-sm-6 d-flex">
+              <div class="vh-equip-card h-100 w-100 p-3 bg-white rounded-3 shadow-sm border d-flex flex-column"
+                style="background-color: var(--vh-bg-surface) !important;">
+                <div class="vh-equip-icon-wrap mb-2">
+                  <i class="bi bi-broadcast text-warning fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-2">4K Aerial Drone</h6>
+                <p class="text-muted small mb-0 flex-grow-1">Reveals broken clay tiles, loose flashing, and chimney cracks that
+                  cannot be seen safely from ladders.</p>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="p-3 bg-white rounded-3 shadow-sm border" style="background-color: var(--vh-bg-surface) !important;">
-                <i class="bi bi-droplet-half text-info fs-3 mb-2 d-block"></i>
-                <h6 class="fw-bold">Pinless Moisture Meters</h6>
-                <p class="text-muted small mb-0">Quantifies moisture percentage behind tile walls and hardwood floors without drilling holes.</p>
+            <div class="col-sm-6 d-flex">
+              <div class="vh-equip-card h-100 w-100 p-3 bg-white rounded-3 shadow-sm border d-flex flex-column"
+                style="background-color: var(--vh-bg-surface) !important;">
+                <div class="vh-equip-icon-wrap mb-2">
+                  <i class="bi bi-droplet-half text-info fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-2">Pinless Moisture Meters</h6>
+                <p class="text-muted small mb-0 flex-grow-1">Quantifies moisture percentage behind tile walls and hardwood floors
+                  without drilling holes.</p>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="p-3 bg-white rounded-3 shadow-sm border" style="background-color: var(--vh-bg-surface) !important;">
-                <i class="bi bi-compass text-danger fs-3 mb-2 d-block"></i>
-                <h6 class="fw-bold">Zip-Level Foundation Alt</h6>
-                <p class="text-muted small mb-0">Measures foundation floor elevation differences across the property to detect settling.</p>
+            <div class="col-sm-6 d-flex">
+              <div class="vh-equip-card h-100 w-100 p-3 bg-white rounded-3 shadow-sm border d-flex flex-column"
+                style="background-color: var(--vh-bg-surface) !important;">
+                <div class="vh-equip-icon-wrap mb-2">
+                  <i class="bi bi-compass text-danger fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-2">Zip-Level Foundation Alt</h6>
+                <p class="text-muted small mb-0 flex-grow-1">Measures foundation floor elevation differences across the property to
+                  detect settling.</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="col-lg-6">
-          <img src="assets/images/high-tech-equipment-new.jpg" alt="Thermal and Drone Inspection in Action" class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100">
+          <img src="assets/images/high-tech-equipment-new.jpg" alt="Thermal and Drone Inspection in Action"
+            class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inspection Process (Transparent Workflow with Visuals - Issue 5) -->
+  <section class="py-5 my-lg-4">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <div class="badge-pill-soft badge-soft-primary mb-2">Transparent Workflow</div>
+        <h2 class="display-6 fw-bold">How Our Inspection Process Works</h2>
+        <p class="text-muted">From easy online booking to comprehensive on-site analysis and 24-hour report delivery, experience total transparency.</p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/easy-online-booking.jpg" alt="Easy Online Booking Calendar" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">1</div>
+            </div>
+            <h5 class="fw-bold mb-2">Easy Online Booking</h5>
+            <p class="text-muted small mb-0">Book online 24/7 or call us. Pick your inspection date, time, and package. Instant confirmation sent to your email.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/onsite-400point-audit.jpg" alt="On-Site 400-Point Audit" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">2</div>
+            </div>
+            <h5 class="fw-bold mb-2">On-Site 400-Point Audit</h5>
+            <p class="text-muted small mb-0">Our licensed master inspector spends 3-4 hours methodically testing all electrical, mechanical, and structural elements.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/client-walkthrough.jpg" alt="Client Walkthrough" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">3</div>
+            </div>
+            <h5 class="fw-bold mb-2">Client Walkthrough</h5>
+            <p class="text-muted small mb-0">Join us for the final 45 minutes on-site. We walk you through every critical finding, main shutoffs, and upkeep tips.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/digital-report-24hrs.jpg" alt="Digital Report in 24 Hours" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">4</div>
+            </div>
+            <h5 class="fw-bold mb-2">Digital Report in 24 Hrs</h5>
+            <p class="text-muted small mb-0">Access your password-protected interactive report from any phone or computer with high-res photos and repair summaries.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="sample-report.html" class="btn btn-vh-primary">
+          <i class="bi bi-file-earmark-bar-graph me-2"></i>Inspect a Live Sample Report
+        </a>
       </div>
     </div>
   </section>
@@ -267,7 +426,8 @@
       <div class="text-center max-w-700 mx-auto mb-5">
         <div class="badge-pill-soft badge-soft-primary mb-2">Proven Results</div>
         <h2 class="display-6 fw-bold">Recent Pre-Purchase Case Studies</h2>
-        <p class="text-muted">How our thorough pre-purchase assessments saved prospective buyers from catastrophic financial losses.</p>
+        <p class="text-muted">How our thorough pre-purchase assessments saved prospective buyers from catastrophic
+          financial losses.</p>
       </div>
 
       <div class="row g-4">
@@ -276,7 +436,8 @@
           <div class="vh-card">
             <span class="badge bg-danger mb-3 align-self-start">Foundation Settlement</span>
             <h5 class="fw-bold">Single-Family Craftsman (Built 1968)</h5>
-            <p class="text-muted small">Buyer was under contract for $620,000. Seller claimed foundation was pristine.</p>
+            <p class="text-muted small">Buyer was under contract for $620,000. Seller claimed foundation was pristine.
+            </p>
             <hr class="border-secondary-subtle">
             <div class="d-flex flex-column gap-2 small mb-4">
               <div><strong>Defect Found:</strong> 1.8-inch floor slope and compromised perimeter sill plate.</div>
@@ -297,7 +458,8 @@
             <p class="text-muted small">Property freshly renovated by a flip company. Listed for $510,000.</p>
             <hr class="border-secondary-subtle">
             <div class="d-flex flex-column gap-2 small mb-4">
-              <div><strong>Defect Found:</strong> Unpermitted Federal Pacific breaker box with scorched branch circuit wires.</div>
+              <div><strong>Defect Found:</strong> Unpermitted Federal Pacific breaker box with scorched branch circuit
+                wires.</div>
               <div><strong>Inspector Tool:</strong> FLIR Thermal Scan & Circuit Analyzer.</div>
               <div class="text-success fw-bold fs-6">Result: Seller replaced entire 200A panel before closing!</div>
             </div>
@@ -315,7 +477,8 @@
             <p class="text-muted small">Listed at $445,000. Fresh ceiling paint masked previous water intrusion.</p>
             <hr class="border-secondary-subtle">
             <div class="d-flex flex-column gap-2 small mb-4">
-              <div><strong>Defect Found:</strong> Active roof valley leak with wet insulation and early mold growth.</div>
+              <div><strong>Defect Found:</strong> Active roof valley leak with wet insulation and early mold growth.
+              </div>
               <div><strong>Inspector Tool:</strong> Pinless moisture meter & drone flight.</div>
               <div class="text-success fw-bold fs-6">Result: Saved buyer $11,200 in roof replacement costs!</div>
             </div>
@@ -331,10 +494,13 @@
   <!-- Lead Inspector Profile -->
   <section class="py-5 bg-light" style="background-color: var(--vh-bg-subtle) !important;">
     <div class="container">
-      <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm border" style="background-color: var(--vh-bg-surface) !important;">
+      <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm border"
+        style="background-color: var(--vh-bg-surface) !important;">
         <div class="row align-items-center g-4">
           <div class="col-md-4 text-center">
-            <img src="assets/images/inspector-1.jpg" alt="Certified Master Inspector John R. Davis" class="img-fluid rounded-circle shadow border border-3 border-primary" style="width: 200px; height: 200px; object-fit: cover;">
+            <img src="assets/images/inspector-1.jpg" alt="Certified Master Inspector John R. Davis"
+              class="img-fluid rounded-circle shadow border border-3 border-primary"
+              style="width: 200px; height: 200px; object-fit: cover;">
             <div class="mt-3">
               <h5 class="fw-bold mb-0">John R. Davis, CMI®</h5>
               <div class="text-muted small">Lead Property Assessor #9876543</div>
@@ -343,10 +509,13 @@
           <div class="col-md-8">
             <div class="badge-pill-soft badge-soft-primary mb-2">Meet Your Lead Inspector</div>
             <h3 class="fw-bold">"We Treat Every Inspection as if Our Own Family Were Buying the Home."</h3>
-            <p class="text-muted">With over 18 years in residential structural framing, code compliance, and forensic diagnostics, John has performed more than 4,500 inspections. He is a Certified Master Inspector (CMI®) and licensed structural specialist.</p>
+            <p class="text-muted">With over 18 years in residential structural framing, code compliance, and forensic
+              diagnostics, John has performed more than 4,500 inspections. He is a Certified Master Inspector (CMI®) and
+              licensed structural specialist.</p>
             <div class="d-flex flex-wrap gap-4 pt-2">
               <div><i class="bi bi-award-fill text-warning me-1"></i><strong>InterNACHI</strong> Master Inspector</div>
-              <div><i class="bi bi-shield-check text-success me-1"></i><strong>Licensed & Insured</strong> $1,000,000 E&O</div>
+              <div><i class="bi bi-shield-check text-success me-1"></i><strong>Licensed & Insured</strong> $1,000,000
+                E&O</div>
               <div><i class="bi bi-clock-check text-primary me-1"></i><strong>4,500+</strong> Audits Completed</div>
             </div>
           </div>
@@ -359,7 +528,8 @@
   <section class="py-5" style="background: linear-gradient(135deg, #091726 0%, #0e3b68 100%); color: #ffffff;">
     <div class="container text-center py-4">
       <h2 class="display-6 fw-bold mb-3 text-white">Don't Let Your Inspection Contingency Expire</h2>
-      <p class="lead text-white-50 mb-4 max-w-700 mx-auto">We offer prioritized slots for contracts with urgent 3 to 7 day inspection contingencies.</p>
+      <p class="lead text-white-50 mb-4 max-w-700 mx-auto">We offer prioritized slots for contracts with urgent 3 to 7
+        day inspection contingencies.</p>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
         <a href="customer-dashboard.html#book" class="btn btn-vh-accent btn-lg">
           <i class="bi bi-calendar-event me-2"></i>Schedule Urgent Assessment
@@ -380,12 +550,18 @@
             <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
             <span>Veri<span class="text-warning">Home</span></span>
           </a>
-          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and digital reports.</p>
+          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase
+            diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and
+            digital reports.</p>
           <div class="d-flex gap-3">
-            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
-            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
-            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
           </div>
         </div>
 
@@ -406,7 +582,8 @@
           <ul class="list-unstyled small d-flex flex-column gap-2">
             <li><a href="sample-report.html"><i class="bi bi-file-earmark-pdf me-1"></i>Sample Report</a></li>
             <li><a href="service-details.html?id=1"><i class="bi bi-search me-1"></i>Comprehensive Inspection</a></li>
-            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a></li>
+            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a>
+            </li>
             <li><a href="service-details.html?id=3"><i class="bi bi-camera me-1"></i>Drone & Thermal Audit</a></li>
             <li><a href="blog.html"><i class="bi bi-journal-text me-1"></i>Inspection Resources</a></li>
             <li><a href="pricing.html"><i class="bi bi-tags me-1"></i>Inspection Packages</a></li>
@@ -417,7 +594,8 @@
           <h5>Headquarters</h5>
           <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
             <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
-            <li><i class="bi bi-telephone-fill text-warning me-2"></i><span dir="ltr" class="vh-phone-bidi">+1 (800) 555-HOME (4663)</span></li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i><span dir="ltr" class="vh-phone-bidi">+1 (800)
+                555-HOME (4663)</span></li>
             <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
             <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
           </ul>
@@ -425,7 +603,8 @@
       </div>
 
       <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div class="vh-footer-bottom-copy" dir="ltr">&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="vh-footer-bottom-copy" dir="ltr">&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.
+        </div>
         <div class="d-flex gap-4">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>
@@ -438,4 +617,5 @@
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>

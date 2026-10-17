@@ -252,6 +252,23 @@
       clickedEl.classList.add('active');
     }
 
+    // Update active tablet nav tab button (Issue 13)
+    document.querySelectorAll('.dash-tablet-nav .dash-tab-btn').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-tab') === navTargetId) {
+        btn.classList.add('active');
+      }
+    });
+
+    // Close mobile sidebar drawer if open
+    const sidebar = document.getElementById('dashSidebar');
+    const backdrop = document.getElementById('dashBackdrop');
+    if (sidebar && sidebar.classList.contains('show')) {
+      sidebar.classList.remove('show');
+      if (backdrop) backdrop.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
     // Update window hash cleanly
     try {
       const hashName = cleanId.replace('tab-', '');
@@ -893,6 +910,7 @@
     INSPECTION_PHOTOS.forEach(photo => {
       const col = document.createElement('div');
       col.className = 'col-lg-4 col-md-6';
+      col.setAttribute('data-property', photo.property);
       col.innerHTML = `
         <div class="vh-card vh-photo-card p-2">
           <div class="vh-photo-img-wrapper rounded-3 mb-2 position-relative cursor-pointer" onclick="window.openPhotoPreview('${photo.id}')" title="Click to view high-resolution photo">
@@ -922,6 +940,51 @@
       container.appendChild(col);
     });
   }
+
+  window.filterPhotosByProperty = function (propertyQuery, btnEl) {
+    if (btnEl) {
+      document.querySelectorAll('#photoPropertyFilters .photo-prop-filter').forEach(b => {
+        b.classList.remove('active', 'btn-vh-primary');
+        b.classList.add('btn-vh-outline');
+      });
+      btnEl.classList.add('active', 'btn-vh-primary');
+      btnEl.classList.remove('btn-vh-outline');
+    }
+
+    const container = document.getElementById('inspectionPhotosGrid');
+    if (!container) return;
+
+    const cols = container.children;
+    const query = (propertyQuery || 'all').toLowerCase().trim();
+
+    Array.from(cols).forEach(col => {
+      if (query === 'all') {
+        col.style.display = 'block';
+      } else {
+        const prop = (col.getAttribute('data-property') || '').toLowerCase();
+        if (prop.includes(query)) {
+          col.style.display = 'block';
+        } else {
+          col.style.display = 'none';
+        }
+      }
+    });
+  };
+
+  window.viewPhotosForProperty = function (propertyQuery) {
+    window.switchCustomerTab('tab-photos');
+    const cleanSearch = (propertyQuery || '').split(',')[0].trim();
+    let matchedBtn = null;
+    document.querySelectorAll('#photoPropertyFilters .photo-prop-filter').forEach(b => {
+      const btnText = b.textContent.toLowerCase();
+      const firstWord = cleanSearch.toLowerCase().split(' ')[0] || '';
+      const secondWord = cleanSearch.toLowerCase().split(' ')[1] || '';
+      if (btnText.includes(firstWord) || (secondWord && btnText.includes(secondWord))) {
+        matchedBtn = b;
+      }
+    });
+    window.filterPhotosByProperty(cleanSearch || 'all', matchedBtn);
+  };
 
   window.openPhotoPreview = function (id) {
     const photo = INSPECTION_PHOTOS.find(p => p.id === id);
@@ -1127,13 +1190,455 @@
     }
   ];
 
+  /* --------------------------------------------------------------------------
+     Condo Specific Report Findings (712 North Clark St, #4B - VH-2025-412)
+     -------------------------------------------------------------------------- */
+
+  const REPORT_FINDINGS_712_CLARK = [
+    {
+      id: 'clark-finding-1',
+      system: 'electrical',
+      systemName: 'Section 4.2 - Interior Subpanel',
+      severity: 'SAFETY HAZARD',
+      severityBadge: 'badge-safety-hazard',
+      borderClass: 'safety-border',
+      statusText: 'Abrasion / Short Risk',
+      statusClass: 'text-danger',
+      statusIcon: 'bi-lightning-charge',
+      title: 'Missing Protective Romex Cable Clamp at 100A Subpanel Knockout',
+      description: '<strong>Finding:</strong> Inside the hallway flush-mount 100A Square D subpanel, 12/2 NM-B Romex branch circuits enter through an open stamped metal knockout without an approved plastic insulating bushing or two-screw cable clamp. Vibration or cable movement over time poses an insulation abrasion and short circuit hazard.',
+      recommendation: 'A licensed electrician should de-energize the subpanel, install approved push-in snap bushings or twin-screw NM clamps, and secure all branch conductors. Estimated repair cost: $95 - $160.',
+      image: 'assets/images/blog-card-electrical-safety.jpg',
+      photoCaption: 'Photo 4.2A: Unclamped NM cable entry at upper right panel knockout'
+    },
+    {
+      id: 'clark-finding-2',
+      system: 'hvac',
+      systemName: 'Section 5.1 - Living Area PTAC Heat Pump',
+      severity: 'MINOR DEFECT',
+      severityBadge: 'badge-minor-defect',
+      borderClass: 'minor-border',
+      statusText: 'Maintenance Advisory',
+      statusClass: 'text-warning-emphasis',
+      statusIcon: 'bi-droplet-half',
+      title: 'Condensate Drain Pan Biofilm Sludge & Washable Filter Bypass',
+      description: '<strong>Finding:</strong> The Packaged Terminal Air Conditioner (PTAC) unit servicing the living room showed standing condensate sludge in the drain pan and loose perimeter seal on the washable mesh filter. Condensate gravity drain discharged slowly during 20-minute operational test.',
+      recommendation: 'Clean drain pan with antimicrobial pan tablets, blow out condensate line, and reseat/replace washable filtration cartridge. Estimated service cost: $75 - $125.',
+      image: 'assets/images/blog-card-inspection-negotiation.jpg',
+      photoCaption: 'Photo 5.1B: Surface residue in PTAC condensate collector pan'
+    },
+    {
+      id: 'clark-finding-3',
+      system: 'structure',
+      systemName: 'Section 3.4 - Balcony & Exterior Openings',
+      severity: 'MINOR DEFECT',
+      severityBadge: 'badge-minor-defect',
+      borderClass: 'minor-border',
+      statusText: 'Mechanical Resistance',
+      statusClass: 'text-muted',
+      statusIcon: 'bi-door-open',
+      title: 'Balcony Heavy Roller Resistance & Scored Sliding Door Track',
+      description: '<strong>Finding:</strong> The 8-foot exterior aluminum sliding glass door leading to the private balcony requires excessive effort (>25 lbs of pull force) to operate. Inspection revealed debris buildup, salt air oxidation, and worn lower nylon tandem rollers riding directly on the track stainless cap.',
+      recommendation: 'Clean track assembly, replace worn bottom tandem roller wheels, and lubricate with dry silicone spray. Estimated repair cost: $140 - $220.',
+      image: 'assets/images/blog-card-foundation-cracks.jpg',
+      photoCaption: 'Photo 3.4A: Scored lower slider track & worn nylon wheel'
+    },
+    {
+      id: 'clark-finding-4',
+      system: 'plumbing',
+      systemName: 'Section 6.3 - Laundry Supply Connections',
+      severity: 'MINOR DEFECT',
+      severityBadge: 'badge-minor-defect',
+      borderClass: 'minor-border',
+      statusText: 'Stem Packing Weep',
+      statusClass: 'text-muted',
+      statusIcon: 'bi-droplet',
+      title: 'Ball Valve Stem Packing Moisture at Laundry Cold Supply',
+      description: '<strong>Finding:</strong> During static water pressure testing, minor moisture seepage was observed around the stem packing nut of the cold water washing machine shut-off ball valve when exercised. Braided stainless steel hoses are in good condition.',
+      recommendation: 'Snug valve stem packing nut 1/4 turn or replace valve assembly if weeping persists. Estimated repair cost: $50 - $90.',
+      image: 'assets/images/defect-plumbing-ptrap.jpg',
+      photoCaption: 'Photo 6.3B: Water droplet at valve stem packing nut'
+    },
+    {
+      id: 'clark-finding-5',
+      system: 'structure',
+      systemName: 'Section 1.3 - Shared Demising Wall',
+      severity: 'SATISFACTORY',
+      severityBadge: 'badge-satisfactory',
+      borderClass: 'passed-border',
+      statusText: '1-Hour Fire Rated',
+      statusClass: 'text-success',
+      statusIcon: 'bi-shield-check',
+      title: 'Double 5/8" Type-X Fire-Rated Gypsum Wallboard Intact',
+      description: '<strong>Finding:</strong> Demising wall separating Unit 4B from common corridor was inspected for penetrations and integrity. Acoustic sealant joints, electrical penetration putty pads, and fire-caulk seals are intact with no breaches or unsealed penetrations.',
+      recommendation: 'Demising firewall meets condominium building code standards and provides proper 1-hour fire separation. In sound condition.',
+      image: 'assets/images/satisfactory-foundation.jpg',
+      photoCaption: 'Photo 1.3A: Code-compliant fire separation assembly'
+    },
+    {
+      id: 'clark-finding-6',
+      system: 'electrical',
+      systemName: 'Section 7.1 - Life Safety Devices',
+      severity: 'SATISFACTORY',
+      severityBadge: 'badge-satisfactory',
+      borderClass: 'passed-border',
+      statusText: 'Fully Operational',
+      statusClass: 'text-success',
+      statusIcon: 'bi-check-circle-fill',
+      title: '10-Year Sealed Lithium Battery Smoke & CO Alarms Operational',
+      description: '<strong>Finding:</strong> All smoke alarms in bedrooms and hallway tested with aerosol detector tester; strobe and 85dB alarm horn responded simultaneously across all units. CO detector in hallway is within 7-year manufacturer service life.',
+      recommendation: 'Life safety detection systems fully operational and compliant with municipal condominium ordinances. No action required.',
+      image: 'assets/images/satisfactory-electrical-panel.jpg',
+      photoCaption: 'Photo 7.1A: Tested operational life safety alarms'
+    }
+  ];
+
+  /* --------------------------------------------------------------------------
+     Inspection Cards Generator (Matching Screenshot Exactly)
+     -------------------------------------------------------------------------- */
+
+  /* --------------------------------------------------------------------------
+     1. My Inspections: Appointment Tracking Card Generator
+     (Focus: Appointment logistics, status, inspector assignments, and details)
+     -------------------------------------------------------------------------- */
+
+  function createAppointmentCardHtml(item) {
+    const isCompleted = !!item.hasReport;
+
+    // Inspection Status Badge
+    let statusBadgeHtml = '';
+    if (item.status === 'Report Ready' || item.status === 'Completed') {
+      statusBadgeHtml = `<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 fw-bold"><i class="bi bi-check-circle-fill me-1"></i>Completed</span>`;
+    } else if (item.status === 'Archived') {
+      statusBadgeHtml = `<span class="badge bg-secondary-subtle text-dark dark-text-light border border-secondary-subtle rounded-pill px-3 py-1 fw-bold"><i class="bi bi-archive me-1"></i>Archived</span>`;
+    } else {
+      statusBadgeHtml = `<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill px-3 py-1 fw-bold"><i class="bi bi-calendar-event me-1"></i>Scheduled</span>`;
+    }
+
+    // Delivery Status Text & Score Pill
+    let deliveryStatusText = '';
+    let conditionScorePill = '';
+    let secondaryActionBtn = '';
+
+    if (isCompleted) {
+      deliveryStatusText = `<strong class="text-success small d-block"><i class="bi bi-patch-check-fill me-1"></i>Report Published (${escapeHtml(item.formattedDate || item.date)})</strong>`;
+      conditionScorePill = `<span class="badge bg-success text-white fw-bold px-2 py-1">Score: ${item.score}/100</span>`;
+      secondaryActionBtn = `
+        <button type="button" class="btn btn-vh-outline" onclick="window.switchCustomerTab('tab-reports')" title="Go to Digital Reports page">
+          <i class="bi bi-file-earmark-check me-1"></i>Go to Report
+        </button>
+      `;
+    } else {
+      deliveryStatusText = `<strong class="text-warning-emphasis small d-block"><i class="bi bi-hourglass-split me-1"></i>Pending (Guaranteed 24h Turnaround)</strong>`;
+      conditionScorePill = `<span class="badge bg-secondary-subtle text-muted px-2 py-1">Awaiting On-Site</span>`;
+      secondaryActionBtn = `
+        <button type="button" class="btn btn-vh-outline" onclick="window.showReportPendingModal('${escapeHtml(item.id)}')" title="View expected delivery timeline">
+          <i class="bi bi-clock-history me-1"></i>Delivery Info
+        </button>
+      `;
+    }
+
+    // Addons snippet
+    let addonsHtml = '';
+    if (item.addons && item.addons.length > 0) {
+      addonsHtml = `<div class="d-flex flex-wrap gap-1 mt-1">` +
+        item.addons.map(a => `<span class="badge bg-secondary-subtle text-secondary" style="font-size: 0.7rem;">${escapeHtml(a.replace(/\s*\(\+.*\)/, ''))}</span>`).join('') +
+        `</div>`;
+    }
+
+    return `
+      <div class="col-lg-6 col-12 d-flex">
+        <div class="vh-appointment-tracking-card shadow-sm h-100 w-100">
+          <!-- Card Header: Order ID + Status -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-secondary-subtle text-dark dark-text-light px-2 py-1 rounded small fw-mono">
+              <i class="bi bi-hash"></i>${escapeHtml(item.id)}
+            </span>
+            ${statusBadgeHtml}
+          </div>
+
+          <!-- Property Title & Specs -->
+          <h5 class="fw-bold mb-1 text-dark dark-text-light">${escapeHtml(item.address)}</h5>
+          <p class="text-muted small mb-3">${escapeHtml(item.cityState)} ${escapeHtml(item.zip)} • ${item.sqft ? item.sqft.toLocaleString() + ' sq ft' : 'Residential Property'}</p>
+
+          <!-- Appointment Logistics Box -->
+          <div class="p-3 rounded-3 mb-3 small vh-dash-info-box">
+            <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
+              <span class="text-muted"><i class="bi bi-card-checklist text-primary me-2"></i>Service Scope:</span>
+              <strong class="text-dark dark-text-light text-end">${escapeHtml(item.serviceName)}</strong>
+            </div>
+            ${addonsHtml ? `<div class="mb-2 pb-2 border-bottom d-flex align-items-center justify-content-between"><span class="text-muted"><i class="bi bi-plus-circle text-primary me-2"></i>Add-ons:</span>${addonsHtml}</div>` : ''}
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-muted"><i class="bi bi-calendar3 text-primary me-2"></i>Inspection Date:</span>
+              <span class="fw-semibold text-dark dark-text-light">${escapeHtml(item.formattedDate || item.date)}</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-muted"><i class="bi bi-clock text-primary me-2"></i>Time Window:</span>
+              <span class="text-dark dark-text-light">${escapeHtml(item.timeSlot || 'Morning Window')}</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="text-muted"><i class="bi bi-person-badge text-primary me-2"></i>Assigned Inspector:</span>
+              <span class="fw-semibold text-primary">${escapeHtml(item.inspector)}</span>
+            </div>
+          </div>
+
+          <!-- Status & Delivery Summary Strip -->
+          <div class="p-2 px-3 rounded-3 mb-3 small d-flex justify-content-between align-items-center border" style="background-color: var(--vh-bg-surface) !important;">
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.72rem;">Report Delivery Status:</small>
+              ${deliveryStatusText}
+            </div>
+            ${conditionScorePill}
+          </div>
+
+          <!-- Actions Footer: Prioritizes Appointment Details & Booking -->
+          <div class="d-flex gap-2 mt-auto pt-2">
+            <button type="button" class="btn btn-vh-primary flex-grow-1" onclick="window.openInspectionDetails('${escapeHtml(item.id)}')">
+              <i class="bi bi-info-circle me-1"></i>View Inspection Details
+            </button>
+            ${secondaryActionBtn}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* --------------------------------------------------------------------------
+     2. Digital Reports: Report Delivery & Publication Card Generator
+     (Focus: Report availability, cloud viewing, PDF downloads, and photos)
+     -------------------------------------------------------------------------- */
+
+  function createDigitalReportCardHtml(item) {
+    const isCompleted = !!item.hasReport;
+
+    // Report Publication Badge
+    let reportBadgeHtml = '';
+    if (item.status === 'Report Ready') {
+      reportBadgeHtml = `<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 fw-bold">Report Published</span>`;
+    } else if (item.status === 'Archived') {
+      reportBadgeHtml = `<span class="badge bg-secondary-subtle text-dark dark-text-light border border-secondary-subtle rounded-pill px-3 py-1 fw-bold">Archived Report</span>`;
+    } else {
+      reportBadgeHtml = `<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill px-3 py-1 fw-bold"><i class="bi bi-hourglass-split me-1"></i>Report In Progress</span>`;
+    }
+
+    // Subtitle & Point Count
+    let subtitle = item.serviceName;
+    if (item.id === 'VH-2025-412') {
+      subtitle += ' (215 Points Evaluated)';
+    } else {
+      subtitle += ' (400 Points Evaluated)';
+    }
+
+    // Date notice
+    const dateNotice = isCompleted ? (item.formattedDate || item.date) : `Expected Delivery: Nov 4, 2026`;
+
+    // Condition Score Box or Pending Delivery Box
+    let scoreOrPendingBoxHtml = '';
+    let photoAccessSnippet = '';
+    let reportActionButtons = '';
+
+    if (isCompleted) {
+      scoreOrPendingBoxHtml = `
+        <div class="p-3 rounded-3 mb-3 small d-flex justify-content-between align-items-center vh-dash-score-box">
+          <div>
+            <span class="text-muted fw-medium d-block">Overall Condition Score</span>
+            <small class="text-success"><i class="bi bi-shield-check me-1"></i>Verified InterNACHI® SOP Audit</small>
+          </div>
+          <strong class="text-success h4 mb-0 fw-bold">${item.score} / 100</strong>
+        </div>
+      `;
+
+      const photoCount = item.id === 'VH-2025-412' ? '1 HD Photo' : '3 HD Photos';
+      photoAccessSnippet = `
+        <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none fw-semibold d-inline-flex align-items-center gap-1" onclick="window.viewPhotosForProperty('${escapeHtml(item.address)}')">
+          <span>View ${photoCount}</span><i class="bi bi-arrow-right"></i>
+        </button>
+      `;
+
+      reportActionButtons = `
+        <button type="button" class="btn btn-vh-primary flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2" onclick="window.openDigitalReport('${escapeHtml(item.id)}')">
+          <i class="bi bi-eye"></i><span>View Digital Report</span>
+        </button>
+        <button type="button" class="btn btn-vh-outline px-3" onclick="window.downloadInspectionReport('${escapeHtml(item.id)}')" title="Download official certified PDF report">
+          <i class="bi bi-download"></i>
+        </button>
+      `;
+    } else {
+      scoreOrPendingBoxHtml = `
+        <div class="p-3 rounded-3 mb-3 small d-flex justify-content-between align-items-center vh-dash-score-box">
+          <div>
+            <span class="text-muted fw-medium d-block">Report Delivery Status</span>
+            <small class="text-warning-emphasis"><i class="bi bi-clock-history me-1"></i>On-Site Assessment: ${escapeHtml(item.formattedDate || item.date)}</small>
+          </div>
+          <span class="badge bg-warning text-dark px-2 py-1 fw-bold">In Preparation</span>
+        </div>
+      `;
+
+      photoAccessSnippet = `<span class="text-muted fst-italic">Capturing during inspection</span>`;
+
+      reportActionButtons = `
+        <button type="button" class="btn btn-vh-outline text-muted flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2" onclick="window.showReportPendingModal('${escapeHtml(item.id)}')">
+          <i class="bi bi-lock me-1"></i><span>Report In Preparation</span>
+        </button>
+        <button type="button" class="btn btn-vh-outline text-muted px-3" disabled title="Download will unlock once certified on-site assessment is completed and published.">
+          <i class="bi bi-download opacity-50"></i>
+        </button>
+      `;
+    }
+
+    return `
+      <div class="col-lg-6 col-12 d-flex">
+        <div class="vh-digital-report-card shadow-sm h-100 w-100">
+          <!-- Top Row: Report Status Pill + Publication Date / ETA -->
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            ${reportBadgeHtml}
+            <span class="text-muted small fw-medium">${escapeHtml(dateNotice)}</span>
+          </div>
+
+          <!-- Report Property Title -->
+          <h5 class="fw-bold mb-1 text-dark dark-text-light">${escapeHtml(item.address)}</h5>
+          <p class="text-muted small mb-2">${escapeHtml(subtitle)}</p>
+          <div class="small text-muted mb-3 d-flex align-items-center gap-2 flex-wrap" style="font-size: 0.78rem;">
+            <span><i class="bi bi-file-earmark-text text-primary me-1"></i>Report #${escapeHtml(item.id)}</span>
+            <span>•</span>
+            <span>Inspector: ${escapeHtml(item.inspector)}</span>
+          </div>
+
+          <!-- Score or In Preparation Box -->
+          <div class="mt-auto">
+            ${scoreOrPendingBoxHtml}
+
+            <!-- Associated Photo Access Strip -->
+            <div class="d-flex justify-content-between align-items-center mb-3 p-2 px-3 rounded-3 bg-light border small" style="background-color: var(--vh-bg-subtle) !important;">
+              <span class="text-muted"><i class="bi bi-camera-fill text-primary me-1"></i>Photo Evidence:</span>
+              ${photoAccessSnippet}
+            </div>
+
+            <!-- Actions Footer: Prioritizes Report Viewing & PDF Download -->
+            <div class="d-flex gap-2">
+              ${reportActionButtons}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderInspectionCards() {
+    const container = document.getElementById('myInspectionsCardsContainer');
+    if (!container) return;
+
+    const list = getInspections();
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center py-5 text-muted">
+          <i class="bi bi-calendar-x fs-1 d-block mb-2 text-secondary opacity-50"></i>
+          No inspection records found. Click <strong>"Book New Inspection"</strong> to schedule one.
+        </div>
+      `;
+      return;
+    }
+
+    list.forEach(item => {
+      container.innerHTML += createAppointmentCardHtml(item);
+    });
+  }
+
+  function renderDigitalReportsCards() {
+    const container = document.getElementById('digitalReportsCardsContainer');
+    if (!container) return;
+
+    const list = getInspections();
+    container.innerHTML = '';
+
+    list.forEach(item => {
+      container.innerHTML += createDigitalReportCardHtml(item);
+    });
+  }
+
+  window.switchInspectionViewMode = function (mode) {
+    const cardsContainer = document.getElementById('myInspectionsCardsContainer');
+    const tableContainer = document.getElementById('myInspectionsTableContainer');
+    const btnCards = document.getElementById('btnViewModeCards');
+    const btnTable = document.getElementById('btnViewModeTable');
+
+    if (mode === 'table') {
+      if (cardsContainer) cardsContainer.style.display = 'none';
+      if (tableContainer) tableContainer.style.display = 'block';
+      if (btnCards) btnCards.classList.remove('active');
+      if (btnTable) btnTable.classList.add('active');
+    } else {
+      if (cardsContainer) cardsContainer.style.display = 'flex';
+      if (tableContainer) tableContainer.style.display = 'none';
+      if (btnCards) btnCards.classList.add('active');
+      if (btnTable) btnTable.classList.remove('active');
+    }
+  };
+
+  window.showReportPendingModal = function (id) {
+    const list = getInspections();
+    const item = list.find(i => i.id === id) || {
+      address: '104 Willow Ridge Road',
+      serviceName: 'Comprehensive + Sewer Scope Inspection',
+      cityState: 'Naperville, IL',
+      formattedDate: 'Thursday, Nov 3, 2026'
+    };
+
+    const modalAddress = document.getElementById('pendingModalAddress');
+    const modalDetails = document.getElementById('pendingModalDetails');
+    const modalDate = document.getElementById('pendingModalDate');
+
+    if (modalAddress) modalAddress.textContent = item.address;
+    if (modalDetails) modalDetails.textContent = `${item.serviceName} • ${item.cityState}`;
+    if (modalDate) modalDate.textContent = item.formattedDate || item.date;
+
+    const modalEl = document.getElementById('reportPendingModal');
+    if (modalEl && window.bootstrap && bootstrap.Modal) {
+      bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     Digital Inspection Report View (Property-Specific Findings)
+     -------------------------------------------------------------------------- */
+
   function renderDigitalReportView(inspection) {
     const container = document.getElementById('digitalReportDynamicContainer');
     if (!container) return;
 
     const profile = getProfile();
-    const score = inspection.score || 94;
-    const findings = inspection.findings || { major: 1, safety: 2, minor: 3, passed: 386 };
+    const isCondo = (inspection.id === 'VH-2025-412');
+    const activeFindings = isCondo ? REPORT_FINDINGS_712_CLARK : REPORT_FINDINGS;
+    const score = inspection.score || (isCondo ? 91 : 94);
+    const findings = inspection.findings || (isCondo ? { major: 0, safety: 1, minor: 4, passed: 215 } : { major: 1, safety: 2, minor: 3, passed: 386 });
+
+    const propType = isCondo ? 'Condominium (4th Floor Unit 4B)' : 'Single Family (2-Story)';
+    const yearBuilt = isCondo ? '2018' : '2014';
+    const totalPoints = isCondo ? 215 : 400;
+    const frontImg = isCondo ? 'assets/images/blog-card-inspection-negotiation.jpg' : 'assets/images/hero-property.jpg';
+    const frontCaption = isCondo ? 'Balcony & Unit Façade Photo' : 'Front Elevation Photo';
+    const associatedPhotoCount = isCondo ? 1 : 3;
+
+    // Collect systems for filter buttons
+    const systemsMap = {};
+    activeFindings.forEach(f => {
+      systemsMap[f.system] = (systemsMap[f.system] || 0) + 1;
+    });
+
+    const systemLabels = {
+      roof: 'Roof & Exterior',
+      electrical: 'Electrical',
+      plumbing: 'Plumbing',
+      hvac: 'HVAC / Heating',
+      structure: isCondo ? 'Structure & Balcony' : 'Structure & Foundation'
+    };
+
+    let filtersHtml = `<button class="btn btn-sm btn-vh-primary report-dash-filter-btn active" data-filter="all">All Systems (${activeFindings.length})</button>`;
+    Object.keys(systemsMap).forEach(sys => {
+      filtersHtml += `<button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="${sys}">${systemLabels[sys] || sys} (${systemsMap[sys]})</button>`;
+    });
 
     container.innerHTML = `
       <!-- Report Header Card -->
@@ -1141,10 +1646,15 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
           <div>
             <span class="badge bg-success mb-1"><i class="bi bi-check-circle me-1"></i>Official Verified Report #${escapeHtml(inspection.id)}</span>
-            <h4 class="fw-bold mb-1 text-dark dark-text-light">Pre-Purchase Property Assessment: ${escapeHtml(inspection.address)}</h4>
+            <h4 class="fw-bold mb-1 text-dark dark-text-light">${isCondo ? 'Condo / Townhome Assessment' : 'Pre-Purchase Property Assessment'}: ${escapeHtml(inspection.address)}</h4>
             <p class="text-muted small mb-0">${escapeHtml(inspection.cityState)} ${escapeHtml(inspection.zip)} • Inspected on ${escapeHtml(inspection.formattedDate || inspection.date)} by ${escapeHtml(inspection.inspector)}</p>
           </div>
-          <span class="badge bg-success-subtle text-success fs-6 px-3 py-2">Status: ${escapeHtml(inspection.status)}</span>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <button type="button" class="btn btn-sm btn-vh-outline" onclick="window.viewPhotosForProperty('${escapeHtml(inspection.address)}')">
+              <i class="bi bi-images me-1"></i>Associated Photos (${associatedPhotoCount})
+            </button>
+            <span class="badge bg-success-subtle text-success fs-6 px-3 py-2">Status: ${escapeHtml(inspection.status)}</span>
+          </div>
         </div>
       </div>
 
@@ -1161,24 +1671,24 @@
                 </div>
               </div>
               <strong class="text-success d-block">Good Overall Condition</strong>
-              <small class="text-muted">${score > 90 ? '400' : '250'} Points Evaluated</small>
+              <small class="text-muted">${totalPoints} Points Evaluated</small>
             </div>
 
             <div class="col-md-6">
               <h5 class="fw-bold mb-3 text-dark dark-text-light">Property & Inspection Overview</h5>
               <div class="row g-2 small text-muted">
-                <div class="col-sm-6"><strong>Property Type:</strong> Single Family (2-Story)</div>
-                <div class="col-sm-6"><strong>Year Built:</strong> 2014</div>
-                <div class="col-sm-6"><strong>Square Footage:</strong> ${inspection.sqft ? inspection.sqft.toLocaleString() + ' sq ft' : '2,850 sq ft'}</div>
-                <div class="col-sm-6"><strong>Weather:</strong> 64°F, Clear & Dry</div>
+                <div class="col-sm-6"><strong>Property Type:</strong> ${propType}</div>
+                <div class="col-sm-6"><strong>Year Built:</strong> ${yearBuilt}</div>
+                <div class="col-sm-6"><strong>Square Footage:</strong> ${inspection.sqft ? inspection.sqft.toLocaleString() + ' sq ft' : (isCondo ? '1,450 sq ft' : '2,850 sq ft')}</div>
+                <div class="col-sm-6"><strong>Weather:</strong> ${isCondo ? '72°F, Clear' : '64°F, Clear & Dry'}</div>
                 <div class="col-sm-6"><strong>Client Name:</strong> ${escapeHtml(profile.firstName)} ${escapeHtml(profile.lastName)}</div>
                 <div class="col-sm-6"><strong>Lead Inspector:</strong> ${escapeHtml(inspection.inspector)}</div>
               </div>
             </div>
 
             <div class="col-md-3 text-center">
-              <img src="assets/images/hero-property.jpg" alt="${escapeHtml(inspection.address)}" class="img-fluid rounded-3 shadow-sm border mb-2 w-100 object-fit-cover" style="height: 120px;">
-              <small class="text-muted d-block">Front Elevation Photo</small>
+              <img src="${frontImg}" alt="${escapeHtml(inspection.address)}" class="img-fluid rounded-3 shadow-sm border mb-2 w-100 object-fit-cover" style="height: 120px;">
+              <small class="text-muted d-block">${frontCaption}</small>
             </div>
           </div>
         </div>
@@ -1205,7 +1715,7 @@
           </div>
           <div class="col-6 col-md-3">
             <div class="p-3 rounded-3 border bg-success-subtle border-success-subtle">
-              <div class="display-6 fw-bold text-success">${findings.passed || 386}</div>
+              <div class="display-6 fw-bold text-success">${findings.passed || (isCondo ? 215 : 386)}</div>
               <div class="fw-bold text-success small">Passed / Satisfactory</div>
             </div>
           </div>
@@ -1213,17 +1723,12 @@
 
         <!-- System Filter Buttons -->
         <div class="d-flex gap-2 flex-wrap mb-4 pb-3 border-bottom" id="dashboardReportFilters">
-          <button class="btn btn-sm btn-vh-primary report-dash-filter-btn active" data-filter="all">All Systems (${REPORT_FINDINGS.length})</button>
-          <button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="roof">Roof & Exterior (1)</button>
-          <button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="electrical">Electrical (2)</button>
-          <button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="plumbing">Plumbing (2)</button>
-          <button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="hvac">HVAC / Heating (1)</button>
-          <button class="btn btn-sm btn-vh-outline report-dash-filter-btn" data-filter="structure">Structure & Foundation (1)</button>
+          ${filtersHtml}
         </div>
 
         <!-- Findings List -->
         <div id="dashboardFindingsContainer">
-          ${REPORT_FINDINGS.map(finding => `
+          ${activeFindings.map(finding => `
             <div class="finding-card ${finding.borderClass}" data-system="${finding.system}">
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
                 <div>
@@ -1277,13 +1782,11 @@
     filterBtns.forEach(btn => {
       btn.addEventListener('click', function () {
         filterBtns.forEach(b => {
-          b.classList.remove('active');
-          b.classList.remove('btn-vh-primary');
+          b.classList.remove('active', 'btn-vh-primary');
           b.classList.add('btn-vh-outline');
         });
-        this.classList.add('active');
+        this.classList.add('active', 'btn-vh-primary');
         this.classList.remove('btn-vh-outline');
-        this.classList.add('btn-vh-primary');
 
         const filter = (this.getAttribute('data-filter') || '').trim().toLowerCase();
         findingCards.forEach(card => {
@@ -1300,15 +1803,21 @@
 
   window.openDigitalReport = function (id) {
     const list = getInspections();
-    let item = list.find(i => i.id === id);
+    const item = list.find(i => i.id === id);
+
     if (!item) {
-      item = list.find(i => i.hasReport) || list[0];
+      if (window.showToast) window.showToast('Report Not Found', 'The requested inspection record does not exist.', 'danger');
+      return;
     }
-    if (!item) return;
+
+    if (!item.hasReport) {
+      // User rule: Do not allow users to open reports that are unavailable or not authorized for them
+      window.showReportPendingModal(item.id);
+      return;
+    }
 
     currentActiveReportInspectionId = item.id;
     renderDigitalReportView(item);
-
     window.switchCustomerTab('tab-report-view');
   };
 
@@ -1365,8 +1874,10 @@
     renderProfileUI();
     initProfileForm();
 
-    // 2. Initial Inspections Rendering
+    // 2. Initial Inspections Rendering (Both Table and Cards)
     renderInspectionsTable();
+    renderInspectionCards();
+    renderDigitalReportsCards();
     initBookingForm();
     updateOverviewWidgets();
 
@@ -1383,9 +1894,14 @@
       const tabEl = document.getElementById(targetTab);
       if (tabEl) {
         window.switchCustomerTab(targetTab);
+      } else {
+        window.switchCustomerTab('tab-overview');
       }
+    } else {
+      window.switchCustomerTab('tab-overview');
     }
   }
+
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initDashboard);

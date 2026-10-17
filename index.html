@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VeriHome | Professional Home Inspection & Pre-Purchase Assessment</title>
-  <meta name="description" content="Protect your investment with certified 400-point home inspections, infrared thermal imaging, pre-purchase assessments, and same-day digital reports.">
-  <meta name="keywords" content="home inspection, pre-purchase assessment, property inspection, certified home inspector, building diagnostics">
+  <meta name="description"
+    content="Protect your investment with certified 400-point home inspections, infrared thermal imaging, pre-purchase assessments, and same-day digital reports.">
+  <meta name="keywords"
+    content="home inspection, pre-purchase assessment, property inspection, certified home inspector, building diagnostics">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -14,7 +17,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- Bootstrap 5 CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -22,12 +27,13 @@
   <link rel="stylesheet" href="assets/css/bootstrap-icons/bootstrap-icons.min.css">
   <!-- Fallback to CDN for Icons if needed -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- RTL Stylesheet (conditionally applied) -->
   <link rel="stylesheet" href="assets/css/rtl.css">
 </head>
+
 <body>
 
 
@@ -39,19 +45,48 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Mobile Quick Actions (Theme & Dashboard easy access) -->
+      <div class="vh-mobile-top-actions d-flex d-lg-none align-items-center gap-2 me-2">
+        <button class="btn btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-nav-control" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2 text-primary"></i>
+        </a>
+      </div>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle active" href="index.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item active" href="index.html"><i class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
-              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
+              <li><a class="dropdown-item active" href="index.html"><i
+                    class="bi bi-house-door me-2 text-primary"></i>Home 1</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i
+                    class="bi bi-building-check me-2 text-warning"></i>Home 2</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -74,19 +109,23 @@
           </li>
         </ul>
 
-        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <!-- Action Controls: Theme Toggles, Single Login/Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
           <!-- Dark/Light Mode Separate Button -->
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <button class="btn btn-nav-control vh-theme-toggle-btn" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode"
+            aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR"
+            aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
 
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Single Combined Login & Registration (Issue 3) -->
+          <a href="login.html" class="btn btn-sm btn-vh-outline">
+            <i class="bi bi-person me-1"></i>Sign In / Register
+          </a>
           <!-- Customer Dashboard Navbar Button (REQUIRED) -->
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
@@ -109,10 +148,12 @@
             Protecting Your Investment With <span class="text-primary">Precision Inspections</span>
           </h1>
           <p class="hero-subtitle">
-            Don't get blindsided by costly hidden defects. Our licensed Master Inspectors conduct comprehensive 400-point structural, electrical, and thermal assessments, delivering interactive digital reports within 24 hours.
+            Don't get blindsided by costly hidden defects. Our licensed Master Inspectors conduct comprehensive
+            400-point structural, electrical, and thermal assessments, delivering interactive digital reports within 24
+            hours.
           </p>
 
-          <div class="d-flex flex-wrap gap-3 mb-4">
+          <div class="d-flex flex-wrap gap-3 mb-2">
             <a href="customer-dashboard.html#book" class="btn btn-vh-accent btn-lg shadow-sm">
               <i class="bi bi-calendar2-check me-2"></i>Book Inspection Now
             </a>
@@ -120,39 +161,14 @@
               <i class="bi bi-file-earmark-medical me-2"></i>View Sample Report
             </a>
           </div>
-
-          <!-- Trust Badges -->
-          <div class="d-flex flex-wrap align-items-center gap-3 pt-3 border-top border-secondary-subtle">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-star-fill text-warning fs-5"></i>
-              <div>
-                <strong class="d-block text-dark dark-text-light" style="line-height: 1;">4.9 / 5.0</strong>
-                <small class="text-muted">Over 2,400+ Reviews</small>
-              </div>
-            </div>
-            <div class="vr"></div>
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-shield-check text-success fs-5"></i>
-              <div>
-                <strong class="d-block text-dark dark-text-light" style="line-height: 1;">$10,000 Guarantee</strong>
-                <small class="text-muted">InterNACHI Backed</small>
-              </div>
-            </div>
-            <div class="vr"></div>
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-lightning-charge-fill text-primary fs-5"></i>
-              <div>
-                <strong class="d-block text-dark dark-text-light" style="line-height: 1;">24-Hr Delivery</strong>
-                <small class="text-muted">Same-Day Digital Portal</small>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="col-lg-6 position-relative">
           <div class="position-relative">
-            <img src="assets/images/hero-inspector.jpg" alt="Certified Home Inspector Examining Property" class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100 object-fit-cover" style="height: 480px;">
-            
+            <img src="assets/images/hero-inspector.jpg" alt="Certified Home Inspector Examining Property"
+              class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100 object-fit-cover"
+              style="height: 480px;">
+
             <!-- Floating Trust Card -->
             <div class="vh-hero-badge-float">
               <div class="vh-brand-icon bg-success">
@@ -166,18 +182,48 @@
           </div>
         </div>
       </div>
+
+      <!-- Hero Section Footer Strip (Aligned cleanly across the entire hero width - Issue 11) -->
+      <div class="vh-hero-footer-bar p-3 p-md-4 mt-4 shadow-sm border bg-white" style="background-color: var(--vh-bg-surface) !important;">
+        <div class="row g-3 align-items-center text-center text-sm-start">
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3">
+            <i class="bi bi-star-fill text-warning fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">4.9 / 5.0 Rating</strong>
+              <small class="text-muted">Over 2,400+ Verified Homeowner Reviews</small>
+            </div>
+          </div>
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3 border-start-md ps-md-4">
+            <i class="bi bi-shield-check text-success fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">$10,000 Guarantee</strong>
+              <small class="text-muted">Official InterNACHI Buy-Back Protection</small>
+            </div>
+          </div>
+          <div class="col-md-4 col-12 d-flex align-items-center justify-content-center justify-content-sm-start gap-3 border-start-md ps-md-4">
+            <i class="bi bi-lightning-charge-fill text-primary fs-3 flex-shrink-0"></i>
+            <div>
+              <strong class="d-block text-dark dark-text-light fs-5 mb-0" style="line-height: 1.1;">24-Hr Report Delivery</strong>
+              <small class="text-muted">Same-Day Interactive Digital Portal Access</small>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Interactive Quick Quote / Cost Estimator Widget -->
-  <section class="py-5 bg-white border-bottom border-top border-secondary-subtle" style="background-color: var(--vh-bg-surface) !important;">
+  <section class="py-5 bg-white border-bottom border-top border-secondary-subtle"
+    style="background-color: var(--vh-bg-surface) !important;">
     <div class="container">
-      <div class="p-4 p-lg-5 rounded-4 shadow-sm" style="background: linear-gradient(135deg, rgba(14, 59, 104, 0.04) 0%, rgba(245, 158, 11, 0.06) 100%); border: 1px solid var(--vh-border);">
+      <div class="p-4 p-lg-5 rounded-4 shadow-sm"
+        style="background: linear-gradient(135deg, rgba(14, 59, 104, 0.04) 0%, rgba(245, 158, 11, 0.06) 100%); border: 1px solid var(--vh-border);">
         <div class="row align-items-center g-4">
           <div class="col-lg-4">
             <div class="badge-pill-soft badge-soft-accent mb-2">Instant Estimate</div>
             <h3 class="fw-bold mb-2">Calculate Your Inspection Cost</h3>
-            <p class="text-muted mb-0">Select your property size and inspection scope for immediate transparent pricing with no hidden charges.</p>
+            <p class="text-muted mb-0">Select your property size and inspection scope for immediate transparent pricing
+              with no hidden charges.</p>
           </div>
 
           <div class="col-lg-5">
@@ -200,7 +246,8 @@
               </div>
             </div>
             <div class="d-flex align-items-center gap-3 mt-2 text-muted small">
-              <span><i class="bi bi-clock-history me-1 text-primary"></i> Est. Duration: <strong id="calcTimeDisplay" class="text-dark dark-text-light">3.5 - 4.5 Hours</strong></span>
+              <span><i class="bi bi-clock-history me-1 text-primary"></i> Est. Duration: <strong id="calcTimeDisplay"
+                  class="text-dark dark-text-light">3.5 - 4.5 Hours</strong></span>
               <span><i class="bi bi-shield-check me-1 text-success"></i> Includes Thermal Scan</span>
             </div>
           </div>
@@ -223,7 +270,9 @@
       <div class="text-center max-w-700 mx-auto mb-5">
         <div class="badge-pill-soft badge-soft-primary mb-2">Why VeriHome</div>
         <h2 class="display-6 fw-bold">Built to Protect Property Buyers & Homeowners</h2>
-        <p class="text-muted">A home is likely your biggest lifetime financial commitment. Our comprehensive inspections identify severe structural hazards, unpermitted repairs, and hidden water intrusion before you sign the contract.</p>
+        <p class="text-muted">A home is likely your biggest lifetime financial commitment. Our comprehensive inspections
+          identify severe structural hazards, unpermitted repairs, and hidden water intrusion before you sign the
+          contract.</p>
       </div>
 
       <div class="row g-4">
@@ -233,7 +282,8 @@
               <i class="bi bi-clipboard2-pulse"></i>
             </div>
             <h4 class="h5 fw-bold">400+ Point Audit</h4>
-            <p class="text-muted small mb-0">From roof ridge vent to foundation footings, we test every accessible mechanical, electrical, and structural component.</p>
+            <p class="text-muted small mb-0">From roof ridge vent to foundation footings, we test every accessible
+              mechanical, electrical, and structural component.</p>
           </div>
         </div>
 
@@ -243,7 +293,8 @@
               <i class="bi bi-camera-fill"></i>
             </div>
             <h4 class="h5 fw-bold">FLIR® Thermal Scans</h4>
-            <p class="text-muted small mb-0">Infrared imaging identifies invisible moisture leaks behind drywall, missing ceiling insulation, and electrical hotspots.</p>
+            <p class="text-muted small mb-0">Infrared imaging identifies invisible moisture leaks behind drywall,
+              missing ceiling insulation, and electrical hotspots.</p>
           </div>
         </div>
 
@@ -253,7 +304,8 @@
               <i class="bi bi-airplane-engines"></i>
             </div>
             <h4 class="h5 fw-bold">4K Aerial Drone Roof</h4>
-            <p class="text-muted small mb-0">FAA-certified drone pilots capture high-definition imagery of steep or inaccessible roofs, flashing, and chimneys.</p>
+            <p class="text-muted small mb-0">FAA-certified drone pilots capture high-definition imagery of steep or
+              inaccessible roofs, flashing, and chimneys.</p>
           </div>
         </div>
 
@@ -263,7 +315,8 @@
               <i class="bi bi-phone-flip"></i>
             </div>
             <h4 class="h5 fw-bold">Interactive Digital Report</h4>
-            <p class="text-muted small mb-0">Cloud-delivered with interactive photo galleries, severity color tags, and a 1-click Repair Request generator for agents.</p>
+            <p class="text-muted small mb-0">Cloud-delivered with interactive photo galleries, severity color tags, and
+              a 1-click Repair Request generator for agents.</p>
           </div>
         </div>
       </div>
@@ -288,19 +341,24 @@
         <div class="col-md-6 col-lg-4">
           <div class="vh-card">
             <div class="position-relative overflow-hidden rounded-3 mb-4">
-              <img src="assets/images/hero-property.jpg" alt="Comprehensive Home Inspection" class="img-fluid w-100 object-fit-cover" style="height: 200px;">
+              <img src="assets/images/hero-property.jpg" alt="Comprehensive Home Inspection"
+                class="img-fluid w-100 object-fit-cover" style="height: 200px;">
               <span class="badge bg-primary position-absolute top-0 end-0 m-3">Most Popular</span>
             </div>
-            <h4 class="h5 fw-bold"><a href="service-details.html?id=1" class="text-dark dark-text-light">Comprehensive Home Inspection</a></h4>
-            <p class="text-muted small">Standard full property inspection covering roof, HVAC, foundation, electrical panels, plumbing, and attic insulation.</p>
+            <h4 class="h5 fw-bold"><a href="service-details.html?id=1" class="text-dark dark-text-light">Comprehensive
+                Home Inspection</a></h4>
+            <p class="text-muted small">Standard full property inspection covering roof, HVAC, foundation, electrical
+              panels, plumbing, and attic insulation.</p>
             <ul class="list-unstyled small text-muted mb-4">
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Over 400 structural checkpoints</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Same-day digital cloud delivery</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Major/Minor defect prioritization</li>
             </ul>
-            <div class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
+            <div
+              class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
               <span class="fw-bold text-primary">From $349</span>
-              <a href="service-details.html?id=1" class="text-primary fw-semibold small">Details <i class="bi bi-chevron-right"></i></a>
+              <a href="service-details.html?id=1" class="text-primary fw-semibold small">Details <i
+                  class="bi bi-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -309,19 +367,24 @@
         <div class="col-md-6 col-lg-4">
           <div class="vh-card">
             <div class="position-relative overflow-hidden rounded-3 mb-4">
-              <img src="assets/images/prepurchase-niche.jpg" alt="Pre-Purchase Property Assessment" class="img-fluid w-100 object-fit-cover" style="height: 200px;">
+              <img src="assets/images/prepurchase-niche.jpg" alt="Pre-Purchase Property Assessment"
+                class="img-fluid w-100 object-fit-cover" style="height: 200px;">
               <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Buyer Essential</span>
             </div>
-            <h4 class="h5 fw-bold"><a href="service-details.html?id=2" class="text-dark dark-text-light">Pre-Purchase Buyer Assessment</a></h4>
-            <p class="text-muted small">Specialized diligence for prospective buyers with price renegotiation leverage, repair cost estimations, and permit cross-checks.</p>
+            <h4 class="h5 fw-bold"><a href="service-details.html?id=2" class="text-dark dark-text-light">Pre-Purchase
+                Buyer Assessment</a></h4>
+            <p class="text-muted small">Specialized diligence for prospective buyers with price renegotiation leverage,
+              repair cost estimations, and permit cross-checks.</p>
             <ul class="list-unstyled small text-muted mb-4">
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Repair cost negotiation guide</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Thermal infrared moisture scans</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Unpermitted modification flags</li>
             </ul>
-            <div class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
+            <div
+              class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
               <span class="fw-bold text-primary">From $489</span>
-              <a href="service-details.html?id=2" class="text-primary fw-semibold small">Details <i class="bi bi-chevron-right"></i></a>
+              <a href="service-details.html?id=2" class="text-primary fw-semibold small">Details <i
+                  class="bi bi-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -330,19 +393,24 @@
         <div class="col-md-6 col-lg-4">
           <div class="vh-card">
             <div class="position-relative overflow-hidden rounded-3 mb-4">
-              <img src="assets/images/thermal-drone-inspection.jpg" alt="Thermal Imaging & Drone Inspection" class="img-fluid w-100 object-fit-cover" style="height: 200px;">
+              <img src="assets/images/thermal-drone-inspection.jpg" alt="Thermal Imaging & Drone Inspection"
+                class="img-fluid w-100 object-fit-cover" style="height: 200px;">
               <span class="badge bg-info text-white position-absolute top-0 end-0 m-3">High Tech</span>
             </div>
-            <h4 class="h5 fw-bold"><a href="service-details.html?id=3" class="text-dark dark-text-light">Thermal & Aerial Drone Audit</a></h4>
-            <p class="text-muted small">Non-invasive diagnostic utilizing military-grade FLIR thermal imaging cameras and aerial 4K drones for inaccessible roofs.</p>
+            <h4 class="h5 fw-bold"><a href="service-details.html?id=3" class="text-dark dark-text-light">Thermal &
+                Aerial Drone Audit</a></h4>
+            <p class="text-muted small">Non-invasive diagnostic utilizing military-grade FLIR thermal imaging cameras
+              and aerial 4K drones for inaccessible roofs.</p>
             <ul class="list-unstyled small text-muted mb-4">
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>High-resolution roof tile analysis</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Hidden moisture leak detection</li>
               <li><i class="bi bi-check-circle-fill text-success me-2"></i>Insulation void mapping</li>
             </ul>
-            <div class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
+            <div
+              class="mt-auto pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
               <span class="fw-bold text-primary">From $249</span>
-              <a href="service-details.html?id=3" class="text-primary fw-semibold small">Details <i class="bi bi-chevron-right"></i></a>
+              <a href="service-details.html?id=3" class="text-primary fw-semibold small">Details <i
+                  class="bi bi-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -356,36 +424,50 @@
       <div class="text-center max-w-700 mx-auto mb-5">
         <div class="badge-pill-soft badge-soft-primary mb-2">Transparent Workflow</div>
         <h2 class="display-6 fw-bold">How Our Inspection Process Works</h2>
-        <p class="text-muted">From quick appointment scheduling to cloud report delivery, we make the inspection process seamless, transparent, and stress-free.</p>
+        <p class="text-muted">From quick appointment scheduling to cloud report delivery, we make the inspection process
+          seamless, transparent, and stress-free.</p>
       </div>
 
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-3">
-          <div class="text-center p-3">
-            <div class="process-step-num mx-auto">1</div>
-            <h5 class="fw-bold">Easy Online Booking</h5>
-            <p class="text-muted small">Book online 24/7 or call us. Pick your inspection date, time, and package. Instant confirmation sent to your email.</p>
+      <!-- Visual Process Steps with generated images (Issue 5: number badge on left side of image) -->
+      <div class="row g-4 align-items-stretch">
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/easy-online-booking.jpg" alt="Easy Online Inspection Booking Calendar" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">1</div>
+            </div>
+            <h5 class="fw-bold mb-2">Easy Online Booking</h5>
+            <p class="text-muted small mb-0">Book online 24/7 or call us. Pick your inspection date, time, and package. Instant confirmation sent to your email.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="text-center p-3">
-            <div class="process-step-num mx-auto">2</div>
-            <h5 class="fw-bold">On-Site 400-Point Audit</h5>
-            <p class="text-muted small">Our licensed master inspector spends 3-4 hours methodically testing all electrical, mechanical, and structural elements.</p>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/onsite-400point-audit.jpg" alt="On-Site 400-Point Audit by Master Inspector" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">2</div>
+            </div>
+            <h5 class="fw-bold mb-2">On-Site 400-Point Audit</h5>
+            <p class="text-muted small mb-0">Our licensed master inspector spends 3-4 hours methodically testing all electrical, mechanical, and structural elements.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="text-center p-3">
-            <div class="process-step-num mx-auto">3</div>
-            <h5 class="fw-bold">Client Walkthrough</h5>
-            <p class="text-muted small">Join us for the final 45 minutes on-site. We walk you through every critical finding, main shutoffs, and upkeep tips.</p>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/client-walkthrough.jpg" alt="Client Walkthrough and Findings Explanation" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">3</div>
+            </div>
+            <h5 class="fw-bold mb-2">Client Walkthrough</h5>
+            <p class="text-muted small mb-0">Join us for the final 45 minutes on-site. We walk you through every critical finding, main shutoffs, and upkeep tips.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="text-center p-3">
-            <div class="process-step-num mx-auto">4</div>
-            <h5 class="fw-bold">Digital Report in 24 Hrs</h5>
-            <p class="text-muted small">Access your password-protected interactive report from any phone or computer with high-res photos and repair summaries.</p>
+        <div class="col-md-6 col-lg-3 d-flex">
+          <div class="vh-process-card card border-0 shadow-sm rounded-4 p-3 w-100 d-flex flex-column text-center">
+            <div class="vh-process-img-wrap mb-3 position-relative">
+              <img src="assets/images/digital-report-24hrs.jpg" alt="Interactive Digital Inspection Report in 24 Hours" class="rounded-3">
+              <div class="process-step-num position-absolute top-0 start-0 m-3 shadow">4</div>
+            </div>
+            <h5 class="fw-bold mb-2">Digital Report in 24 Hrs</h5>
+            <p class="text-muted small mb-0">Access your password-protected interactive report from any phone or computer with high-res photos and repair summaries.</p>
           </div>
         </div>
       </div>
@@ -405,28 +487,33 @@
         <div class="col-lg-6">
           <div class="badge-pill-soft badge-soft-accent mb-2">Easy to Understand</div>
           <h2 class="display-6 fw-bold mb-3">Clear, Interactive Reports With Photo Proof</h2>
-          <p class="text-muted mb-4">No 50-page confusing jargon binders. Our digital inspection reports categorize every finding into actionable categories: Major Defect, Minor Defect, Safety Hazard, or Maintenance Reminder.</p>
+          <p class="text-muted mb-4">No 50-page confusing jargon binders. Our digital inspection reports categorize
+            every finding into actionable categories: Major Defect, Minor Defect, Safety Hazard, or Maintenance
+            Reminder.</p>
 
           <div class="d-flex flex-column gap-3 mb-4">
             <div class="d-flex align-items-start gap-3">
               <span class="badge bg-danger rounded-pill p-2"><i class="bi bi-exclamation-triangle-fill"></i></span>
               <div>
                 <strong class="d-block text-dark dark-text-light">Major Defects Flagged in Red</strong>
-                <small class="text-muted">High-priority structural or mechanical issues that cost over $1,500 to repair or prevent move-in.</small>
+                <small class="text-muted">High-priority structural or mechanical issues that cost over $1,500 to repair
+                  or prevent move-in.</small>
               </div>
             </div>
             <div class="d-flex align-items-start gap-3">
               <span class="badge bg-warning text-dark rounded-pill p-2"><i class="bi bi-shield-exclamation"></i></span>
               <div>
                 <strong class="d-block text-dark dark-text-light">Safety Hazards Highlighted</strong>
-                <small class="text-muted">Direct safety concerns like faulty GFCI breakers, unvented gas lines, or missing handrails.</small>
+                <small class="text-muted">Direct safety concerns like faulty GFCI breakers, unvented gas lines, or
+                  missing handrails.</small>
               </div>
             </div>
             <div class="d-flex align-items-start gap-3">
               <span class="badge bg-success rounded-pill p-2"><i class="bi bi-check-lg"></i></span>
               <div>
                 <strong class="d-block text-dark dark-text-light">1-Click Repair Request List for Agents</strong>
-                <small class="text-muted">Buyers and Realtors can automatically extract selected defects to create seller repair requests.</small>
+                <small class="text-muted">Buyers and Realtors can automatically extract selected defects to create
+                  seller repair requests.</small>
               </div>
             </div>
           </div>
@@ -439,7 +526,8 @@
         <div class="col-lg-6">
           <div class="position-relative">
             <a href="sample-report.html">
-              <img src="assets/images/easy-reports-new.jpg" alt="VeriHome Sample Inspection Report on Tablet" class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100">
+              <img src="assets/images/easy-reports-new.jpg" alt="VeriHome Sample Inspection Report on Tablet"
+                class="img-fluid rounded-4 shadow-lg border border-2 border-white w-100">
             </a>
           </div>
         </div>
@@ -477,18 +565,24 @@
       <div class="text-center max-w-700 mx-auto mb-5">
         <div class="badge-pill-soft badge-soft-primary mb-2">Verified Reviews</div>
         <h2 class="display-6 fw-bold">What Homebuyers & Realtors Say</h2>
-        <p class="text-muted">Real stories from satisfied clients who saved tens of thousands of dollars before purchasing.</p>
+        <p class="text-muted">Real stories from satisfied clients who saved tens of thousands of dollars before
+          purchasing.</p>
       </div>
 
       <div class="row g-4">
         <div class="col-md-4">
           <div class="vh-card">
             <div class="text-warning mb-3">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
-            <p class="text-muted small mb-4">"VeriHome saved us from buying a money pit. Their inspector discovered cracked main load-bearing joists and an old aluminum wiring setup that the seller hid. We negotiated a $18,000 credit!"</p>
+            <p class="text-muted small mb-4">"VeriHome saved us from buying a money pit. Their inspector discovered
+              cracked main load-bearing joists and an old aluminum wiring setup that the seller hid. We negotiated a
+              $18,000 credit!"</p>
             <div class="d-flex align-items-center gap-3 mt-auto vh-testimonial-profile">
-              <img src="assets/images/profile-david.jpg" alt="David &amp; Karen Miller" class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48" style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(13, 110, 253, 0.45);">
+              <img src="assets/images/profile-david.jpg" alt="David &amp; Karen Miller"
+                class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48"
+                style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(13, 110, 253, 0.45);">
               <div class="vh-testimonial-meta">
                 <strong class="d-block text-dark dark-text-light">David &amp; Karen Miller</strong>
                 <small class="text-muted">First-Time Homebuyers</small>
@@ -500,11 +594,16 @@
         <div class="col-md-4">
           <div class="vh-card">
             <div class="text-warning mb-3">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
-            <p class="text-muted small mb-4">"As a top-producing realtor, I only recommend VeriHome to my VIP clients. Their digital reports are the best in the industry—clear photos, thermal imaging, and delivered in less than 24 hours."</p>
+            <p class="text-muted small mb-4">"As a top-producing realtor, I only recommend VeriHome to my VIP clients.
+              Their digital reports are the best in the industry—clear photos, thermal imaging, and delivered in less
+              than 24 hours."</p>
             <div class="d-flex align-items-center gap-3 mt-auto vh-testimonial-profile">
-              <img src="assets/images/profile-samantha.jpg" alt="Samantha Lawrence" class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48" style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(245, 158, 11, 0.45);">
+              <img src="assets/images/profile-samantha.jpg" alt="Samantha Lawrence"
+                class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48"
+                style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(245, 158, 11, 0.45);">
               <div class="vh-testimonial-meta">
                 <strong class="d-block text-dark dark-text-light">Samantha Lawrence</strong>
                 <small class="text-muted">Broker Associate, Compass</small>
@@ -516,11 +615,16 @@
         <div class="col-md-4">
           <div class="vh-card">
             <div class="text-warning mb-3">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
-            <p class="text-muted small mb-4">"The customer dashboard made tracking our inspection so easy. We booked on Tuesday, inspection was Thursday morning, and by Thursday evening our complete digital report was ready to download."</p>
+            <p class="text-muted small mb-4">"The customer dashboard made tracking our inspection so easy. We booked on
+              Tuesday, inspection was Thursday morning, and by Thursday evening our complete digital report was ready to
+              download."</p>
             <div class="d-flex align-items-center gap-3 mt-auto vh-testimonial-profile">
-              <img src="assets/images/profile-robert.jpg" alt="Robert Chen" class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48" style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(16, 185, 129, 0.45);">
+              <img src="assets/images/profile-robert.jpg" alt="Robert Chen"
+                class="rounded-circle object-fit-cover flex-shrink-0 shadow-sm" width="48" height="48"
+                style="width: 48px; height: 48px; object-fit: cover; border: 2px solid rgba(16, 185, 129, 0.45);">
               <div class="vh-testimonial-meta">
                 <strong class="d-block text-dark dark-text-light">Robert Chen</strong>
                 <small class="text-muted">Commercial Investor</small>
@@ -533,10 +637,12 @@
   </section>
 
   <!-- CTA Banner -->
-  <section class="py-5" style="background: linear-gradient(135deg, var(--vh-primary) 0%, var(--vh-primary-dark) 100%); color: #ffffff;">
+  <section class="py-5"
+    style="background: linear-gradient(135deg, var(--vh-primary) 0%, var(--vh-primary-dark) 100%); color: #ffffff;">
     <div class="container text-center py-4">
       <h2 class="display-6 fw-bold mb-3 text-white">Ready to Schedule Your Inspection?</h2>
-      <p class="lead text-white-50 mb-4 max-w-700 mx-auto">Book in less than 60 seconds. Our certified inspectors are available 6 days a week with same-day digital report turnaround.</p>
+      <p class="lead text-white-50 mb-4 max-w-700 mx-auto">Book in less than 60 seconds. Our certified inspectors are
+        available 6 days a week with same-day digital report turnaround.</p>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
         <a href="customer-dashboard.html#book" class="btn btn-vh-accent btn-lg">
           <i class="bi bi-calendar-check me-2"></i>Book Online Now
@@ -557,12 +663,18 @@
             <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
             <span>Veri<span class="text-warning">Home</span></span>
           </a>
-          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and digital reports.</p>
+          <p class="small text-muted mb-4">VeriHome is the premier licensed property inspection and pre-purchase
+            diagnostics firm. We equip homebuyers and investors with certified 400-point audits, thermal scans, and
+            digital reports.</p>
           <div class="d-flex gap-3">
-            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
-            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
-            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" class="text-muted hover-white fs-5" aria-label="Facebook" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com" class="text-muted hover-white fs-5" aria-label="Twitter" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://linkedin.com" class="text-muted hover-white fs-5" aria-label="LinkedIn" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com" class="text-muted hover-white fs-5" aria-label="Instagram" target="_blank"
+              rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
           </div>
         </div>
 
@@ -583,7 +695,8 @@
           <ul class="list-unstyled small d-flex flex-column gap-2">
             <li><a href="sample-report.html"><i class="bi bi-file-earmark-pdf me-1"></i>Sample Report</a></li>
             <li><a href="service-details.html?id=1"><i class="bi bi-search me-1"></i>Comprehensive Inspection</a></li>
-            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a></li>
+            <li><a href="service-details.html?id=2"><i class="bi bi-shield-check me-1"></i>Pre-Purchase Assessment</a>
+            </li>
             <li><a href="service-details.html?id=3"><i class="bi bi-camera me-1"></i>Drone & Thermal Audit</a></li>
             <li><a href="blog.html"><i class="bi bi-journal-text me-1"></i>Inspection Resources</a></li>
             <li><a href="pricing.html"><i class="bi bi-tags me-1"></i>Inspection Packages</a></li>
@@ -594,7 +707,8 @@
           <h5>Headquarters</h5>
           <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
             <li><i class="bi bi-geo-alt-fill text-warning me-2"></i>742 Evergreen Terrace, Suite 300, Metro City</li>
-            <li><i class="bi bi-telephone-fill text-warning me-2"></i><span dir="ltr" class="vh-phone-bidi">+1 (800) 555-HOME (4663)</span></li>
+            <li><i class="bi bi-telephone-fill text-warning me-2"></i><span dir="ltr" class="vh-phone-bidi">+1 (800)
+                555-HOME (4663)</span></li>
             <li><i class="bi bi-envelope-fill text-warning me-2"></i>inspections@verihome.com</li>
             <li><i class="bi bi-patch-check-fill text-success me-2"></i>License #HI-89420-InterNACHI</li>
           </ul>
@@ -602,7 +716,8 @@
       </div>
 
       <div class="vh-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div class="vh-footer-bottom-copy" dir="ltr">&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.</div>
+        <div class="vh-footer-bottom-copy" dir="ltr">&copy; 2026 VeriHome Inspection Services LLC. All rights reserved.
+        </div>
         <div class="d-flex gap-4">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>
@@ -617,4 +732,5 @@
   <!-- Core Main JS -->
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>

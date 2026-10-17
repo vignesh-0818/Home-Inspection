@@ -35,11 +35,36 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
+      <!-- Quick mobile actions header (Theme & Dashboard immediately accessible without scrolling - Issue 14) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none ms-auto me-2">
+        <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash px-2 py-1" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2"></i>
+        </a>
+      </div>
+
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,19 +95,22 @@
           </li>
         </ul>
 
-        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <!-- Action Controls: Theme Toggles, Sign In / Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
-          <!-- Dark/Light Mode Separate Button -->
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <!-- Dark/Light Mode Separate Button (Desktop) -->
+          <button class="btn btn-nav-control vh-theme-toggle-btn d-none d-lg-inline-flex" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
 
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Combined Sign In / Register (Issue 3) -->
+          <a href="login.html" class="btn btn-sm btn-vh-outline">
+            <i class="bi bi-person me-1"></i>Sign In / Register
+          </a>
+
           <!-- Customer Dashboard Navbar Button (REQUIRED) -->
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
@@ -93,14 +121,68 @@
     </div>
   </nav>
 
+  <!-- Full-Width Photographic Hero Banner (Reference Style - Issue 1 & 10) -->
+  <section class="vh-inner-banner vh-banner-sample-report">
+    <div class="container vh-inner-banner-container">
+      <h1 class="vh-inner-banner-title">Sample Digital Inspection Report</h1>
+      <p class="vh-inner-banner-desc">Explore an interactive sample report for a 2,850 sq ft residential property in Oakridge, IL. Discover our 400-point audit scoring, categorized findings, high-definition photo proof, and repair cost estimations.</p>
+    </div>
+  </section>
+
+  <!-- Report Structure & Severity Guide Section (Issue 7) -->
+  <section class="py-5 bg-white border-bottom" style="background-color: var(--vh-bg-surface) !important; border-color: var(--vh-border) !important;">
+    <div class="container py-lg-2">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="badge-pill-soft badge-soft-primary mb-2">Report Architecture</div>
+          <h2 class="display-6 fw-bold mb-3">Understanding Your VeriHome Digital Report</h2>
+          <p class="text-muted mb-4">Every VeriHome inspection generates an interactive cloud-based report designed for buyers, sellers, and agents. Rather than hundreds of pages of unorganized text, our reports prioritize findings by urgency.</p>
+          
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="badge bg-danger mb-2">Major Defect</span>
+                <p class="text-muted small mb-0">Structural failures or severe system malfunctions requiring prompt licensed contractor replacement.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="badge bg-warning text-dark mb-2">Safety Hazard</span>
+                <p class="text-muted small mb-0">Electrical, fire, or toxic conditions creating immediate personal risk for occupants.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="badge bg-primary mb-2">Minor Defect</span>
+                <p class="text-muted small mb-0">Common physical wear, minor leaks, and routine items to negotiate before closing.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <span class="badge bg-info text-white mb-2">Maintenance Advice</span>
+                <p class="text-muted small mb-0">Seasonal upkeep tips and preventative maintenance schedules for property preservation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="position-relative rounded-4 overflow-hidden shadow-lg border border-2 border-white">
+            <img src="assets/images/sample-report-structure-guide.jpg" alt="Sample Digital Inspection Report Tablet Interface" class="img-fluid w-100 object-fit-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Report Header Banner -->
   <div class="py-4 bg-light border-bottom" style="background-color: var(--vh-bg-subtle) !important;">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div>
-          <span class="badge bg-success mb-1"><i class="bi bi-check-circle me-1"></i>Official Verified Report #VH-2026-889</span>
-          <h1 class="h3 fw-bold mb-1">Pre-Purchase Property Assessment: 482 Maple Avenue</h1>
-          <p class="text-muted small mb-0">Oakridge, IL 60126 • Inspected on October 28, 2026 by John R. Davis, CMI®</p>
+          <span class="badge bg-success mb-1"><i class="bi bi-check-circle me-1"></i>Official Verified Sample Report #VH-2026-889</span>
+          <h2 class="h4 fw-bold mb-1">Pre-Purchase Property Assessment: 482 Maple Avenue</h2>
+          <p class="text-muted small mb-0">Oakridge, IL 60126 • Inspected on October 28, 2026 by John R. Davis, CMI® • Condition Score: 94/100</p>
         </div>
         <div class="d-flex gap-2">
           <button class="btn btn-sm btn-vh-outline" onclick="window.print()">
@@ -387,7 +469,199 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Interactive Repair Cost Summary & Seller Negotiation Credit Table -->
+        <div class="mt-5 p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+            <div>
+              <span class="badge-pill-soft badge-soft-primary mb-1">Financial Contingency Roadmap</span>
+              <h4 class="fw-bold mb-0">Estimated Repair Cost & Seller Credit Addendum</h4>
+              <small class="text-muted">Itemized contractor estimates for identified defects on 482 Maple Avenue to use during escrow price negotiations.</small>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-danger-subtle text-danger fs-6 px-3 py-1 fw-bold">Negotiation Leverage: $1,505 - $2,800</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="min-width: 140px;">System & Item</th>
+                  <th scope="col" style="min-width: 130px;">Defect Severity</th>
+                  <th scope="col">Inspector Recommendation</th>
+                  <th scope="col" style="min-width: 140px;" class="text-end">Est. Contractor Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Section 2.1</strong>
+                    <div class="small text-muted">Roof Shingle & Chimney Flashing</div>
+                  </td>
+                  <td><span class="badge badge-major-defect rounded-pill px-2 py-1">MAJOR DEFECT</span></td>
+                  <td class="small">Replace wind-lifted shingles on south slope, reseal counterflashing, inspect roof decking.</td>
+                  <td class="text-end fw-bold text-danger">$800 - $1,400</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Section 5.3</strong>
+                    <div class="small text-muted">Service Panel Slot A16</div>
+                  </td>
+                  <td><span class="badge badge-safety-hazard rounded-pill px-2 py-1">SAFETY HAZARD</span></td>
+                  <td class="small">Separate double-tapped circuit conductors into dedicated breaker slot or install UL-listed tandem breaker.</td>
+                  <td class="text-end fw-bold text-danger">$180 - $350</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Section 6.4</strong>
+                    <div class="small text-muted">Water Heater TPR Relief Valve</div>
+                  </td>
+                  <td><span class="badge badge-safety-hazard rounded-pill px-2 py-1">SAFETY HAZARD</span></td>
+                  <td class="small">Install copper discharge pipe from temperature relief valve extending within 6" of floor drain.</td>
+                  <td class="text-end fw-bold text-danger">$75 - $150</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Section 8.2</strong>
+                    <div class="small text-muted">Crawlspace Vapor Barrier</div>
+                  </td>
+                  <td><span class="badge badge-minor-defect rounded-pill px-2 py-1">MINOR DEFECT</span></td>
+                  <td class="small">Overlap and tape 6-mil polyethylene ground cover sheets; add dehumidifier ducting.</td>
+                  <td class="text-end fw-bold text-warning-emphasis">$450 - $900</td>
+                </tr>
+              </tbody>
+              <tfoot class="table-group-divider">
+                <tr class="fw-bold">
+                  <td colspan="3" class="text-end">Total Recommended Buyer Credit / Escrow Holdback:</td>
+                  <td class="text-end text-primary h5 mb-0">$1,505 - $2,800</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Digital Inspection Report Deliverables & Interactive Photo Telemetry (With New Image) -->
+        <div class="mt-5 p-4 p-lg-5 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+          <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+              <span class="badge-pill-soft badge-soft-accent mb-2">Exclusive Cloud Report Interface</span>
+              <h3 class="fw-bold mb-3">Interactive Digital Deliverables & HD Visual Telemetry</h3>
+              <p class="text-muted mb-4">Every VeriHome inspection includes immediate access to our interactive cloud portal. Review 360° attic panoramas, FLIR thermal imaging radiometry, sewer push-camera video footage, and export customizable PDF summaries.</p>
+              
+              <div class="d-flex flex-column gap-3 mb-4">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="vh-icon-box vh-icon-primary mb-0 flex-shrink-0" style="width: 42px; height: 42px;">
+                    <i class="bi bi-camera-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <strong class="d-block text-dark dark-text-light">High-Resolution Defect Photo Proof</strong>
+                    <div class="small text-muted">All findings are tagged with annotated high-definition photos, gauge measurements, and GPS timestamps.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <div class="vh-icon-box vh-icon-accent mb-0 flex-shrink-0" style="width: 42px; height: 42px;">
+                    <i class="bi bi-file-earmark-diff fs-5"></i>
+                  </div>
+                  <div>
+                    <strong class="d-block text-dark dark-text-light">One-Click Repair Addendum Generator</strong>
+                    <div class="small text-muted">Easily select any defect to compile a formatted amendment ready for your realtor to attach to purchase contracts.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <div class="vh-icon-box vh-icon-primary mb-0 flex-shrink-0" style="width: 42px; height: 42px;">
+                    <i class="bi bi-cloud-check fs-5"></i>
+                  </div>
+                  <div>
+                    <strong class="d-block text-dark dark-text-light">Lifetime Digital Cloud Vault</strong>
+                    <div class="small text-muted">Securely access your home's historical inspection archives, appliance serial tracking, and seasonal upkeep reminders anytime.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 flex-wrap">
+                <button type="button" class="btn btn-vh-primary" onclick="window.print()">
+                  <i class="bi bi-printer me-1"></i>Print Full 48-Page Report
+                </button>
+                <button type="button" class="btn btn-vh-outline" onclick="showToast('Sample PDF', 'Downloading Complete 48-Page Sample Assessment PDF...', 'info')">
+                  <i class="bi bi-file-earmark-pdf me-1"></i>Download Full PDF (14.2 MB)
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="position-relative rounded-4 overflow-hidden shadow-lg border border-2 border-white">
+                <img src="assets/images/sample-report-full-preview.jpg" alt="VeriHome Interactive Digital Inspection Report Preview" class="img-fluid w-100 object-fit-cover shadow-sm">
+                <div class="position-absolute bottom-0 start-0 end-0 p-3 bg-dark bg-opacity-75 text-white backdrop-blur small d-flex justify-content-between align-items-center">
+                  <span><i class="bi bi-eye-fill me-1 text-warning"></i>Live Digital Report Interface: 482 Maple Ave</span>
+                  <span class="badge bg-success">400 Points Verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 400-Point Audit Verified Systems Matrix -->
+        <div class="mt-5 p-4 rounded-4 border bg-white shadow-sm" style="background-color: var(--vh-bg-surface) !important;">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <div>
+              <span class="badge-pill-soft badge-soft-primary mb-1">Systems Verification Matrix</span>
+              <h4 class="fw-bold mb-0">Detailed Sub-System Inspection Status (386 Passed Items)</h4>
+              <small class="text-muted">Comprehensive testing logs across all major physical, electrical, and mechanical components.</small>
+            </div>
+            <span class="badge bg-success-subtle text-success fs-6 px-3 py-1">Score: 94% / Compliant</span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="bi bi-building-check text-success fs-5"></i>
+                  <strong class="text-dark dark-text-light">Foundation & Framing</strong>
+                </div>
+                <ul class="list-unstyled small mb-0 d-flex flex-column gap-1 text-muted">
+                  <li><i class="bi bi-check2 text-success me-1"></i>Poured concrete foundation: No structural settlement cracks</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Floor joists & subfloor: Proper deflection, no rot</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Exterior grading slope: Positive 5% drainage away from slab</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Attic ventilation: Continuous soffit & ridge baffles clear</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="bi bi-cpu text-success fs-5"></i>
+                  <strong class="text-dark dark-text-light">Electrical & Safety</strong>
+                </div>
+                <ul class="list-unstyled small mb-0 d-flex flex-column gap-1 text-muted">
+                  <li><i class="bi bi-check2 text-success me-1"></i>200A Main Breaker: Thermal scans normal under load</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>GFCI Protection: Bathrooms, kitchen & exterior trip within 25ms</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Smoke & CO Alarms: Interconnected units responsive on all levels</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Grounding Rods: Dual copper rods properly bonded</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-light h-100" style="background-color: var(--vh-bg-subtle) !important;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="bi bi-thermometer-half text-success fs-5"></i>
+                  <strong class="text-dark dark-text-light">HVAC & Plumbing</strong>
+                </div>
+                <ul class="list-unstyled small mb-0 d-flex flex-column gap-1 text-muted">
+                  <li><i class="bi bi-check2 text-success me-1"></i>Carrier 96% Furnace: Heat exchanger intact, 0 ppm CO</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>AC Temperature Split: Delta-T 17°F (Supply 54°F / Return 71°F)</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Water Supply: PEX-A lines verified at 62 PSI static pressure</li>
+                  <li><i class="bi bi-check2 text-success me-1"></i>Drain Waste & Vent: Free drainage with no active sewer odors</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <!-- Inspector Certification Sign-off -->
         <div class="p-4 rounded-4 border bg-light mt-5" style="background-color: var(--vh-bg-subtle) !important;">
           <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">

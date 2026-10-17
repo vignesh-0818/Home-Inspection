@@ -92,20 +92,44 @@
           </ul>
         </div>
 
-        <!-- Hamburger Toggle for Mobile View Only -->
-        <button class="btn btn-nav-control d-inline-flex d-lg-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
+        <!-- Hamburger Toggle for Mobile & Tablet View (Issue 13) -->
+        <button class="btn btn-nav-control d-inline-flex d-xl-none" id="vhDashSidebarToggle" type="button" aria-label="Toggle Navigation Menu" title="Menu">
           <i class="bi bi-list fs-5"></i>
         </button>
       </div>
     </div>
   </nav>
 
+  <!-- Persistent Dashboard Section Navigation Bar for 1024px, 720px & Mobile (Issue 13) -->
+  <div class="dash-tablet-nav d-xl-none bg-white border-bottom shadow-sm px-3 py-2 sticky-top" style="top: 0; z-index: 1020; background-color: var(--vh-bg-surface) !important;">
+    <div class="dash-tablet-nav-scroller d-flex align-items-center gap-2 overflow-x-auto py-1">
+      <button type="button" class="dash-tab-btn active" data-tab="admin-overview" onclick="switchAdminTab('admin-overview', this)">
+        <i class="bi bi-graph-up-arrow me-1"></i>Analytics
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="admin-orders" onclick="switchAdminTab('admin-orders', this)">
+        <i class="bi bi-receipt-cutoff me-1"></i>Orders <span class="badge bg-primary ms-1">28</span>
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="admin-inspectors" onclick="switchAdminTab('admin-inspectors', this)">
+        <i class="bi bi-people-fill me-1"></i>Inspectors
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="admin-reports" onclick="switchAdminTab('admin-reports', this)">
+        <i class="bi bi-file-earmark-medical me-1"></i>Reports Manager
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="admin-messages" onclick="switchAdminTab('admin-messages', this)">
+        <i class="bi bi-inbox-fill me-1"></i>Inquiries <span class="badge bg-warning text-dark ms-1">4</span>
+      </button>
+      <button type="button" class="dash-tab-btn" data-tab="admin-settings" onclick="switchAdminTab('admin-settings', this)">
+        <i class="bi bi-gear-wide-connected me-1"></i>Settings
+      </button>
+    </div>
+  </div>
+
   <!-- Admin Layout Wrapper -->
   <div class="dash-wrapper">
     <!-- Admin Sidebar -->
     <aside class="dash-sidebar p-3" id="dashSidebar" style="background: var(--vh-bg-surface);">
       <!-- Mobile Sidebar Header with Close Button -->
-      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-lg-none">
+      <div class="d-flex align-items-center justify-content-between pb-3 mb-2 border-bottom d-xl-none">
         <div class="d-flex align-items-center gap-2">
           <span class="vh-brand-icon" style="background: linear-gradient(135deg, #091726, #0e3b68);"><i class="bi bi-shield-lock"></i></span>
           <span class="fw-bold fs-6">Veri<span class="text-warning">Home</span></span>
@@ -559,13 +583,38 @@
   <script src="assets/js/main.js"></script>
   <script>
     function switchAdminTab(tabId, clickedEl) {
+      const cleanId = (tabId || '').replace('#', '');
       document.querySelectorAll('.admin-view-tab').forEach(el => el.style.display = 'none');
-      const target = document.getElementById(tabId.replace('#', ''));
+      const target = document.getElementById(cleanId);
       if (target) target.style.display = 'block';
 
+      // Update sidebar nav items
+      document.querySelectorAll('.dash-nav-item').forEach(el => {
+        el.classList.remove('active');
+        if (el.getAttribute('href') === '#' + cleanId) {
+          el.classList.add('active');
+        }
+      });
+
+      // Update persistent tablet nav buttons
+      document.querySelectorAll('.dash-tablet-nav .dash-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-tab') === cleanId) {
+          btn.classList.add('active');
+        }
+      });
+
       if (clickedEl) {
-        document.querySelectorAll('.dash-nav-item').forEach(el => el.classList.remove('active'));
         clickedEl.classList.add('active');
+      }
+
+      // Close mobile drawer if open
+      const sidebar = document.getElementById('dashSidebar');
+      const backdrop = document.getElementById('dashBackdrop');
+      if (sidebar && sidebar.classList.contains('show')) {
+        sidebar.classList.remove('show');
+        if (backdrop) backdrop.classList.remove('show');
+        document.body.style.overflow = '';
       }
     }
 

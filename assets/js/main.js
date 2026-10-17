@@ -7,7 +7,6 @@ function initVeriHome() {
   'use strict';
 
   // 1. Dark / Light Theme Toggle
-  const themeToggleBtn = document.getElementById('vhThemeToggle');
   const htmlEl = document.documentElement;
 
   // Retrieve saved theme or prefer-color-scheme
@@ -16,54 +15,63 @@ function initVeriHome() {
 
   setTheme(savedTheme);
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', function () {
-      const currentTheme = htmlEl.getAttribute('data-bs-theme') || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-    });
-  }
-
   function setTheme(theme) {
     htmlEl.setAttribute('data-bs-theme', theme);
     localStorage.setItem('vh-theme', theme);
-    if (themeToggleBtn) {
-      const icon = themeToggleBtn.querySelector('i');
+    document.querySelectorAll('.vh-theme-toggle-btn, #vhThemeToggle, #vhThemeToggleMobile').forEach(btn => {
+      const icon = btn.querySelector('i');
       if (icon) {
         if (theme === 'dark') {
           icon.className = 'bi bi-sun-fill text-warning';
-          themeToggleBtn.setAttribute('title', 'Switch to Light Mode');
+          btn.setAttribute('title', 'Switch to Light Mode');
         } else {
           icon.className = 'bi bi-moon-stars-fill text-primary';
-          themeToggleBtn.setAttribute('title', 'Switch to Dark Mode');
+          btn.setAttribute('title', 'Switch to Dark Mode');
         }
       }
-    }
+    });
   }
 
+  window.vhToggleTheme = function () {
+    const currentTheme = htmlEl.getAttribute('data-bs-theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  };
+
+  document.querySelectorAll('.vh-theme-toggle-btn, #vhThemeToggle, #vhThemeToggleMobile').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.vhToggleTheme();
+    });
+  });
+
   // 2. RTL / LTR Toggle
-  const rtlToggleBtn = document.getElementById('vhRtlToggle');
   const savedDir = localStorage.getItem('vh-direction') || 'ltr';
   setDirection(savedDir);
 
-  if (rtlToggleBtn) {
-    rtlToggleBtn.addEventListener('click', function () {
-      const currentDir = htmlEl.getAttribute('dir') || 'ltr';
-      const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
-      setDirection(newDir);
+  window.vhToggleRtl = function () {
+    const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+    const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+    setDirection(newDir);
+  };
+
+  document.querySelectorAll('.vh-rtl-toggle-btn, #vhRtlToggle, #vhRtlToggleMobile').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.vhToggleRtl();
     });
-  }
+  });
 
   function setDirection(dir) {
     htmlEl.setAttribute('dir', dir);
     localStorage.setItem('vh-direction', dir);
-    if (rtlToggleBtn) {
-      rtlToggleBtn.setAttribute('title', dir === 'rtl' ? 'Switch to LTR' : 'Switch to RTL');
-      const textSpan = rtlToggleBtn.querySelector('.rtl-text');
+    document.querySelectorAll('.vh-rtl-toggle-btn, #vhRtlToggle, #vhRtlToggleMobile').forEach(btn => {
+      btn.setAttribute('title', dir === 'rtl' ? 'Switch to LTR' : 'Switch to RTL');
+      const textSpan = btn.querySelector('.rtl-text, span');
       if (textSpan) {
         textSpan.textContent = dir === 'rtl' ? 'LTR' : 'RTL';
       }
-    }
+    });
     // Propagate direction and alignment to form inputs (tel, date, text, textarea, select)
     document.querySelectorAll('input, textarea, select, .form-control, .vh-auth-input').forEach(function(el) {
       el.setAttribute('dir', dir);
@@ -400,16 +408,229 @@ function initVeriHome() {
     }
   });
 
-  // 8. Dummy Form Submissions with feedback
-  const dummyForms = document.querySelectorAll('.vh-dummy-form');
-  dummyForms.forEach(form => {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const actionMessage = this.getAttribute('data-success-msg') || 'Action completed successfully!';
-      window.showToast('Inspection Portal', actionMessage, 'success');
-      this.reset();
+  // 8. Contact & Inspection Form Validation (Issue 9)
+  function setupContactFormValidation() {
+    const contactForms = document.querySelectorAll('.vh-dummy-form, #contactForm, .vh-contact-form');
+    contactForms.forEach(form => {
+      const nameInput = form.querySelector('input[type="text"][placeholder*="John"], #contactName, input[name="name"], input[placeholder*="Name"]');
+      const phoneInput = form.querySelector('input[type="tel"], #contactPhone, input[name="phone"]');
+      const emailInput = form.querySelector('input[type="email"], #contactEmail, input[name="email"]');
+
+      function getFeedbackEl(input) {
+        let feedback = input.nextElementSibling;
+        if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+          feedback = document.createElement('div');
+          feedback.className = 'invalid-feedback';
+          input.parentNode.appendChild(feedback);
+        }
+        return feedback;
+      }
+
+      function validateName(input) {
+        if (!input) return true;
+        const val = input.value.trim();
+        const feedback = getFeedbackEl(input);
+
+        if (input.required && !val) {
+          input.classList.add('is-invalid');
+          feedback.textContent = 'Please enter your full name.';
+          return false;
+        }
+
+        if (val) {
+          // Reject numbers and invalid symbols: allow normal alphabetic names, spaces, hyphens, and apostrophes
+          const nameRegex = /^[a-zA-Z\s'’\-]+$/;
+          if (!nameRegex.test(val) || val.length < 2) {
+            input.classList.add('is-invalid');
+            feedback.textContent = 'Name must only contain letters, spaces, hyphens, or apostrophes (no numbers or symbols).';
+            return false;
+          }
+        }
+
+        input.classList.remove('is-invalid');
+        feedback.textContent = '';
+        return true;
+      }
+
+      function validatePhone(input) {
+        if (!input) return true;
+        const val = input.value.trim();
+        const feedback = getFeedbackEl(input);
+
+        if (input.required && !val) {
+          input.classList.add('is-invalid');
+          feedback.textContent = 'Please enter your phone number.';
+          return false;
+        }
+
+        if (val) {
+          // Reject alphabetic characters and clearly malformed numbers
+          if (/[a-zA-Z]/.test(val)) {
+            input.classList.add('is-invalid');
+            feedback.textContent = 'Phone number cannot contain letters. Please enter digits only.';
+            return false;
+          }
+
+          const digitsOnly = val.replace(/\D/g, '');
+          if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+            input.classList.add('is-invalid');
+            feedback.textContent = 'Please enter a valid phone number (digits only, e.g. (555) 000-0000 or +91 9876543210).';
+            return false;
+          }
+
+          const phonePattern = /^(\+?[0-9]{1,4}[\s.-]?)?(\(?[0-9]{2,5}\)?[\s.-]?)?[0-9]{3,4}[\s.-]?[0-9]{3,4}$/;
+          if (!phonePattern.test(val)) {
+            input.classList.add('is-invalid');
+            feedback.textContent = 'Please enter a valid phone number format.';
+            return false;
+          }
+        }
+
+        input.classList.remove('is-invalid');
+        feedback.textContent = '';
+        return true;
+      }
+
+      function validateEmail(input) {
+        if (!input) return true;
+        const val = input.value.trim();
+        const feedback = getFeedbackEl(input);
+
+        if (input.required && !val) {
+          input.classList.add('is-invalid');
+          feedback.textContent = 'Please enter your email address.';
+          return false;
+        }
+
+        if (val) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(val)) {
+            input.classList.add('is-invalid');
+            feedback.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
+            return false;
+          }
+        }
+
+        input.classList.remove('is-invalid');
+        feedback.textContent = '';
+        return true;
+      }
+
+      // Live validation and strict character restrictions (Issue 9)
+      if (nameInput) {
+        // Strict restriction: Name field MUST NOT accept numbers
+        nameInput.addEventListener('keydown', (e) => {
+          if (/^[0-9]$/.test(e.key)) {
+            e.preventDefault();
+            const feedback = getFeedbackEl(nameInput);
+            nameInput.classList.add('is-invalid');
+            feedback.textContent = 'Name field does not accept numbers. Letters only.';
+          }
+        });
+        nameInput.addEventListener('input', () => {
+          if (/[0-9]/.test(nameInput.value)) {
+            nameInput.value = nameInput.value.replace(/[0-9]/g, '');
+            const feedback = getFeedbackEl(nameInput);
+            nameInput.classList.add('is-invalid');
+            feedback.textContent = 'Name field does not accept numbers. Letters only.';
+          } else {
+            if (nameInput.classList.contains('is-invalid')) validateName(nameInput);
+          }
+        });
+        nameInput.addEventListener('paste', () => {
+          setTimeout(() => {
+            nameInput.value = nameInput.value.replace(/[0-9]/g, '');
+            validateName(nameInput);
+          }, 10);
+        });
+        nameInput.addEventListener('blur', () => validateName(nameInput));
+      }
+
+      if (phoneInput) {
+        // Strict restriction: Phone field MUST NOT accept letters
+        phoneInput.addEventListener('keydown', (e) => {
+          if (/^[a-zA-Z]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            const feedback = getFeedbackEl(phoneInput);
+            phoneInput.classList.add('is-invalid');
+            feedback.textContent = 'Phone number field does not accept letters. Digits only.';
+          }
+        });
+        phoneInput.addEventListener('input', () => {
+          if (/[a-zA-Z]/.test(phoneInput.value)) {
+            phoneInput.value = phoneInput.value.replace(/[a-zA-Z]/g, '');
+            const feedback = getFeedbackEl(phoneInput);
+            phoneInput.classList.add('is-invalid');
+            feedback.textContent = 'Phone number field does not accept letters. Digits only.';
+          } else {
+            if (phoneInput.classList.contains('is-invalid')) validatePhone(phoneInput);
+          }
+        });
+        phoneInput.addEventListener('paste', () => {
+          setTimeout(() => {
+            phoneInput.value = phoneInput.value.replace(/[a-zA-Z]/g, '');
+            validatePhone(phoneInput);
+          }, 10);
+        });
+        phoneInput.addEventListener('blur', () => validatePhone(phoneInput));
+      }
+
+      if (emailInput) {
+        emailInput.addEventListener('input', () => { if (emailInput.classList.contains('is-invalid')) validateEmail(emailInput); });
+        emailInput.addEventListener('blur', () => validateEmail(emailInput));
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const isNameValid = validateName(nameInput);
+        const isPhoneValid = validatePhone(phoneInput);
+        const isEmailValid = validateEmail(emailInput);
+
+        // Check required fields
+        let otherValid = true;
+        form.querySelectorAll('[required]').forEach(req => {
+          if (req !== nameInput && req !== phoneInput && req !== emailInput) {
+            if (!req.value.trim()) {
+              req.classList.add('is-invalid');
+              const fb = getFeedbackEl(req);
+              fb.textContent = 'This field is required.';
+              otherValid = false;
+            } else {
+              req.classList.remove('is-invalid');
+            }
+          }
+        });
+
+        if (!isNameValid || !isPhoneValid || !isEmailValid || !otherValid) {
+          const firstInvalid = form.querySelector('.is-invalid');
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
+
+        const actionMessage = this.getAttribute('data-success-msg') || 'Your inquiry has been received! Our dispatch coordinator will call you shortly.';
+        if (window.showToast) {
+          window.showToast('Inspection Portal', actionMessage, 'success');
+        }
+
+        let inlineSuccess = form.querySelector('.form-success-banner');
+        if (!inlineSuccess) {
+          inlineSuccess = document.createElement('div');
+          inlineSuccess.className = 'alert alert-success form-success-banner mt-3 d-flex align-items-center gap-2';
+          form.appendChild(inlineSuccess);
+        }
+        inlineSuccess.innerHTML = '<i class="bi bi-check-circle-fill fs-5"></i><span>' + actionMessage + '</span>';
+        inlineSuccess.style.display = 'flex';
+
+        form.reset();
+        setTimeout(() => {
+          if (inlineSuccess) inlineSuccess.style.display = 'none';
+        }, 6000);
+      });
     });
-  });
+  }
+
+  setupContactFormValidation();
 
   // 9. External Footer Social Links in New Tab (Guaranteed Cross-Browser Behavior)
   function setupFooterSocialLinks() {

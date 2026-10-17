@@ -34,11 +34,36 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
+      <!-- Mobile Quick Actions (Theme & Dashboard easy access) -->
+      <div class="vh-mobile-top-actions d-flex d-lg-none align-items-center gap-2 me-2">
+        <button class="btn btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-nav-control" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2 text-primary"></i>
+        </a>
+      </div>
+
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,14 +96,13 @@
 
         <!-- Action Controls: Theme Toggles, Login, Register, Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <button class="btn btn-nav-control vh-theme-toggle-btn" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <a href="login.html" class="btn btn-sm btn-vh-outline"><i class="bi bi-person me-1"></i>Sign In / Register</a>
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
             <span>Dashboard</span>
@@ -92,13 +116,7 @@
   <section class="vh-inner-banner vh-banner-pricing">
     <div class="container vh-inner-banner-container">
       <h1 class="vh-inner-banner-title">Privacy Policy</h1>
-      <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
-        <ol class="vh-inner-breadcrumb">
-          <li class="breadcrumb-item-custom"><a href="index.html" class="breadcrumb-link">Home</a></li>
-          <li class="breadcrumb-separator" aria-hidden="true">/</li>
-          <li class="breadcrumb-item-custom breadcrumb-current" aria-current="page">Privacy Policy</li>
-        </ol>
-      </nav>
+      <p class="vh-inner-banner-desc">Learn how VeriHome protects your personal data, inspection report confidentiality, and property privacy.</p>
     </div>
   </section>
 

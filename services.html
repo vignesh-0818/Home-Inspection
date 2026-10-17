@@ -36,11 +36,36 @@
         <span>Veri<span class="text-warning">Home</span></span>
       </a>
 
+      <!-- Quick mobile actions header (Theme & Dashboard immediately accessible without scrolling - Issue 14) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none ms-auto me-2">
+        <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-primary"></i>
+        </button>
+        <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash px-2 py-1" title="Customer Dashboard" aria-label="Dashboard">
+          <i class="bi bi-speedometer2"></i>
+        </a>
+      </div>
+
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
+        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
+              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
+            </button>
+            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
+              <span class="rtl-text">RTL</span>
+            </button>
+          </div>
+          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
+            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
+          </a>
+        </div>
+
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,19 +96,22 @@
           </li>
         </ul>
 
-        <!-- Action Controls: Theme Toggles, Login, Register, Customer Dashboard -->
+        <!-- Action Controls: Theme Toggles, Sign In / Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
-          <!-- Dark/Light Mode Separate Button -->
-          <button class="btn btn-nav-control" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <!-- Dark/Light Mode Separate Button (Desktop) -->
+          <button class="btn btn-nav-control vh-theme-toggle-btn d-none d-lg-inline-flex" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
-          <button class="btn btn-nav-control" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
+          <button class="btn btn-nav-control vh-rtl-toggle-btn" id="vhRtlToggle" type="button" title="Toggle RTL/LTR" aria-label="Toggle RTL">
             <span class="rtl-text">RTL</span>
           </button>
 
-          <a href="login.html" class="btn btn-sm btn-vh-outline">Login</a>
-          <a href="register.html" class="btn btn-sm btn-vh-outline">Register</a>
+          <!-- Combined Sign In / Register (Issue 3) -->
+          <a href="login.html" class="btn btn-sm btn-vh-outline">
+            <i class="bi bi-person me-1"></i>Sign In / Register
+          </a>
+
           <!-- Customer Dashboard Navbar Button (REQUIRED) -->
           <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
             <i class="bi bi-speedometer2"></i>
@@ -97,14 +125,8 @@
   <!-- Full-Width Photographic Hero Banner (Reference Style) -->
   <section class="vh-inner-banner vh-banner-services">
     <div class="container vh-inner-banner-container">
-      <h1 class="vh-inner-banner-title">Services</h1>
-      <nav aria-label="breadcrumb" class="vh-inner-breadcrumb-nav">
-        <ol class="vh-inner-breadcrumb">
-          <li class="breadcrumb-item-custom"><a href="index.html" class="breadcrumb-link">Home</a></li>
-          <li class="breadcrumb-separator" aria-hidden="true">/</li>
-          <li class="breadcrumb-item-custom breadcrumb-current" aria-current="page">Services</li>
-        </ol>
-      </nav>
+      <h1 class="vh-inner-banner-title">Our Inspection Services</h1>
+      <p class="vh-inner-banner-desc">Explore our full suite of certified residential, commercial, and specialized diagnostic assessments—delivering empirical proof, 400-point audits, and same-day digital reports.</p>
     </div>
   </section>
 
@@ -190,10 +212,10 @@
         <p class="text-muted">Explore our full suite of certified residential, commercial, and specialized diagnostic assessments designed to give property buyers and owners total peace of mind.</p>
       </div>
 
-      <div class="row g-4">
+      <div class="row g-4 align-items-stretch">
         <!-- Service 1: Comprehensive Home Inspection -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/hero-property.jpg" alt="Comprehensive Home Inspection" class="img-fluid">
               <span class="badge bg-primary position-absolute top-0 end-0 m-3 shadow-sm">Core Service</span>
@@ -221,8 +243,8 @@
         </div>
 
         <!-- Service 2: Pre-Purchase Property Assessment -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/prepurchase-niche.jpg" alt="Pre-Purchase Property Assessment" class="img-fluid">
               <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 shadow-sm fw-bold">Buyer Essential</span>
@@ -250,8 +272,8 @@
         </div>
 
         <!-- Service 3: Thermal Infrared & Drone Roof Audit -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/thermal-drone-inspection.jpg" alt="Thermal Imaging & Drone Roof Audit" class="img-fluid">
               <span class="badge bg-info text-white position-absolute top-0 end-0 m-3 shadow-sm">High Tech</span>
@@ -279,8 +301,8 @@
         </div>
 
         <!-- Service 4: Commercial Property Assessment -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/commercial-property.jpg" alt="Commercial Property Assessment" class="img-fluid">
               <span class="badge bg-dark position-absolute top-0 end-0 m-3 shadow-sm">Commercial PCA</span>
@@ -308,8 +330,8 @@
         </div>
 
         <!-- Service 5: Radon Gas & Air Quality Testing -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/radon-testing.jpg" alt="Radon Gas & Air Quality Testing" class="img-fluid">
               <span class="badge bg-danger position-absolute top-0 end-0 m-3 shadow-sm">Environmental</span>
@@ -337,8 +359,8 @@
         </div>
 
         <!-- Service 6: Sewer Lateral Video Scope -->
-        <div class="col-md-6 col-lg-4">
-          <div class="vh-service-card">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="vh-service-card w-100">
             <div class="vh-service-img-wrapper">
               <img src="assets/images/sewer-scope.jpg" alt="Sewer Lateral Video Scope" class="img-fluid">
               <span class="badge bg-secondary position-absolute top-0 end-0 m-3 shadow-sm">Plumbing Diagnostic</span>
@@ -362,6 +384,80 @@
               <span class="vh-service-price">From $195</span>
               <a href="service-details.html?id=6" class="btn btn-sm btn-vh-primary">View Details</a>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Scope & Inspection Deliverables (Issue 7) -->
+  <section class="py-5 bg-white border-top border-bottom" style="background-color: var(--vh-bg-surface) !important; border-color: var(--vh-border) !important;">
+    <div class="container py-lg-3">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <div class="badge-pill-soft badge-soft-primary mb-2">Technical Standards</div>
+        <h2 class="display-6 fw-bold">400-Point Inspection Scope & Diagnostic Systems</h2>
+        <p class="text-muted">Every inspection follows InterNACHI Standards of Practice and state engineering guidelines. Here is an architectural overview of the systems evaluated during our on-site audit.</p>
+      </div>
+
+      <div class="row align-items-center g-5 mb-5">
+        <div class="col-lg-7">
+          <div class="position-relative rounded-4 overflow-hidden shadow-lg border border-2 border-white">
+            <img src="assets/images/services-standards-overview.jpg" alt="Residential Property Inspection Diagnostic Breakdown Diagram" class="img-fluid w-100 object-fit-cover">
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <h3 class="h4 fw-bold mb-3">Diagnostic Scope & Deliverables</h3>
+          <p class="text-muted small mb-4">Our Master Inspectors spend 3 to 4 methodical hours on-site evaluating every critical physical, electrical, and structural component of the residence.</p>
+          
+          <div class="d-flex flex-column gap-3 mb-4">
+            <div class="d-flex align-items-start gap-3">
+              <div class="rounded-circle bg-primary-subtle text-primary p-2 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <div>
+                <strong class="d-block small text-dark dark-text-light">Structural Integrity & Foundation</strong>
+                <small class="text-muted">Footings, concrete foundation walls, crawlspace framing, sill plates, and altimeter differential floor elevation logging.</small>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="rounded-circle bg-warning-subtle text-warning-emphasis p-2 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="bi bi-lightning-charge"></i>
+              </div>
+              <div>
+                <strong class="d-block small text-dark dark-text-light">Electrical Grid & Safety Compliance</strong>
+                <small class="text-muted">Main breaker panelboard, Romex wiring, grounding electrodes, double-taps, GFCI/AFCI protection, and thermal hotspot detection.</small>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="rounded-circle bg-info-subtle text-info p-2 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="bi bi-droplet-half"></i>
+              </div>
+              <div>
+                <strong class="d-block small text-dark dark-text-light">Plumbing & Mechanical Networks</strong>
+                <small class="text-muted">Supply lines (PEX/copper), drain-waste-vent piping, water heater TPR safety valves, and static supply pressure measurement.</small>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="rounded-circle bg-success-subtle text-success p-2 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="bi bi-fan"></i>
+              </div>
+              <div>
+                <strong class="d-block small text-dark dark-text-light">HVAC Heating & Cooling Performance</strong>
+                <small class="text-muted">Furnace combustion, ductwork supply/return CFM flow, air handler operation, delta-T temperature splits, and condenser fins.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="sample-report.html" class="btn btn-vh-primary">
+              <i class="bi bi-file-earmark-medical me-2"></i>Inspect Live Sample Report
+            </a>
+            <a href="customer-dashboard.html#book" class="btn btn-vh-outline">
+              <i class="bi bi-calendar2-check me-2"></i>Book Inspection Now
+            </a>
           </div>
         </div>
       </div>

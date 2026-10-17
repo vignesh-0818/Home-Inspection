@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client & Inspector Portal Login | VeriHome</title>
-  <meta name="description" content="Secure portal login for VeriHome clients, homebuyers, real estate agents, and certified inspectors. Access your digital inspection reports and appointments.">
+  <title>Portal Access: Sign In & Register | VeriHome</title>
+  <meta name="description" content="Secure portal authentication for VeriHome clients, homebuyers, real estate agents, and certified inspectors. Sign in or register to access digital inspection reports and appointments.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -36,93 +36,236 @@
     </button>
   </div>
 
-  <!-- Login Card Section (Centered in Viewport, No Footer) -->
+  <!-- Combined Auth Card Section (Centered in Viewport) -->
   <main class="vh-auth-main">
     <div class="container">
       <div class="vh-auth-card text-center">
         
-        <!-- VeriHome Brand Logo (Consistent gold-gradient shield icon and wordmark) -->
+        <!-- VeriHome Brand Logo -->
         <a class="vh-brand mx-auto mb-3" href="index.html">
           <span class="vh-brand-icon"><i class="bi bi-shield-check"></i></span>
           <span>Veri<span class="text-warning">Home</span></span>
         </a>
 
-        <h2 class="vh-auth-title">Sign In to Your Portal</h2>
-        <p class="vh-auth-subtitle">Access your inspection reports, photos, and scheduled appointments.</p>
-
-        <!-- Role Toggle Tabs (Silent tab switch: no toasts, no auto-fill) -->
-        <div class="vh-auth-tabs">
-          <button type="button" class="vh-auth-tab-btn active" id="btnRoleClient" onclick="switchLoginRole('client')">
-            <i class="bi bi-person-fill"></i>Client Login
+        <!-- Primary Auth Mode Switcher: Sign In vs Register (Issue 3) -->
+        <div class="vh-auth-mode-tabs mb-4">
+          <button type="button" class="vh-auth-mode-btn active" id="tabModeLogin" onclick="switchAuthMode('login')">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
           </button>
-          <button type="button" class="vh-auth-tab-btn" id="btnRoleAdmin" onclick="switchLoginRole('admin')">
-            <i class="bi bi-shield-lock-fill"></i>Inspector Login
+          <button type="button" class="vh-auth-mode-btn" id="tabModeRegister" onclick="switchAuthMode('register')">
+            <i class="bi bi-person-plus me-2"></i>Create Account
           </button>
         </div>
 
-        <!-- Inline Form Message (Validation & Demo Success) -->
-        <div id="loginFeedback" class="vh-auth-alert" style="display: none;" role="alert"></div>
+        <!-- ==============================================
+             PANEL 1: SIGN IN VIEW
+             ============================================== -->
+        <div id="loginView">
+          <h2 class="vh-auth-title" id="authHeading">Sign In to Your Portal</h2>
+          <p class="vh-auth-subtitle" id="authSubtitle">Access your inspection reports, photos, and scheduled appointments.</p>
 
-        <form id="loginForm" novalidate autocomplete="off" onsubmit="handleLoginSubmit(event)">
-          <div class="vh-auth-group">
-            <label class="vh-auth-label" for="loginEmail">Email Address</label>
-            <div class="vh-auth-input-wrap">
-              <span class="vh-auth-input-icon"><i class="bi bi-envelope"></i></span>
-              <input type="email" id="loginEmail" class="vh-auth-input" placeholder="Enter your email address" value="" autocomplete="off">
-            </div>
+          <!-- Role Toggle Tabs -->
+          <div class="vh-auth-tabs">
+            <button type="button" class="vh-auth-tab-btn active" id="btnRoleClient" onclick="switchLoginRole('client')">
+              <i class="bi bi-person-fill"></i>Client Login
+            </button>
+            <button type="button" class="vh-auth-tab-btn" id="btnRoleAdmin" onclick="switchLoginRole('admin')">
+              <i class="bi bi-shield-lock-fill"></i>Inspector Login
+            </button>
           </div>
 
-          <div class="vh-auth-group">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <label class="vh-auth-label mb-0" for="loginPassword">Password</label>
+          <!-- Inline Form Message (Validation & Demo Success) -->
+          <div id="loginFeedback" class="vh-auth-alert" style="display: none;" role="alert"></div>
+
+          <form id="loginForm" novalidate autocomplete="off" onsubmit="handleLoginSubmit(event)">
+            <div class="vh-auth-group">
+              <label class="vh-auth-label" for="loginEmail">Email Address</label>
+              <div class="vh-auth-input-wrap">
+                <span class="vh-auth-input-icon"><i class="bi bi-envelope"></i></span>
+                <input type="email" id="loginEmail" class="vh-auth-input" placeholder="Enter your email address" value="" autocomplete="off">
+              </div>
             </div>
-            <div class="vh-auth-input-wrap has-toggle">
-              <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
-              <input type="password" id="loginPassword" class="vh-auth-input" placeholder="Enter your password" value="" autocomplete="off">
-              <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('loginPassword', this)" aria-label="Toggle password visibility">
-                <i class="bi bi-eye"></i>
-              </button>
+
+            <div class="vh-auth-group">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label class="vh-auth-label mb-0" for="loginPassword">Password</label>
+              </div>
+              <div class="vh-auth-input-wrap has-toggle">
+                <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+                <input type="password" id="loginPassword" class="vh-auth-input" placeholder="Enter your password" value="" autocomplete="off">
+                <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('loginPassword', this)" aria-label="Toggle password visibility">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
             </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="rememberMe">
+                <label class="form-check-label small text-muted" for="rememberMe">
+                  Remember this device
+                </label>
+              </div>
+              <a href="forgot-password.html" class="small vh-auth-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" id="loginSubmitBtn" class="btn vh-auth-btn w-100 py-3 mb-4">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+            </button>
+
+            <!-- Social Login Separator -->
+            <div class="vh-auth-divider mb-4">
+              <span>or continue with</span>
+            </div>
+
+            <!-- Social Login Options: Google & Apple (Issue 3 / Login Redirect) -->
+            <div class="row g-2 mb-4">
+              <div class="col-6">
+                <button type="button" class="btn vh-auth-social-btn w-100 d-inline-flex align-items-center justify-content-center" id="btnGoogleAuth" onclick="handleSocialAuth('Google', event)" aria-label="Sign in with Google">
+                  <i class="bi bi-google text-danger me-2"></i>Google
+                </button>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn vh-auth-social-btn w-100 d-inline-flex align-items-center justify-content-center" id="btnAppleAuth" onclick="handleSocialAuth('Apple', event)" aria-label="Sign in with Apple">
+                  <i class="bi bi-apple me-2"></i>Apple
+                </button>
+              </div>
+            </div>
+
+            <div class="text-center small">
+              <span class="text-muted">Don't have an account yet?</span> 
+              <button type="button" class="btn btn-link p-0 vh-auth-link fw-semibold ms-1" onclick="switchAuthMode('register')">Register here</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ==============================================
+             PANEL 2: REGISTER VIEW (Issue 3)
+             ============================================== -->
+        <div id="registerView" style="display: none;">
+          <h2 class="vh-auth-title">Create Your Client Account</h2>
+          <p class="vh-auth-subtitle">Create your account to schedule home inspections and view digital reports.</p>
+
+          <!-- Role Toggle Tabs -->
+          <div class="vh-auth-tabs">
+            <button type="button" class="vh-auth-tab-btn active" id="btnRoleBuyer" onclick="switchRegRole('buyer')">
+              <i class="bi bi-house-heart-fill"></i>Homebuyer Account
+            </button>
+            <button type="button" class="vh-auth-tab-btn" id="btnRoleAgent" onclick="switchRegRole('agent')">
+              <i class="bi bi-briefcase-fill"></i>Realtor / Agent
+            </button>
           </div>
 
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="form-check mb-0">
-              <input class="form-check-input" type="checkbox" id="rememberMe">
-              <label class="form-check-label small text-muted" for="rememberMe">
-                Remember this device
+          <!-- Inline Form Message (Validation & Demo Success) -->
+          <div id="regFeedback" class="vh-auth-alert" style="display: none;" role="alert"></div>
+
+          <form id="registerForm" novalidate autocomplete="off" onsubmit="handleRegisterSubmit(event)">
+            <!-- First & Last Name side-by-side -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-6 col-12">
+                <div class="vh-auth-group mb-0">
+                  <label class="vh-auth-label" for="regFirstName">First Name</label>
+                  <div class="vh-auth-input-wrap">
+                    <span class="vh-auth-input-icon"><i class="bi bi-person"></i></span>
+                    <input type="text" id="regFirstName" class="vh-auth-input" placeholder="First name" value="" autocomplete="off">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="vh-auth-group mb-0">
+                  <label class="vh-auth-label" for="regLastName">Last Name</label>
+                  <div class="vh-auth-input-wrap">
+                    <span class="vh-auth-input-icon"><i class="bi bi-person"></i></span>
+                    <input type="text" id="regLastName" class="vh-auth-input" placeholder="Last name" value="" autocomplete="off">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="vh-auth-group">
+              <label class="vh-auth-label" for="regEmail">Email Address</label>
+              <div class="vh-auth-input-wrap">
+                <span class="vh-auth-input-icon"><i class="bi bi-envelope"></i></span>
+                <input type="email" id="regEmail" class="vh-auth-input" placeholder="Enter your email address" value="" autocomplete="off">
+              </div>
+            </div>
+
+            <!-- Mobile Phone -->
+            <div class="vh-auth-group">
+              <label class="vh-auth-label" for="regPhone">Mobile Phone</label>
+              <div class="vh-auth-input-wrap">
+                <span class="vh-auth-input-icon"><i class="bi bi-telephone"></i></span>
+                <input type="tel" id="regPhone" class="vh-auth-input" placeholder="(555) 000-0000" value="" autocomplete="off">
+              </div>
+            </div>
+
+            <!-- Password & Confirm Password side-by-side -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-6 col-12">
+                <div class="vh-auth-group mb-0">
+                  <label class="vh-auth-label" for="regPassword">Password</label>
+                  <div class="vh-auth-input-wrap has-toggle">
+                    <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+                    <input type="password" id="regPassword" class="vh-auth-input" placeholder="Create password" value="" autocomplete="off">
+                    <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('regPassword', this)" aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="vh-auth-group mb-0">
+                  <label class="vh-auth-label" for="regConfirm">Confirm Password</label>
+                  <div class="vh-auth-input-wrap has-toggle">
+                    <span class="vh-auth-input-icon"><i class="bi bi-lock"></i></span>
+                    <input type="password" id="regConfirm" class="vh-auth-input" placeholder="Confirm password" value="" autocomplete="off">
+                    <button type="button" class="vh-auth-toggle-pass" onclick="togglePasswordVisibility('regConfirm', this)" aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms / Privacy Checkbox -->
+            <div class="form-check text-start mb-4">
+              <input class="form-check-input" type="checkbox" id="termsCheck">
+              <label class="form-check-label small text-muted" for="termsCheck">
+                I agree to the <a href="terms-of-service.html" class="vh-auth-link">Terms of Service</a> and <a href="privacy-policy.html" class="vh-auth-link">Privacy Policy</a>
               </label>
             </div>
-            <a href="forgot-password.html" class="small vh-auth-link">Forgot Password?</a>
-          </div>
 
-          <button type="submit" id="loginSubmitBtn" class="btn vh-auth-btn w-100 py-3 mb-4">
-            <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
-          </button>
+            <!-- Submit Button -->
+            <button type="submit" id="regSubmitBtn" class="btn vh-auth-btn vh-auth-btn-accent w-100 py-3 mb-4">
+              <i class="bi bi-check2-circle me-1"></i>Create Client Account
+            </button>
 
-          <!-- Social Login Separator -->
-          <div class="vh-auth-divider mb-4">
-            <span>or continue with</span>
-          </div>
-
-          <!-- Social Login Options: Google & Apple -->
-          <div class="row g-2 mb-4">
-            <div class="col-6">
-              <button type="button" class="btn vh-auth-social-btn w-100" id="btnGoogleAuth" onclick="handleSocialAuth('Google')">
-                <i class="bi bi-google text-danger me-2"></i>Google
-              </button>
+            <!-- Social Register Separator -->
+            <div class="vh-auth-divider mb-4">
+              <span>or register with</span>
             </div>
-            <div class="col-6">
-              <button type="button" class="btn vh-auth-social-btn w-100" id="btnAppleAuth" onclick="handleSocialAuth('Apple')">
-                <i class="bi bi-apple me-2"></i>Apple
-              </button>
-            </div>
-          </div>
 
-          <div class="text-center small">
-            <span class="text-muted">Don't have an account yet?</span> 
-            <a href="register.html" class="vh-auth-link fw-semibold ms-1">Register here</a>
-          </div>
-        </form>
+            <!-- Social Register Options: Google & Apple (Issue 3 / Register Redirect) -->
+            <div class="row g-2 mb-4">
+              <div class="col-6">
+                <button type="button" class="btn vh-auth-social-btn w-100 d-inline-flex align-items-center justify-content-center" id="btnGoogleAuthReg" onclick="handleSocialAuth('Google', event)" aria-label="Register with Google">
+                  <i class="bi bi-google text-danger me-2"></i>Google
+                </button>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn vh-auth-social-btn w-100 d-inline-flex align-items-center justify-content-center" id="btnAppleAuthReg" onclick="handleSocialAuth('Apple', event)" aria-label="Register with Apple">
+                  <i class="bi bi-apple me-2"></i>Apple
+                </button>
+              </div>
+            </div>
+
+            <div class="text-center small">
+              <span class="text-muted">Already have an account?</span> 
+              <button type="button" class="btn btn-link p-0 vh-auth-link fw-semibold ms-1" onclick="switchAuthMode('login')">Sign in here</button>
+            </div>
+          </form>
+        </div>
 
       </div>
     </div>
@@ -132,40 +275,45 @@
   <script src="assets/js/main.js"></script>
   <script>
     let currentRole = 'client';
+    let currentRegRole = 'buyer';
     let authRefreshTimer = null;
-    let socialAuthTimer = null;
 
     function cleanupAllTimers() {
       if (authRefreshTimer) {
         clearTimeout(authRefreshTimer);
         authRefreshTimer = null;
       }
-      if (socialAuthTimer) {
-        clearTimeout(socialAuthTimer);
-        socialAuthTimer = null;
-      }
     }
 
-    // Clean up timers on pagehide / beforeunload (component unmount)
     window.addEventListener('beforeunload', cleanupAllTimers);
     window.addEventListener('pagehide', cleanupAllTimers);
 
-    // Reset form fields completely on load and pageshow
-    function resetFormFields() {
-      const form = document.getElementById('loginForm');
-      if (form) form.reset();
-      const emailInput = document.getElementById('loginEmail');
-      const passInput = document.getElementById('loginPassword');
-      if (emailInput) emailInput.value = '';
-      if (passInput) passInput.value = '';
-      const feedbackEl = document.getElementById('loginFeedback');
-      if (feedbackEl) feedbackEl.style.display = 'none';
+    // Switch between Sign In and Register views
+    function switchAuthMode(mode) {
       cleanupAllTimers();
+      const loginView = document.getElementById('loginView');
+      const registerView = document.getElementById('registerView');
+      const tabModeLogin = document.getElementById('tabModeLogin');
+      const tabModeRegister = document.getElementById('tabModeRegister');
+
+      if (mode === 'register') {
+        if (loginView) loginView.style.display = 'none';
+        if (registerView) registerView.style.display = 'block';
+        if (tabModeLogin) tabModeLogin.classList.remove('active');
+        if (tabModeRegister) tabModeRegister.classList.add('active');
+        history.replaceState(null, null, '#register');
+        document.title = 'Create Account | VeriHome';
+      } else {
+        if (registerView) registerView.style.display = 'none';
+        if (loginView) loginView.style.display = 'block';
+        if (tabModeRegister) tabModeRegister.classList.remove('active');
+        if (tabModeLogin) tabModeLogin.classList.add('active');
+        history.replaceState(null, null, '#login');
+        document.title = 'Sign In | VeriHome';
+      }
     }
 
-    window.addEventListener('DOMContentLoaded', resetFormFields);
-    window.addEventListener('pageshow', resetFormFields);
-
+    // Role switcher for Login
     function switchLoginRole(role) {
       currentRole = role;
       const btnClient = document.getElementById('btnRoleClient');
@@ -178,21 +326,73 @@
         btnAdmin.classList.add('active');
         btnClient.classList.remove('active');
       }
-      // No notification, no auto-fill of credentials
     }
 
-    function togglePasswordVisibility(fieldId, btn) {
-      const field = document.getElementById(fieldId);
-      const icon = btn.querySelector('i');
-      if (field.type === 'password') {
-        field.type = 'text';
-        icon.className = 'bi bi-eye-slash';
+    // Role switcher for Register
+    function switchRegRole(role) {
+      currentRegRole = role;
+      const btnBuyer = document.getElementById('btnRoleBuyer');
+      const btnAgent = document.getElementById('btnRoleAgent');
+
+      if (role === 'buyer') {
+        btnBuyer.classList.add('active');
+        btnAgent.classList.remove('active');
       } else {
-        field.type = 'password';
-        icon.className = 'bi bi-eye';
+        btnAgent.classList.add('active');
+        btnBuyer.classList.remove('active');
       }
     }
 
+    // Password visibility toggle
+    function togglePasswordVisibility(fieldId, btn) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+      const icon = btn.querySelector('i');
+      if (field.type === 'password') {
+        field.type = 'text';
+        if (icon) icon.className = 'bi bi-eye-slash';
+      } else {
+        field.type = 'password';
+        if (icon) icon.className = 'bi bi-eye';
+      }
+    }
+
+    // Social Authentication Redirect Handler (Issue 3)
+    function handleSocialAuth(provider, e) {
+      if (e) e.preventDefault();
+      cleanupAllTimers();
+
+      const isRegister = document.getElementById('registerView').style.display !== 'none';
+      const feedbackEl = isRegister ? document.getElementById('regFeedback') : document.getElementById('loginFeedback');
+
+      if (feedbackEl) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-success';
+        feedbackEl.innerHTML = `<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Authenticating via ${provider}... Redirecting to your dashboard</span>`;
+        feedbackEl.style.display = 'flex';
+      }
+
+      // Store active user session if not present
+      if (!localStorage.getItem('verihome_profile')) {
+        localStorage.setItem('verihome_profile', JSON.stringify({
+          firstName: 'David',
+          lastName: 'Miller',
+          email: provider.toLowerCase() === 'google' ? 'david.miller@gmail.com' : 'david.miller@icloud.com',
+          phone: '(555) 345-6789',
+          agentName: 'Samantha Lawrence (Compass)',
+          agentEmail: 'samantha@compass.com'
+        }));
+      }
+
+      setTimeout(() => {
+        if (currentRole === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'customer-dashboard.html';
+        }
+      }, 700);
+    }
+
+    // Login Submission Handler
     function handleLoginSubmit(e) {
       e.preventDefault();
       cleanupAllTimers();
@@ -200,9 +400,9 @@
       const emailInput = document.getElementById('loginEmail');
       const passInput = document.getElementById('loginPassword');
       const feedbackEl = document.getElementById('loginFeedback');
-      
-      const email = emailInput.value.trim();
-      const pass = passInput.value.trim();
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const pass = passInput ? passInput.value.trim() : '';
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -220,43 +420,89 @@
         return;
       }
 
-      // Display success message inside the Login card without redirecting
       feedbackEl.className = 'vh-auth-alert vh-auth-alert-success';
-      feedbackEl.innerHTML = '<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Sign-in successful!</span>';
+      feedbackEl.innerHTML = '<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Sign-in successful! Redirecting to your dashboard...</span>';
       feedbackEl.style.display = 'flex';
 
-      // Keep confirmation message visible for 5 seconds, then refresh current Login page
-      authRefreshTimer = setTimeout(() => {
-        resetFormFields();
-        window.location.reload();
-      }, 5000);
+      setTimeout(() => {
+        if (currentRole === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'customer-dashboard.html';
+        }
+      }, 900);
     }
 
-    function handleSocialAuth(provider) {
-      // Clear any existing social auth timer to reset the 5-second window on repeated clicks
-      if (socialAuthTimer) {
-        clearTimeout(socialAuthTimer);
-        socialAuthTimer = null;
-      }
-      if (authRefreshTimer) {
-        clearTimeout(authRefreshTimer);
-        authRefreshTimer = null;
+    // Register Submission Handler
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      cleanupAllTimers();
+
+      const firstName = document.getElementById('regFirstName').value.trim();
+      const lastName = document.getElementById('regLastName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const phone = document.getElementById('regPhone').value.trim();
+      const pass = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      const termsCheck = document.getElementById('termsCheck').checked;
+      const feedbackEl = document.getElementById('regFeedback');
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!firstName || !lastName || !email || !phone || !pass || !confirm) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Please fill out all required fields.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
       }
 
-      const feedbackEl = document.getElementById('loginFeedback');
-      if (!feedbackEl) return;
+      if (!emailRegex.test(email)) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-circle-fill flex-shrink-0"></i><span>Please enter a valid email address.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
 
-      // Display existing informational message without falsely claiming authentication
-      feedbackEl.className = 'vh-auth-alert vh-auth-alert-info';
-      feedbackEl.innerHTML = `<i class="bi bi-info-circle-fill flex-shrink-0"></i><span>${provider} sign-in is not configured yet.</span>`;
+      if (pass.length < 6) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Password must be at least 6 characters.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (pass !== confirm) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i><span>Passwords do not match. Please re-enter them.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      if (!termsCheck) {
+        feedbackEl.className = 'vh-auth-alert vh-auth-alert-danger';
+        feedbackEl.innerHTML = '<i class="bi bi-shield-exclamation flex-shrink-0"></i><span>Please agree to the Terms of Service and Privacy Policy.</span>';
+        feedbackEl.style.display = 'flex';
+        return;
+      }
+
+      feedbackEl.className = 'vh-auth-alert vh-auth-alert-success';
+      feedbackEl.innerHTML = '<i class="bi bi-check-circle-fill flex-shrink-0"></i><span>Registration successful! Your client account is active. Redirecting...</span>';
       feedbackEl.style.display = 'flex';
 
-      // Automatically hide the informational notification after exactly 5 seconds
-      socialAuthTimer = setTimeout(() => {
-        feedbackEl.style.display = 'none';
-        socialAuthTimer = null;
-      }, 5000);
+      setTimeout(() => {
+        window.location.href = 'customer-dashboard.html';
+      }, 1000);
     }
+
+    // Auto-detect hash on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      if (hash === '#register' || params.get('mode') === 'register') {
+        switchAuthMode('register');
+      } else {
+        switchAuthMode('login');
+      }
+    });
   </script>
 </body>
 </html>
