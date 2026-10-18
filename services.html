@@ -51,20 +51,6 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-                <!-- Mobile Drawer Quick Actions: Instant access at top of menu (No scrolling required - Issue 14) -->
-        <div class="d-lg-none p-3 mb-3 mt-2 rounded-3 border bg-light d-flex align-items-center justify-content-between" style="background-color: var(--vh-bg-subtle) !important;">
-          <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-sm btn-nav-control vh-theme-toggle-btn" type="button" title="Toggle Theme" aria-label="Toggle Theme">
-              <i class="bi bi-moon-stars-fill text-primary"></i> <span class="small fw-semibold ms-1">Theme</span>
-            </button>
-            <button class="btn btn-sm btn-nav-control vh-rtl-toggle-btn" type="button" title="Toggle RTL" aria-label="Toggle RTL">
-              <span class="rtl-text">RTL</span>
-            </button>
-          </div>
-          <a href="customer-dashboard.html" class="btn btn-sm btn-customer-dash">
-            <i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span>
-          </a>
-        </div>
 
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
@@ -98,8 +84,8 @@
 
         <!-- Action Controls: Theme Toggles, Sign In / Register, Customer Dashboard -->
         <div class="vh-navbar-actions d-flex align-items-center gap-2 flex-nowrap ms-xl-3 ms-lg-2">
-          <!-- Dark/Light Mode Separate Button (Desktop) -->
-          <button class="btn btn-nav-control vh-theme-toggle-btn d-none d-lg-inline-flex" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <!-- Dark/Light Mode Separate Button -->
+          <button class="btn btn-nav-control vh-theme-toggle-btn" id="vhThemeToggle" type="button" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <i class="bi bi-moon-stars-fill text-primary"></i>
           </button>
           <!-- RTL Separate Button -->
